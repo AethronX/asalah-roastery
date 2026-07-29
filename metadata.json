@@ -1,0 +1,6 @@
+{
+  "name": "Al Asalah Roastery - محامص الأصالة",
+  "description": "Luxurious Omani artisanal coffee roastery e-commerce experience with interactive shopping, roasts, origin tracking, flavor profiles, and Omani coffee story.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

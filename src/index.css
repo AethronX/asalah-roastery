@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary: #B78A5C;
+    --bg-cream: #F8F3EC;
+    --dark-brown: #4A3326;
+    --gold: #C9A76A;
+    --espresso: #2B211B;
+    --sand: #EFE8DE;
+  }
+
+  body {
+    background-color: var(--bg-cream);
+    color: var(--espresso);
+    font-family: 'IBM Plex Sans Arabic', 'Tajawal', 'Alexandria', 'Cairo', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Alexandria', 'IBM Plex Sans Arabic', 'Amiri', serif;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+  }
+}
+
+/* Typography Utility Classes */
+.font-ibm {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+.font-tajawal {
+  font-family: 'Tajawal', sans-serif;
+}
+
+.font-alexandria {
+  font-family: 'Alexandria', sans-serif;
+}
+
+.font-almarai {
+  font-family: 'Almarai', sans-serif;
+}
+
+.font-[#2B211B] {
+  color: var(--espresso);
+}
+
+.font-cairo {
+  font-family: 'Cairo', sans-serif;
+}
+
+.font-amiri {
+  font-family: 'Amiri', 'Georgia', serif;
+}
+
+.font-readex {
+  font-family: 'Readex Pro', sans-serif;
+}
+
+/* Editorial & Luxury Aesthetic Classes */
+.serif-title {
+  font-family: 'Amiri', 'Georgia', serif;
+  font-weight: 700;
+}
+
+.sans-label {
+  font-family: 'Alexandria', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  font-size: 11px;
+}
+
+.gold-text {
+  color: var(--gold);
+}
+
+/* Luxury Royal Gold Gradient Text */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #2B211B 0%, #B78A5C 40%, #D4AF37 70%, #C9A76A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-bright {
+  background: linear-gradient(135deg, #FFF 0%, #F5E6CA 50%, #C9A76A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.product-card {
+  background: white;
+  border-radius: 18px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(74, 51, 38, 0.05);
+  border: 1px solid rgba(239, 232, 222, 0.85);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(74, 51, 38, 0.14);
+  border-color: rgba(201, 167, 106, 0.5);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F3EC;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9A76A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B78A5C;
+}
+
+/* Glassmorphism Effect */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 167, 106, 0.2);
+}
+
+.glass-panel-dark {
+  background: rgba(43, 33, 27, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(201, 167, 106, 0.25);
+}
+
+/* Steam Animation */
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-40px) scale(1.25);
+    opacity: 0;
+  }
+}
+
+.animate-steam-1 {
+  animation: rise 4s infinite ease-out;
+}
+
+.animate-steam-2 {
+  animation: rise 5s infinite ease-out 1.5s;
+}
+
+.animate-steam-3 {
+  animation: rise 4.5s infinite ease-out 0.8s;
+}
+
+/* Shimmer Gold Effect */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #4A3326 0%, #B78A5C 50%, #C9A76A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border-glow {
+  box-shadow: 0 0 20px -5px rgba(201, 167, 106, 0.3);
+}
+
+
