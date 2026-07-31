@@ -2,17 +2,33 @@
 
 @layer base {
   :root {
-    --primary: #B78A5C;
-    --bg-cream: #F8F3EC;
-    --dark-brown: #4A3326;
-    --gold: #C9A76A;
-    --espresso: #2B211B;
-    --sand: #EFE8DE;
+    --bg-primary: #1B1512;
+    --bg-secondary: #241B17;
+    --bg-elevated: #2C211C;
+    --bg-card: #342720;
+    --bg-floating: #3A2C25;
+    --bg-footer: #120E0C;
+
+    --gold-light: #F3E2BE;
+    --gold-champagne: #E8C98D;
+    --gold-core: #D7AE63;
+    --gold-rich: #C99A52;
+    --gold-deep: #AE7C38;
+
+    --ivory-warm: #F7F2EA;
+    --coffee-cream: #E8DCCB;
+    --light-cream: #FAF6F0;
+    --walnut: #6C4C35;
+    --bronze: #9B6B3A;
+    --copper: #734726;
+
+    --espresso-dark: #1B1512;
+    --espresso-deep: #2B211B;
   }
 
   body {
-    background-color: var(--bg-cream);
-    color: var(--espresso);
+    background-color: var(--light-cream);
+    color: var(--espresso-dark);
     font-family: 'IBM Plex Sans Arabic', 'Tajawal', 'Alexandria', 'Cairo', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -39,68 +55,77 @@
   font-family: 'Alexandria', sans-serif;
 }
 
-.font-almarai {
-  font-family: 'Almarai', sans-serif;
-}
-
-.font-[#2B211B] {
-  color: var(--espresso);
-}
-
-.font-cairo {
-  font-family: 'Cairo', sans-serif;
-}
-
 .font-amiri {
   font-family: 'Amiri', 'Georgia', serif;
 }
 
-.font-readex {
-  font-family: 'Readex Pro', sans-serif;
-}
-
-/* Editorial & Luxury Aesthetic Classes */
-.serif-title {
-  font-family: 'Amiri', 'Georgia', serif;
-  font-weight: 700;
-}
-
-.sans-label {
-  font-family: 'Alexandria', sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  font-size: 11px;
-}
-
-.gold-text {
-  color: var(--gold);
-}
-
-/* Luxury Royal Gold Gradient Text */
+/* Luxury Champagne & Metallic Gold Gradients */
 .gold-gradient-text {
-  background: linear-gradient(135deg, #2B211B 0%, #B78A5C 40%, #D4AF37 70%, #C9A76A 100%);
+  background: linear-gradient(135deg, #F3E2BE 0%, #E8C98D 35%, #D7AE63 70%, #C99A52 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gold-gradient-bright {
-  background: linear-gradient(135deg, #FFF 0%, #F5E6CA 50%, #C9A76A 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #F3E2BE 45%, #D7AE63 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.product-card {
-  background: white;
-  border-radius: 18px;
+.gold-gradient-[#1B1512] {
+  background: linear-gradient(135deg, #1B1512 0%, #4E382A 50%, #8C5D2C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Luxury Metallic Gold Button */
+.btn-champagne-primary {
+  background: linear-gradient(135deg, #F3E2BE 0%, #E8C98D 40%, #D7AE63 80%, #C99A52 100%);
+  color: #120E0C;
+  font-weight: 700;
+  border: 1px solid rgba(243, 226, 190, 0.6);
+  box-shadow: 0 4px 20px rgba(215, 174, 99, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 20px rgba(74, 51, 38, 0.05);
-  border: 1px solid rgba(239, 232, 222, 0.85);
+}
+
+.btn-champagne-primary:hover {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F3E2BE 40%, #E8C98D 80%, #D7AE63 100%);
+  box-shadow: 0 8px 30px rgba(215, 174, 99, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-champagne-secondary {
+  background: rgba(27, 21, 18, 0.5);
+  color: #F3E2BE;
+  font-weight: 700;
+  border: 1px solid rgba(215, 174, 99, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(18, 14, 12, 0.3);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-champagne-secondary:hover {
+  background: rgba(215, 174, 99, 0.18);
+  border-color: rgba(243, 226, 190, 0.8);
+  color: #FFFFFF;
+  box-shadow: 0 6px 24px rgba(215, 174, 99, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Product Cards & Containers */
+.product-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 24px rgba(27, 21, 18, 0.06);
+  border: 1px solid rgba(215, 174, 99, 0.2);
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 36px rgba(74, 51, 38, 0.14);
-  border-color: rgba(201, 167, 106, 0.5);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 42px rgba(27, 21, 18, 0.12), 0 0 24px rgba(215, 174, 99, 0.2);
+  border-color: rgba(215, 174, 99, 0.6);
 }
 
 /* Custom Scrollbar */
@@ -108,40 +133,42 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F8F3EC;
+  background: #1B1512;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C9A76A;
+  background: linear-gradient(180deg, #D7AE63 0%, #9B6B3A 100%);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #B78A5C;
+  background: linear-gradient(180deg, #F3E2BE 0%, #D7AE63 100%);
 }
 
-/* Glassmorphism Effect */
+/* Glassmorphism Panels */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(201, 167, 106, 0.2);
+  background: rgba(250, 246, 240, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(215, 174, 99, 0.25);
+  box-shadow: 0 12px 36px rgba(27, 21, 18, 0.08);
 }
 
 .glass-panel-dark {
-  background: rgba(43, 33, 27, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(201, 167, 106, 0.25);
+  background: rgba(27, 21, 18, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(215, 174, 99, 0.3);
+  box-shadow: 0 16px 48px rgba(18, 14, 12, 0.6);
 }
 
 /* Steam Animation */
 @keyframes rise {
   0% {
     transform: translateY(0) scale(1);
-    opacity: 0.5;
+    opacity: 0.4;
   }
   50% {
     transform: translateY(-20px) scale(1.1);
-    opacity: 0.8;
+    opacity: 0.7;
   }
   100% {
     transform: translateY(-40px) scale(1.25);
@@ -161,15 +188,22 @@
   animation: rise 4.5s infinite ease-out 0.8s;
 }
 
-/* Shimmer Gold Effect */
-.gold-gradient-text {
-  background: linear-gradient(135deg, #4A3326 0%, #B78A5C 50%, #C9A76A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Performance & GPU Acceleration Optimizations */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform;
 }
 
 .gold-border-glow {
-  box-shadow: 0 0 20px -5px rgba(201, 167, 106, 0.3);
+  box-shadow: 0 0 25px -3px rgba(215, 174, 99, 0.35);
 }
+
 
 

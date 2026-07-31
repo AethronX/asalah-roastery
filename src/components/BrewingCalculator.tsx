@@ -82,28 +82,28 @@ export const BrewingCalculator: React.FC<BrewingCalculatorProps> = ({ isOpen, on
   const calc = getCalculation();
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#2B211B]/85 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-[#F8F3EC] text-[#2B211B] rounded-3xl max-w-2xl w-full border border-[#C9A76A]/40 shadow-2xl relative p-6 sm:p-8 text-right">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#1B1512]/90 backdrop-blur-xl flex items-center justify-center p-4">
+      <div className="bg-[#FAF6F0] text-[#1B1512] rounded-3xl max-w-2xl w-full border border-[#D7AE63]/40 shadow-2xl relative p-6 sm:p-8 text-right">
         
         {/* Close Button */}
         <button
           onClick={onClose}
           aria-label="إغلاق حاسبة التحضير"
-          className="absolute top-4 left-4 p-2 rounded-full bg-[#2B211B]/10 hover:bg-[#2B211B] hover:text-white transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center"
+          className="absolute top-4 left-4 p-2.5 rounded-full bg-[#1B1512]/10 hover:bg-[#1B1512] hover:text-[#F3E2BE] transition-all min-w-[40px] min-h-[40px] flex items-center justify-center"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Title Header */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-full bg-[#C9A76A]/20 border border-[#C9A76A] flex items-center justify-center text-[#B78A5C]">
+          <div className="w-10 h-10 rounded-full bg-[#241B17] border border-[#D7AE63]/50 flex items-center justify-center text-[#F3E2BE] shadow-md">
             <Sparkles className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="font-amiri text-2xl font-bold text-[#2B211B]">
+            <h2 className="font-amiri text-2xl font-bold text-[#1B1512]">
               دليل وحاسبة تحضير القهوة المثالية
             </h2>
-            <p className="text-xs text-[#2B211B] font-medium">
+            <p className="text-xs text-[#4E382A] font-medium">
               احسب مقادير البن والماء والحرارة للحصول على أفضل رشفة
             </p>
           </div>
@@ -122,8 +122,8 @@ export const BrewingCalculator: React.FC<BrewingCalculatorProps> = ({ isOpen, on
               onClick={() => setMethod(m.id as any)}
               className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all border min-h-[40px] ${
                 method === m.id
-                  ? 'bg-[#2B211B] text-[#C9A76A] border-[#C9A76A] shadow-md'
-                  : 'bg-white text-[#2B211B] border-[#EFE8DE] hover:bg-[#EFE8DE]'
+                  ? 'bg-[#1B1512] text-[#F3E2BE] border-[#D7AE63] shadow-md'
+                  : 'bg-white text-[#1B1512] border-[#D7AE63]/25 hover:bg-[#F3E2BE]/10'
               }`}
             >
               {m.label}
@@ -132,10 +132,10 @@ export const BrewingCalculator: React.FC<BrewingCalculatorProps> = ({ isOpen, on
         </div>
 
         {/* Cups Range Slider */}
-        <div className="mb-6 bg-white p-4 rounded-2xl border border-[#EFE8DE]">
+        <div className="mb-6 bg-white p-4 rounded-2xl border border-[#D7AE63]/25">
           <div className="flex justify-between items-center mb-2 text-xs font-bold">
-            <label htmlFor="brewing-cups-slider" className="text-[#2B211B]">عدد الفناجين / الأكواب المطلوب تحضيرها:</label>
-            <span className="text-[#B78A5C] text-sm font-black">{cups} فناجين</span>
+            <label htmlFor="brewing-cups-slider" className="text-[#1B1512]">عدد الفناجين / الأكواب المطلوب تحضيرها:</label>
+            <span className="text-[#9B6B3A] text-sm font-black">{cups} فناجين</span>
           </div>
           <input
             id="brewing-cups-slider"
@@ -144,9 +144,9 @@ export const BrewingCalculator: React.FC<BrewingCalculatorProps> = ({ isOpen, on
             max="12"
             value={cups}
             onChange={(e) => setCups(parseInt(e.target.value))}
-            className="w-full accent-[#B78A5C] cursor-pointer"
+            className="w-full accent-[#D7AE63] cursor-pointer"
           />
-          <div className="flex justify-between text-[10px] text-[#2B211B] font-bold mt-1">
+          <div className="flex justify-between text-[10px] text-[#4E382A] font-bold mt-1">
             <span>فنجان واحد (شخصي)</span>
             <span>6 فناجين (جلسة)</span>
             <span>12 فنجان (مجلس كامل)</span>
@@ -155,35 +155,35 @@ export const BrewingCalculator: React.FC<BrewingCalculatorProps> = ({ isOpen, on
 
         {/* Calculations Results Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
-          <div className="bg-[#2B211B] text-[#F8F3EC] p-3.5 rounded-2xl border border-[#C9A76A]/30">
-            <div className="flex items-center gap-1.5 text-xs text-[#C9A76A] mb-1">
-              <Scale className="w-4 h-4" />
+          <div className="bg-[#1B1512] text-[#F7F2EA] p-4 rounded-2xl border border-[#D7AE63]/30 shadow-md">
+            <div className="flex items-center gap-1.5 text-xs text-[#F3E2BE] mb-1">
+              <Scale className="w-4 h-4 text-[#D7AE63]" />
               <span>وزن البن المحمص</span>
             </div>
-            <div className="text-xl font-bold font-amiri text-[#F8F3EC]">
+            <div className="text-xl font-bold font-amiri text-[#F7F2EA]">
               {calc.coffeeGrams} جرام
             </div>
           </div>
 
-          <div className="bg-[#2B211B] text-[#F8F3EC] p-3.5 rounded-2xl border border-[#C9A76A]/30">
-            <div className="flex items-center gap-1.5 text-xs text-[#C9A76A] mb-1">
-              <Coffee className="w-4 h-4" />
+          <div className="bg-[#1B1512] text-[#F7F2EA] p-4 rounded-2xl border border-[#D7AE63]/30 shadow-md">
+            <div className="flex items-center gap-1.5 text-xs text-[#F3E2BE] mb-1">
+              <Coffee className="w-4 h-4 text-[#D7AE63]" />
               <span>كمية الماء</span>
             </div>
-            <div className="text-xl font-bold font-amiri text-[#F8F3EC]">
+            <div className="text-xl font-bold font-amiri text-[#F7F2EA]">
               {calc.waterMl} مل
             </div>
           </div>
 
-          <div className="bg-[#2B211B] text-[#F8F3EC] p-3.5 rounded-2xl border border-[#C9A76A]/30 col-span-2 sm:col-span-1">
-            <div className="flex items-center gap-1.5 text-xs text-[#C9A76A] mb-1">
-              <Thermometer className="w-4 h-4" />
+          <div className="bg-[#1B1512] text-[#F7F2EA] p-4 rounded-2xl border border-[#D7AE63]/30 shadow-md col-span-2 sm:col-span-1">
+            <div className="flex items-center gap-1.5 text-xs text-[#F3E2BE] mb-1">
+              <Thermometer className="w-4 h-4 text-[#D7AE63]" />
               <span>حرارة الماء والوقت</span>
             </div>
-            <div className="text-xs font-bold text-[#F8F3EC]">
+            <div className="text-xs font-bold text-[#F7F2EA]">
               {calc.temp}
             </div>
-            <div className="text-[10px] text-[#C9A76A]/80 mt-0.5">
+            <div className="text-[10px] text-[#F3E2BE]/80 mt-0.5">
               {calc.time}
             </div>
           </div>
@@ -191,21 +191,21 @@ export const BrewingCalculator: React.FC<BrewingCalculatorProps> = ({ isOpen, on
 
         {/* Omani Cardamom & Saffron Note */}
         {calc.cardamomGrams > 0 && (
-          <div className="mb-6 bg-[#B78A5C]/15 p-3 rounded-xl border border-[#B78A5C]/30 text-xs flex items-center justify-between">
-            <span className="font-bold text-[#2B211B]">مقادير الهيل والزعفران العماني:</span>
-            <span className="text-[#4A3326]">
+          <div className="mb-6 bg-[#241B17] p-3.5 rounded-xl border border-[#D7AE63]/40 text-xs flex items-center justify-between shadow-sm">
+            <span className="font-bold text-[#F3E2BE]">مقادير الهيل والزعفران العماني:</span>
+            <span className="text-[#E8DCCB] font-medium">
               {calc.cardamomGrams}g هيل أخضرمطحون + {calc.saffronPinches} قرصة زعفران سوبر نيل
             </span>
           </div>
         )}
 
         {/* Steps Guide */}
-        <div className="bg-white/70 p-4 rounded-2xl border border-[#EFE8DE] text-xs">
-          <h4 className="font-bold text-[#2B211B] mb-2 flex items-center gap-1.5">
-            <Timer className="w-4 h-4 text-[#B78A5C]" />
+        <div className="bg-white p-4 rounded-2xl border border-[#D7AE63]/25 text-xs">
+          <h4 className="font-bold text-[#1B1512] mb-2 flex items-center gap-1.5">
+            <Timer className="w-4 h-4 text-[#9B6B3A]" />
             <span>خطوات التحضير للحصول على المذاق الملكي:</span>
           </h4>
-          <ol className="space-y-2 pr-4 list-decimal text-[#4A3326] font-light">
+          <ol className="space-y-2 pr-4 list-decimal text-[#4E382A] font-medium">
             {calc.steps.map((st, i) => (
               <li key={i}>{st}</li>
             ))}

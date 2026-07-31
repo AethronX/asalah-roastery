@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { PRODUCTS } from './data/products';
 import { Product, CartItem, CategoryId, GrindType } from './types';
 
@@ -49,13 +49,13 @@ export default function App() {
   // Toast Notification State
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  const showToast = (msg: string) => {
+  const showToast = useCallback((msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3500);
-  };
+  }, []);
 
   // Cart operations
-  const handleAddToCart = (
+  const handleAddToCart = useCallback((
     product: Product,
     weightGrams: number = 250,
     grind: GrindType = 'حبوب كاملة (Whole Beans)',
@@ -91,9 +91,9 @@ export default function App() {
     });
 
     showToast(`تمت إضافة "${product.nameAr}" إلى السلة`);
-  };
+  }, [showToast]);
 
-  const handleExpressBuy = (
+  const handleExpressBuy = useCallback((
     product: Product,
     weightGrams: number = 250,
     grind: GrindType = 'حبوب كاملة (Whole Beans)',
@@ -102,27 +102,27 @@ export default function App() {
     handleAddToCart(product, weightGrams, grind, quantity);
     setCartInitialStep('address');
     setIsCartOpen(true);
-  };
+  }, [handleAddToCart]);
 
-  const handleUpdateCartQuantity = (index: number, qty: number) => {
+  const handleUpdateCartQuantity = useCallback((index: number, qty: number) => {
     setCartItems((prev) => {
       const updated = [...prev];
       updated[index].quantity = qty;
       return updated;
     });
-  };
+  }, []);
 
-  const handleRemoveCartItem = (index: number) => {
+  const handleRemoveCartItem = useCallback((index: number) => {
     setCartItems((prev) => prev.filter((_, i) => i !== index));
     showToast('تمت إزالة المنتج من السلة');
-  };
+  }, [showToast]);
 
-  const handleClearCart = () => {
+  const handleClearCart = useCallback(() => {
     setCartItems([]);
-  };
+  }, []);
 
   // Wishlist operations
-  const handleToggleWishlist = (product: Product) => {
+  const handleToggleWishlist = useCallback((product: Product) => {
     setWishlistProducts((prev) => {
       const exists = prev.some((p) => p.id === product.id);
       if (exists) {
@@ -133,23 +133,39 @@ export default function App() {
         return [...prev, product];
       }
     });
-  };
+  }, [showToast]);
 
   // Navigation handlers
-  const handleCategorySelect = (catId: CategoryId) => {
+  const handleCategorySelect = useCallback((catId: CategoryId) => {
     setActiveCategory(catId);
     const catalogEl = document.getElementById('shop-catalog');
     if (catalogEl) {
       catalogEl.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, []);
+
+  // Memoized Total Cart Computations for Header & Floating Bar
+  const cartTotalQuantity = useMemo(
+    () => cartItems.reduce((acc, item) => acc + item.quantity, 0),
+    [cartItems]
+  );
+
+  const cartTotalOmr = useMemo(
+    () => cartItems.reduce((acc, item) => acc + item.unitPriceOmr * item.quantity, 0),
+    [cartItems]
+  );
+
+  const wishlistIds = useMemo(
+    () => wishlistProducts.map((p) => p.id),
+    [wishlistProducts]
+  );
 
   // Render main website layout content
   const renderStorefrontContent = () => (
     <div className="min-h-screen bg-[#F8F3EC] text-[#2B211B]">
       {/* Navigation Header */}
       <Header
-        cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
+        cartCount={cartTotalQuantity}
         wishlistCount={wishlistProducts.length}
         onOpenCart={() => {
           setCartInitialStep('cart');
@@ -163,7 +179,7 @@ export default function App() {
       />
 
       {/* Main Content Sections */}
-      <main>
+      <main id="main-content">
         {/* Hero Section */}
         <Hero
           onShopNow={() => handleCategorySelect('all')}
@@ -179,8 +195,8 @@ export default function App() {
           onSelectCategory={handleCategorySelect}
         />
 
-        {/* Coffee Finder Quiz (Inspired by Blue Bottle & Onyx) */}
-        <div id="coffee-quiz">
+        {/* Coffee Finder Quiz */}
+        <div id="coffee-quiz" className="cv-auto">
           <CoffeeFinderQuiz
             products={PRODUCTS}
             onAddToCart={handleAddToCart}
@@ -198,55 +214,69 @@ export default function App() {
           onExpressBuy={handleExpressBuy}
           onQuickView={(p) => setSelectedProductView(p)}
           onToggleWishlist={handleToggleWishlist}
-          wishlistIds={wishlistProducts.map((p) => p.id)}
+          wishlistIds={wishlistIds}
           currency={currency}
         />
 
         {/* Coffee Autoship Subscription Engine */}
-        <CoffeeSubscriptionBanner
-          products={PRODUCTS}
-          onSubscribe={(product, freq) => {
-            handleExpressBuy(product, 250, 'حبوب كاملة (Whole Beans)');
-            setToastMessage(`تم بدء طلب اشتراكك (${freq === 'weekly' ? 'أسبوعي' : freq === 'biweekly' ? 'كل أسبوعين' : 'شهري'}) لمنتج ${product.nameAr}`);
-          }}
-          currency={currency}
-        />
+        <div className="cv-auto">
+          <CoffeeSubscriptionBanner
+            products={PRODUCTS}
+            onSubscribe={(product, freq) => {
+              handleExpressBuy(product, 250, 'حبوب كاملة (Whole Beans)');
+              showToast(`تم بدء طلب اشتراكك (${freq === 'weekly' ? 'أسبوعي' : freq === 'biweekly' ? 'كل أسبوعين' : 'شهري'}) لمنتج ${product.nameAr}`);
+            }}
+            currency={currency}
+          />
+        </div>
 
         {/* Story Section */}
-        <OurStory />
+        <div className="cv-auto">
+          <OurStory />
+        </div>
 
         {/* Brand Guarantees Features */}
-        <Features />
+        <div className="cv-auto">
+          <Features />
+        </div>
 
         {/* Gift Section */}
-        <GiftSection
-          onSelectGift={(p) => setSelectedProductView(p)}
-          giftProduct={PRODUCTS.find((p) => p.id === 'luxury-royal-gift-box')}
-        />
+        <div className="cv-auto">
+          <GiftSection
+            onSelectGift={(p) => setSelectedProductView(p)}
+            giftProduct={PRODUCTS.find((p) => p.id === 'luxury-royal-gift-box')}
+          />
+        </div>
 
         {/* Testimonials */}
-        <Testimonials />
+        <div className="cv-auto">
+          <Testimonials />
+        </div>
 
         {/* Instagram Lifestyle Gallery */}
-        <InstagramGrid />
+        <div className="cv-auto">
+          <InstagramGrid />
+        </div>
 
         {/* Branch Locations & Tasting Sessions */}
-        <LocationSection />
+        <div className="cv-auto">
+          <LocationSection />
+        </div>
       </main>
 
       {/* Sticky Express Floating Cart Bar for High Conversions */}
       {cartItems.length > 0 && !isCartOpen && (
-        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-md bg-[#2B211B] text-[#F8F3EC] p-3 rounded-2xl border border-[#C9A76A]/50 shadow-[0_15px_40px_rgba(0,0,0,0.6)] flex items-center justify-between backdrop-blur-md animate-fadeIn">
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-md bg-[#1B1512] text-[#F7F2EA] p-3 rounded-2xl border border-[#D7AE63]/50 shadow-[0_15px_40px_rgba(0,0,0,0.6)] flex items-center justify-between backdrop-blur-md animate-fadeIn gpu-accelerated">
           <div className="flex items-center gap-3">
             <div className="relative">
-              <span className="w-9 h-9 rounded-xl bg-[#C9A76A] text-[#2B211B] font-bold text-xs flex items-center justify-center">
-                {cartItems.reduce((acc, i) => acc + i.quantity, 0)}
+              <span className="w-9 h-9 rounded-xl bg-gradient-to-r from-[#F3E2BE] to-[#D7AE63] text-[#120E0C] font-black text-xs flex items-center justify-center shadow-md">
+                {cartTotalQuantity}
               </span>
             </div>
             <div className="text-xs">
-              <span className="block text-[#C9A76A] font-bold">سلة التسوق المباشرة</span>
-              <span className="text-[11px] text-white/70">
-                إجمالي: {currency === 'OMR' ? `${cartItems.reduce((acc, item) => acc + item.unitPriceOmr * item.quantity, 0).toFixed(3)} ر.ع` : `$${(cartItems.reduce((acc, item) => acc + item.unitPriceOmr * item.quantity, 0) * 2.6).toFixed(2)}`}
+              <span className="block text-[#F3E2BE] font-bold">سلة التسوق المباشرة</span>
+              <span className="text-[11px] text-[#E8DCCB]">
+                إجمالي: {currency === 'OMR' ? `${cartTotalOmr.toFixed(3)} ر.ع` : `$${(cartTotalOmr * 2.6).toFixed(2)}`}
               </span>
             </div>
           </div>
@@ -256,7 +286,7 @@ export default function App() {
               setCartInitialStep('address');
               setIsCartOpen(true);
             }}
-            className="px-4 py-2 bg-gradient-to-r from-[#B78A5C] to-[#C9A76A] text-[#2B211B] font-bold text-xs rounded-xl hover:shadow-lg transition-all flex items-center gap-1.5"
+            className="px-4 py-2 btn-champagne-primary text-[#120E0C] font-black text-xs rounded-xl hover:shadow-lg transition-all flex items-center gap-1.5"
           >
             <span>إتمام الشراء الآن</span>
             <span>➔</span>
@@ -270,11 +300,11 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen bg-[#2B211B] text-[#F8F3EC] selection:bg-[#B78A5C] selection:text-white font-['IBM_Plex_Sans_Arabic','Tajawal','Alexandria',sans-serif] relative">
+    <div className="min-h-screen bg-[#1B1512] text-[#F7F2EA] selection:bg-[#D7AE63] selection:text-[#120E0C] font-['IBM_Plex_Sans_Arabic','Tajawal','Alexandria',sans-serif] relative">
       
       {/* Toast Notification with Direct Checkout Action */}
       {toastMessage && (
-        <div className="fixed top-20 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-50 bg-[#2B211B] text-[#C9A76A] px-5 py-3 rounded-2xl border border-[#C9A76A]/50 shadow-2xl flex items-center gap-3 text-xs font-bold animate-bounce">
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-50 bg-[#1B1512] text-[#F3E2BE] px-5 py-3 rounded-2xl border border-[#D7AE63]/50 shadow-2xl flex items-center gap-3 text-xs font-bold animate-bounce gpu-accelerated">
           <Check className="w-4 h-4 text-emerald-400" />
           <span>{toastMessage}</span>
           <button
@@ -283,7 +313,7 @@ export default function App() {
               setIsCartOpen(true);
               setToastMessage(null);
             }}
-            className="px-2.5 py-1 bg-[#C9A76A] text-[#2B211B] rounded-lg text-[10px] font-bold hover:bg-white transition-colors mr-2"
+            className="px-2.5 py-1 bg-[#D7AE63] text-[#120E0C] rounded-lg text-[10px] font-bold hover:bg-white transition-colors mr-2"
           >
             عرض السلة والدفع ➔
           </button>
@@ -293,48 +323,59 @@ export default function App() {
       {/* Main Storefront Content */}
       {renderStorefrontContent()}
 
-      {/* Modals & Drawers */}
-      <ProductDetailModal
-        product={selectedProductView}
-        onClose={() => setSelectedProductView(null)}
-        onAddToCart={handleAddToCart}
-        onExpressBuy={handleExpressBuy}
-        currency={currency}
-        onToggleWishlist={handleToggleWishlist}
-        isWishlisted={selectedProductView ? wishlistProducts.some((p) => p.id === selectedProductView.id) : false}
-      />
+      {/* Modals & Drawers - Rendered conditionally to keep DOM lightweight & fast */}
+      {selectedProductView && (
+        <ProductDetailModal
+          product={selectedProductView}
+          onClose={() => setSelectedProductView(null)}
+          onAddToCart={handleAddToCart}
+          onExpressBuy={handleExpressBuy}
+          currency={currency}
+          onToggleWishlist={handleToggleWishlist}
+          isWishlisted={wishlistProducts.some((p) => p.id === selectedProductView.id)}
+        />
+      )}
 
-      <BrewingCalculator
-        isOpen={isBrewingCalcOpen}
-        onClose={() => setIsBrewingCalcOpen(false)}
-      />
+      {isBrewingCalcOpen && (
+        <BrewingCalculator
+          isOpen={isBrewingCalcOpen}
+          onClose={() => setIsBrewingCalcOpen(false)}
+        />
+      )}
 
-      <CartDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        cartItems={cartItems}
-        onUpdateQuantity={handleUpdateCartQuantity}
-        onRemoveItem={handleRemoveCartItem}
-        currency={currency}
-        onClearCart={handleClearCart}
-      />
+      {isCartOpen && (
+        <CartDrawer
+          isOpen={isCartOpen}
+          onClose={() => setIsCartOpen(false)}
+          cartItems={cartItems}
+          onUpdateQuantity={handleUpdateCartQuantity}
+          onRemoveItem={handleRemoveCartItem}
+          currency={currency}
+          onClearCart={handleClearCart}
+          initialStep={cartInitialStep}
+        />
+      )}
 
-      <WishlistDrawer
-        isOpen={isWishlistOpen}
-        onClose={() => setIsWishlistOpen(false)}
-        wishlistProducts={wishlistProducts}
-        onRemoveFromWishlist={handleToggleWishlist}
-        onAddToCart={handleAddToCart}
-        currency={currency}
-      />
+      {isWishlistOpen && (
+        <WishlistDrawer
+          isOpen={isWishlistOpen}
+          onClose={() => setIsWishlistOpen(false)}
+          wishlistProducts={wishlistProducts}
+          onRemoveFromWishlist={handleToggleWishlist}
+          onAddToCart={handleAddToCart}
+          currency={currency}
+        />
+      )}
 
-      <SearchModal
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
-        products={PRODUCTS}
-        onSelectProduct={(p) => setSelectedProductView(p)}
-        currency={currency}
-      />
+      {isSearchOpen && (
+        <SearchModal
+          isOpen={isSearchOpen}
+          onClose={() => setIsSearchOpen(false)}
+          products={PRODUCTS}
+          onSelectProduct={(p) => setSelectedProductView(p)}
+          currency={currency}
+        />
+      )}
 
     </div>
   );

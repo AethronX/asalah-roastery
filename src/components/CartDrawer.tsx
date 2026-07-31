@@ -162,18 +162,18 @@ ${itemsSummary}
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden bg-[#2B211B]/80 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 overflow-hidden bg-[#1B1512]/85 backdrop-blur-md animate-fadeIn">
       <div className="absolute inset-0" onClick={onClose} />
 
       <div className="fixed inset-y-0 left-0 max-w-full flex pl-0 sm:pl-10 text-right">
-        <div className="w-screen max-w-md bg-[#F8F3EC] text-[#2B211B] shadow-2xl border-r border-[#C9A76A]/40 flex flex-col justify-between relative z-10">
+        <div className="w-screen max-w-md bg-[#FAF6F0] text-[#1B1512] shadow-2xl border-r border-[#D7AE63]/40 flex flex-col justify-between relative z-10">
           
           {/* Drawer Top Header */}
-          <div className="p-4 sm:p-5 bg-[#2B211B] text-[#F8F3EC] border-b border-[#C9A76A]/30 flex items-center justify-between">
+          <div className="p-4 sm:p-5 bg-[#1B1512] text-[#F7F2EA] border-b border-[#D7AE63]/30 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <ShoppingBag className="w-5 h-5 text-[#C9A76A]" />
-              <h3 className="font-amiri text-xl font-bold">سلة الشراء المباشر</h3>
-              <span className="text-xs bg-[#C9A76A] text-[#2B211B] px-2 py-0.5 rounded-full font-bold">
+              <ShoppingBag className="w-5 h-5 text-[#F3E2BE]" />
+              <h3 className="font-alexandria text-lg font-bold">سلة الشراء المباشر</h3>
+              <span className="text-xs bg-gradient-to-r from-[#F3E2BE] to-[#D7AE63] text-[#120E0C] px-2.5 py-0.5 rounded-full font-black">
                 {cartItems.reduce((acc, i) => acc + i.quantity, 0)} منتج
               </span>
             </div>
@@ -191,13 +191,13 @@ ${itemsSummary}
             
             {/* Express 1-Click Buy Header (Apple Pay / Instant) */}
             {cartItems.length > 0 && checkoutStep === 'cart' && (
-              <div className="p-3 bg-gradient-to-r from-[#2B211B] to-[#4A3326] rounded-2xl border border-[#C9A76A]/40 text-white space-y-2">
-                <div className="flex items-center justify-between text-xs text-[#C9A76A] font-bold">
+              <div className="p-3 bg.gradient-to-r bg-[#1B1512] rounded-2xl border border-[#D7AE63]/40 text-white space-y-2">
+                <div className="flex items-center justify-between text-xs text-[#F3E2BE] font-bold">
                   <span className="flex items-center gap-1.5">
-                    <Zap className="w-4 h-4 fill-current" />
+                    <Zap className="w-4 h-4 fill-current text-[#F3E2BE]" />
                     <span>الدفع السريع المباشر (1-Click Buy)</span>
                   </span>
-                  <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                  <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30 font-bold">
                     جاهز للتنفيذ
                   </span>
                 </div>
@@ -214,21 +214,21 @@ ${itemsSummary}
 
             {/* Free Shipping Progress Bar */}
             {cartItems.length > 0 && checkoutStep === 'cart' && (
-              <div className="bg-[#EFE8DE] p-3.5 rounded-2xl border border-[#B78A5C]/20 text-xs">
-                <div className="flex items-center justify-between font-bold text-[#2B211B] mb-1.5">
+              <div className="bg-[#FAF6F0] p-3.5 rounded-2xl border border-[#D7AE63]/30 text-xs">
+                <div className="flex items-center justify-between font-bold text-[#1B1512] mb-1.5">
                   <span className="flex items-center gap-1">
-                    <Truck className="w-4 h-4 text-[#B78A5C]" />
+                    <Truck className="w-4 h-4 text-[#D7AE63]" />
                     <span>التوصيل المجاني المباشر</span>
                   </span>
-                  <span>
+                  <span className="text-[#9B6B3A]">
                     {remainingForFreeShipping === 0
                       ? 'مؤهل للتوصيل المجاني!'
                       : `متبقي ${remainingForFreeShipping.toFixed(3)} ر.ع`}
                   </span>
                 </div>
-                <div className="h-2 rounded-full bg-[#2B211B]/10 overflow-hidden">
+                <div className="h-2 rounded-full bg-[#1B1512]/10 overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-[#B78A5C] to-[#C9A76A] transition-all duration-500 rounded-full"
+                    className="h-full bg-gradient-to-r from-[#F3E2BE] to-[#D7AE63] transition-all duration-500 rounded-full"
                     style={{ width: `${progressPercent}%` }}
                   />
                 </div>
@@ -240,9 +240,9 @@ ${itemsSummary}
               <>
                 {cartItems.length === 0 ? (
                   <div className="py-16 text-center space-y-3">
-                    <ShoppingBag className="w-16 h-16 text-[#B78A5C]/40 mx-auto" />
-                    <h4 className="font-amiri text-xl font-bold text-[#2B211B]">سلتك فارغة حالياً</h4>
-                    <p className="text-xs text-[#4A3326]/70 max-w-xs mx-auto">
+                    <ShoppingBag className="w-16 h-16 text-[#D7AE63]/40 mx-auto" />
+                    <h4 className="font-alexandria text-xl font-bold text-[#1B1512]">سلتك فارغة حالياً</h4>
+                    <p className="text-xs text-[#4E382A] max-w-xs mx-auto">
                       اختر حبوب القهوة العمانية الفاخرة أو المحاصيل المختصة وأضفها بنقرة واحدة.
                     </p>
                   </div>
@@ -251,7 +251,7 @@ ${itemsSummary}
                     {cartItems.map((item, idx) => (
                       <div
                         key={idx}
-                        className="p-3 bg-white rounded-2xl border border-[#EFE8DE] flex gap-3 items-center justify-between hover:border-[#B78A5C]/40 transition-colors shadow-sm"
+                        className="p-3 bg-white rounded-2xl border border-[#D7AE63]/25 flex gap-3 items-center justify-between hover:border-[#D7AE63] transition-colors shadow-sm"
                       >
                         <img
                           src={item.product.image}
@@ -261,17 +261,17 @@ ${itemsSummary}
                           width="64"
                           height="64"
                           referrerPolicy="no-referrer"
-                          className="w-16 h-16 rounded-xl object-cover shrink-0 border border-[#EFE8DE]"
+                          className="w-16 h-16 rounded-xl object-cover shrink-0 border border-[#D7AE63]/20"
                         />
 
                         <div className="flex-grow text-xs">
-                          <h4 className="font-bold text-[#2B211B] font-amiri text-sm line-clamp-1">
+                          <h4 className="font-bold text-[#1B1512] font-alexandria text-sm line-clamp-1">
                             {item.product.nameAr}
                           </h4>
-                          <div className="text-[11px] text-[#2B211B] font-medium mt-0.5">
+                          <div className="text-[11px] text-[#4E382A] font-medium mt-0.5">
                             الوزن: {item.selectedWeight} | {item.selectedGrind.split(' ')[0]}
                           </div>
-                          <div className="font-bold text-[#2B211B] mt-1 text-sm">
+                          <div className="font-extrabold text-[#1B1512] mt-1 text-sm">
                             {currency === 'OMR'
                               ? `${(item.unitPriceOmr * item.quantity).toFixed(3)} ر.ع`
                               : `$${(item.unitPriceOmr * 2.6 * item.quantity).toFixed(2)}`}
@@ -282,24 +282,24 @@ ${itemsSummary}
                         <div className="flex flex-col items-end gap-2">
                           <button
                             onClick={() => onRemoveItem(idx)}
-                            className="text-red-600 hover:text-red-800 p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center"
+                            className="text-rose-600 hover:text-rose-800 p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center"
                             title="حذف"
                             aria-label={`حذف ${item.product.nameAr} من السلة`}
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
-                          <div className="flex items-center border border-[#EFE8DE] bg-[#EFE8DE]/60 rounded-lg overflow-hidden text-xs">
+                          <div className="flex items-center border border-[#D7AE63]/30 bg-[#FAF6F0] rounded-lg overflow-hidden text-xs">
                             <button
                               onClick={() => onUpdateQuantity(idx, Math.max(1, item.quantity - 1))}
-                              className="px-2.5 py-1 font-bold hover:bg-[#B78A5C]/20 min-w-[28px] min-h-[28px]"
+                              className="px-2.5 py-1 font-bold hover:bg-[#D7AE63] hover:text-[#120E0C] min-w-[28px] min-h-[28px]"
                               aria-label={`تقليل كمية ${item.product.nameAr}`}
                             >
                               -
                             </button>
-                            <span className="px-2.5 font-bold text-[#2B211B]">{item.quantity}</span>
+                            <span className="px-2.5 font-bold text-[#1B1512]">{item.quantity}</span>
                             <button
                               onClick={() => onUpdateQuantity(idx, item.quantity + 1)}
-                              className="px-2.5 py-1 font-bold hover:bg-[#B78A5C]/20 min-w-[28px] min-h-[28px]"
+                              className="px-2.5 py-1 font-bold hover:bg-[#D7AE63] hover:text-[#120E0C] min-w-[28px] min-h-[28px]"
                               aria-label={`زيادة كمية ${item.product.nameAr}`}
                             >
                               +
@@ -310,10 +310,10 @@ ${itemsSummary}
                     ))}
 
                     {/* Promo Coupon Section */}
-                    <div className="p-3.5 bg-white rounded-2xl border border-[#EFE8DE] space-y-2">
-                      <div className="flex items-center justify-between text-xs font-bold text-[#2B211B]">
+                    <div className="p-3.5 bg-white rounded-2xl border border-[#D7AE63]/25 space-y-2">
+                      <div className="flex items-center justify-between text-xs font-bold text-[#1B1512]">
                         <span className="flex items-center gap-1.5">
-                          <Tag className="w-4 h-4 text-[#B78A5C]" />
+                          <Tag className="w-4 h-4 text-[#D7AE63]" />
                           <label htmlFor="coupon-code-input">كوبون الخصم الترحيبي</label>
                         </span>
                         {appliedCoupon && (
@@ -330,12 +330,12 @@ ${itemsSummary}
                           value={couponInput}
                           onChange={(e) => setCouponInput(e.target.value)}
                           placeholder="أدخل الكود (مثال: ASALAH10)"
-                          className="flex-grow p-2 text-xs bg-white border border-[#EFE8DE] text-[#2B211B] rounded-xl focus:outline-none focus:border-[#B78A5C] uppercase font-mono font-bold"
+                          className="flex-grow p-2 text-xs bg-white border border-[#D7AE63]/30 text-[#1B1512] rounded-xl focus:outline-none focus:border-[#D7AE63] uppercase font-mono font-bold"
                         />
                         <button
                           onClick={() => handleApplyCoupon()}
                           aria-label="تطبيق كود الخصم"
-                          className="px-4 py-2 bg-[#2B211B] text-[#C9A76A] rounded-xl text-xs font-bold hover:bg-[#B78A5C] hover:text-white transition-colors shrink-0 min-h-[38px]"
+                          className="px-4 py-2 bg-[#1B1512] text-[#F3E2BE] rounded-xl text-xs font-bold hover:bg-[#D7AE63] hover:text-[#120E0C] transition-colors shrink-0 min-h-[38px]"
                         >
                           تطبيق
                         </button>
@@ -345,19 +345,19 @@ ${itemsSummary}
                       <div className="flex gap-1.5 pt-1">
                         <button
                           onClick={() => handleApplyCoupon('ASALAH10')}
-                          className="text-[10px] px-2.5 py-1 bg-[#EFE8DE] hover:bg-[#B78A5C] hover:text-white rounded-lg transition-colors font-mono"
+                          className="text-[10px] px-2.5 py-1 bg-[#FAF6F0] hover:bg-[#D7AE63] hover:text-[#120E0C] rounded-lg transition-colors font-mono border border-[#D7AE63]/20"
                         >
                           ASALAH10 (10% خصم)
                         </button>
                         <button
                           onClick={() => handleApplyCoupon('FREESHIP')}
-                          className="text-[10px] px-2.5 py-1 bg-[#EFE8DE] hover:bg-[#B78A5C] hover:text-white rounded-lg transition-colors font-mono"
+                          className="text-[10px] px-2.5 py-1 bg-[#FAF6F0] hover:bg-[#D7AE63] hover:text-[#120E0C] rounded-lg transition-colors font-mono border border-[#D7AE63]/20"
                         >
                           FREESHIP (شحن مجاني)
                         </button>
                       </div>
 
-                      {couponError && <p className="text-[11px] text-red-500 font-medium">{couponError}</p>}
+                      {couponError && <p className="text-[11px] text-rose-600 font-medium">{couponError}</p>}
                     </div>
 
                   </div>
@@ -373,44 +373,44 @@ ${itemsSummary}
                 <button
                   type="button"
                   onClick={() => setCheckoutStep('cart')}
-                  className="flex items-center gap-1 text-[#B78A5C] font-bold hover:underline mb-1"
+                  className="flex items-center gap-1 text-[#9B6B3A] font-bold hover:underline mb-1"
                 >
                   <ArrowLeft className="w-4 h-4 rotate-180" />
                   <span>تعديل السلة والمنتجات</span>
                 </button>
 
-                <h4 className="font-amiri text-xl font-bold text-[#2B211B] border-b border-[#EFE8DE] pb-2">
+                <h4 className="font-alexandria text-xl font-bold text-[#1B1512] border-b border-[#D7AE63]/25 pb-2">
                   بيانات التوصيل السريع والدفع
                 </h4>
 
                 {/* Quick Presets for Frictionless Address */}
                 <div className="space-y-1.5">
-                  <label className="block text-[#4A3326] font-bold text-[11px] flex items-center justify-between">
+                  <label className="block text-[#4E382A] font-bold text-[11px] flex items-center justify-between">
                     <span>اختيار موقع سريع (تعبئة فورية):</span>
-                    <span className="text-[#B78A5C]">نقرة واحدة</span>
+                    <span className="text-[#9B6B3A]">نقرة واحدة</span>
                   </label>
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       type="button"
                       onClick={() => handleQuickAddressPreset('عبدالله المعمري (مسقط)', 'مسقط', '+968 92345678')}
-                      className="p-2 bg-white border border-[#EFE8DE] rounded-xl hover:border-[#B78A5C] text-right transition-colors"
+                      className="p-2 bg-white border border-[#D7AE63]/30 rounded-xl hover:border-[#D7AE63] text-right transition-colors"
                     >
-                      <span className="font-bold block text-[#2B211B] text-[11px]">مسقط - الخوض</span>
-                      <span className="text-[10px] text-[#4A3326]/60">توصيل خلال ساعتين</span>
+                      <span className="font-bold block text-[#1B1512] text-[11px]">مسقط - الخوض</span>
+                      <span className="text-[10px] text-[#4E382A]/70">توصيل خلال ساعتين</span>
                     </button>
                     <button
                       type="button"
                       onClick={() => handleQuickAddressPreset('مريم البوسعيدية (صلالة)', 'صلالة', '+968 98765432')}
-                      className="p-2 bg-white border border-[#EFE8DE] rounded-xl hover:border-[#B78A5C] text-right transition-colors"
+                      className="p-2 bg-white border border-[#D7AE63]/30 rounded-xl hover:border-[#D7AE63] text-right transition-colors"
                     >
-                      <span className="font-bold block text-[#2B211B] text-[11px]">صلالة - المعتزة</span>
-                      <span className="text-[10px] text-[#4A3326]/60">توصيل خلال 24 ساعة</span>
+                      <span className="font-bold block text-[#1B1512] text-[11px]">صلالة - المعتزة</span>
+                      <span className="text-[10px] text-[#4E382A]/70">توصيل خلال 24 ساعة</span>
                     </button>
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="customer-name-input" className="block text-[#2B211B] mb-1 font-bold">اسم المستلم:</label>
+                  <label htmlFor="customer-name-input" className="block text-[#1B1512] mb-1 font-bold">اسم المستلم:</label>
                   <input
                     id="customer-name-input"
                     type="text"
@@ -418,17 +418,17 @@ ${itemsSummary}
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
                     placeholder="أدخل الاسم الكامل"
-                    className="w-full p-3 bg-white border border-[#EFE8DE] text-[#2B211B] font-bold rounded-xl focus:outline-none focus:border-[#B78A5C]"
+                    className="w-full p-3 bg-white border border-[#D7AE63]/30 text-[#1B1512] font-bold rounded-xl focus:outline-none focus:border-[#D7AE63]"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="customer-city-select" className="block text-[#2B211B] mb-1 font-bold">المدينة / الولاية العمانية:</label>
+                  <label htmlFor="customer-city-select" className="block text-[#1B1512] mb-1 font-bold">المدينة / الولاية العمانية:</label>
                   <select
                     id="customer-city-select"
                     value={customerCity}
                     onChange={(e) => setCustomerCity(e.target.value)}
-                    className="w-full p-3 bg-white border border-[#EFE8DE] text-[#2B211B] font-bold rounded-xl focus:outline-none focus:border-[#B78A5C]"
+                    className="w-full p-3 bg-white border border-[#D7AE63]/30 text-[#1B1512] font-bold rounded-xl focus:outline-none focus:border-[#D7AE63]"
                   >
                     <option value="مسقط">مسقط (توصيل نفس اليوم - خلال 3 ساعات)</option>
                     <option value="صلالة">صلالة (ظفار - توصيل 24 ساعة)</option>
@@ -440,7 +440,7 @@ ${itemsSummary}
                 </div>
 
                 <div>
-                  <label htmlFor="customer-phone-input" className="block text-[#2B211B] mb-1 font-bold">رقم الهاتف للواتساب والاتصال:</label>
+                  <label htmlFor="customer-phone-input" className="block text-[#1B1512] mb-1 font-bold">رقم الهاتف للواتساب والاتصال:</label>
                   <input
                     id="customer-phone-input"
                     type="tel"
@@ -448,21 +448,21 @@ ${itemsSummary}
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
                     placeholder="+968 9XXXXXXX"
-                    className="w-full p-3 bg-white border border-[#EFE8DE] text-[#2B211B] font-bold rounded-xl focus:outline-none focus:border-[#B78A5C]"
+                    className="w-full p-3 bg-white border border-[#D7AE63]/30 text-[#1B1512] font-bold rounded-xl focus:outline-none focus:border-[#D7AE63]"
                   />
                 </div>
 
                 {/* Payment Selection */}
                 <div className="space-y-2 pt-2">
-                  <label className="block text-[#4A3326] font-bold">طريقة الدفع والتأكيد:</label>
+                  <label className="block text-[#4E382A] font-bold">طريقة الدفع والتأكيد:</label>
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       type="button"
                       onClick={() => setPaymentMethod('cod')}
                       className={`p-2.5 rounded-xl border text-center font-bold flex flex-col items-center justify-center gap-1 transition-all ${
                         paymentMethod === 'cod'
-                          ? 'border-[#B78A5C] bg-[#2B211B] text-[#C9A76A]'
-                          : 'border-[#EFE8DE] bg-white text-[#4A3326]'
+                          ? 'border-[#D7AE63] bg-[#1B1512] text-[#F3E2BE]'
+                          : 'border-[#D7AE63]/30 bg-white text-[#4E382A]'
                       }`}
                     >
                       <ShoppingBag className="w-4 h-4" />
@@ -475,8 +475,8 @@ ${itemsSummary}
                       onClick={() => setPaymentMethod('bank_transfer')}
                       className={`p-2.5 rounded-xl border text-center font-bold flex flex-col items-center justify-center gap-1 transition-all ${
                         paymentMethod === 'bank_transfer'
-                          ? 'border-[#B78A5C] bg-[#2B211B] text-[#C9A76A]'
-                          : 'border-[#EFE8DE] bg-white text-[#4A3326]'
+                          ? 'border-[#D7AE63] bg-[#1B1512] text-[#F3E2BE]'
+                          : 'border-[#D7AE63]/30 bg-white text-[#4E382A]'
                       }`}
                     >
                       <CreditCard className="w-4 h-4" />
@@ -486,7 +486,7 @@ ${itemsSummary}
                   </div>
                 </div>
 
-                <div className="p-3 bg.emerald-50 bg-emerald-900/10 rounded-xl text-[11px] text-emerald-900 border border-emerald-500/30 space-y-1">
+                <div className="p-3 bg-emerald-900/10 rounded-xl text-[11px] text-emerald-900 border border-emerald-500/30 space-y-1">
                   <div className="flex items-center gap-1.5 font-bold">
                     <MessageCircle className="w-4 h-4 text-emerald-600 fill-emerald-100" />
                     <span>طلب مباشر وسريع عبر الواتساب (+968 76923072)</span>
@@ -512,13 +512,13 @@ ${itemsSummary}
                 <div className="w-20 h-20 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-inner">
                   <CheckCircle2 className="w-12 h-12" />
                 </div>
-                <h3 className="font-amiri text-2xl font-bold text-[#2B211B]">تم جهز رسالة الطلب وتحويلها!</h3>
-                <p className="text-xs text-[#4A3326]/80 leading-relaxed max-w-xs mx-auto">
+                <h3 className="font-alexandria text-2xl font-bold text-[#1B1512]">تم جهز رسالة الطلب وتحويلها!</h3>
+                <p className="text-xs text-[#4E382A]/80 leading-relaxed max-w-xs mx-auto">
                   إذا لم يُفتح تطبيق الواتساب تلقائياً، يمكنك إرسال الطلب بنقرة واحدة عبر الزر أدناه مباشرة إلى قسم المبيعات:
                 </p>
 
-                <div className="p-4 bg-white rounded-2xl border border-[#EFE8DE] text-xs text-right space-y-1.5 max-w-xs mx-auto shadow-sm">
-                  <div className="font-bold text-[#2B211B] border-b pb-1 flex items-center justify-between">
+                <div className="p-4 bg-white rounded-2xl border border-[#D7AE63]/30 text-xs text-right space-y-1.5 max-w-xs mx-auto shadow-sm">
+                  <div className="font-bold text-[#1B1512] border-b pb-1 flex items-center justify-between">
                     <span>رقم المبيعات والمتابعة:</span>
                     <span className="text-emerald-700 font-mono text-[11px]">+968 76923072</span>
                   </div>
@@ -549,7 +549,7 @@ ${itemsSummary}
 
                   <button
                     onClick={onClose}
-                    className="w-full py-3 bg-[#2B211B] text-[#C9A76A] font-bold text-xs rounded-2xl hover:bg-[#B78A5C] hover:text-white transition-colors"
+                    className="w-full py-3 bg-[#1B1512] text-[#F3E2BE] font-bold text-xs rounded-2xl hover:bg-[#D7AE63] hover:text-[#120E0C] transition-colors"
                   >
                     إغلاق والعودة للتسوق
                   </button>
@@ -561,11 +561,11 @@ ${itemsSummary}
 
           {/* Drawer Bottom Footer */}
           {cartItems.length > 0 && checkoutStep === 'cart' && (
-            <div className="p-4 sm:p-5 bg-white border-t border-[#EFE8DE] space-y-2.5 shadow-lg">
+            <div className="p-4 sm:p-5 bg-white border-t border-[#D7AE63]/25 space-y-2.5 shadow-lg">
               
               <div className="flex items-center justify-between text-xs">
-                <span className="text-[#4A3326]">المجموع الفرعي:</span>
-                <span className="font-bold text-[#2B211B]">
+                <span className="text-[#4E382A]">المجموع الفرعي:</span>
+                <span className="font-bold text-[#1B1512]">
                   {currency === 'OMR' ? `${subtotalOmr.toFixed(3)} ر.ع` : `$${(subtotalOmr * 2.6).toFixed(2)}`}
                 </span>
               </div>
@@ -578,25 +578,25 @@ ${itemsSummary}
               )}
 
               <div className="flex items-center justify-between text-xs">
-                <span className="text-[#4A3326]">الشحن والتوصيل:</span>
+                <span className="text-[#4E382A]">الشحن والتوصيل:</span>
                 <span className="font-bold text-emerald-700">
                   {shippingFeeOmr === 0 ? 'مجاني بالكامل' : `${shippingFeeOmr.toFixed(3)} ر.ع`}
                 </span>
               </div>
 
-              <div className="flex items-center justify-between text-base font-bold border-t border-[#EFE8DE] pt-2">
+              <div className="flex items-center justify-between text-base font-bold border-t border-[#D7AE63]/25 pt-2">
                 <span>الإجمالي الكلي:</span>
-                <span className="text-[#2B211B] font-amiri text-lg">
+                <span className="text-[#1B1512] font-alexandria text-lg font-extrabold">
                   {currency === 'OMR' ? `${totalOmr.toFixed(3)} ر.ع` : `$${totalUsd.toFixed(2)}`}
                 </span>
               </div>
 
               <button
                 onClick={() => setCheckoutStep('address')}
-                className="w-full py-3.5 bg-gradient-to-r from-[#B78A5C] via-[#C9A76A] to-[#B78A5C] text-[#2B211B] font-bold text-sm rounded-2xl hover:shadow-xl transition-all flex items-center justify-center gap-2 active:scale-98"
+                className="w-full py-3.5 btn-champagne-primary text-[#120E0C] font-black text-sm rounded-2xl hover:shadow-xl transition-all flex items-center justify-center gap-2 active:scale-98 border border-[#F3E2BE]/60"
               >
                 <span>متابعة الشراء والدفع السريع</span>
-                <ArrowLeft className="w-4 h-4" />
+                <ArrowLeft className="w-4 h-4 text-[#120E0C]" />
               </button>
             </div>
           )}

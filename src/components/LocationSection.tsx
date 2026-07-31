@@ -21,17 +21,17 @@ export const LocationSection: React.FC = () => {
   };
 
   return (
-    <section id="location-section" className="py-24 bg-[#2B211B] text-[#F8F3EC] relative overflow-hidden">
+    <section id="location-section" className="py-24 bg-[#1B1512] text-[#F7F2EA] relative overflow-hidden border-t border-[#D7AE63]/25">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-semibold uppercase tracking-widest text-[#C9A76A] bg-[#C9A76A]/10 px-3.5 py-1.5 rounded-full border border-[#C9A76A]/20 inline-block mb-3">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#F3E2BE] bg-[#241B17] px-4 py-1.5 rounded-full border border-[#D7AE63]/40 inline-block mb-3 shadow-sm font-alexandria">
             فروعنا وجلسات التذوق
           </span>
-          <h2 className="font-amiri text-3xl sm:text-4xl font-bold text-[#F8F3EC] mb-3">
+          <h2 className="font-alexandria text-3xl sm:text-4xl font-black text-[#F7F2EA] mb-3">
             زوروا فروع محامص الأصالة في سلطنة عمان
           </h2>
-          <p className="text-[#F8F3EC]/70 text-sm font-light">
+          <p className="text-[#E8DCCB] text-sm font-medium">
             استمتعوا بتجربة تذوق حيّة للبن المحمص طازجاً في صالات العرض المخصصة.
           </p>
         </div>
@@ -46,32 +46,32 @@ export const LocationSection: React.FC = () => {
                 onClick={() => setSelectedBranch(b)}
                 className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer text-right ${
                   selectedBranch.id === b.id
-                    ? 'bg-[#4A3326] border-[#C9A76A] shadow-2xl'
-                    : 'bg-white/5 border-white/10 hover:bg-white/10'
+                    ? 'bg-[#241B17] border-[#D7AE63] shadow-2xl ring-1 ring-[#D7AE63]/50'
+                    : 'bg-[#241B17]/50 border-[#D7AE63]/20 hover:border-[#D7AE63]/60 hover:bg-[#241B17]'
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-amiri text-xl font-bold text-[#F8F3EC]">
+                  <h3 className="font-alexandria text-xl font-bold text-[#F7F2EA]">
                     {b.nameAr}
                   </h3>
                   {b.isRoastery && (
-                    <span className="bg-[#C9A76A] text-[#2B211B] text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                    <span className="bg-gradient-to-r from-[#F3E2BE] to-[#D7AE63] text-[#120E0C] text-[10px] font-black px-3 py-1 rounded-full shadow-sm">
                       المحمصة الرئيسية
                     </span>
                   )}
                 </div>
 
-                <div className="space-y-2 text-xs text-[#F8F3EC] font-normal">
+                <div className="space-y-2 text-xs text-[#E8DCCB] font-medium">
                   <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-[#C9A76A] shrink-0" />
+                    <MapPin className="w-4 h-4 text-[#F3E2BE] shrink-0" />
                     <span>{b.addressAr}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-[#C9A76A] shrink-0" />
+                    <Clock className="w-4 h-4 text-[#F3E2BE] shrink-0" />
                     <span>{b.hoursAr}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-[#C9A76A] shrink-0" />
+                    <Phone className="w-4 h-4 text-[#F3E2BE] shrink-0" />
                     <span dir="ltr">{b.phone}</span>
                   </div>
                 </div>
@@ -80,16 +80,16 @@ export const LocationSection: React.FC = () => {
           </div>
 
           {/* Tasting Appointment Booking Form */}
-          <div className="lg:col-span-6 bg-[#4A3326] rounded-3xl p-6 sm:p-8 border border-[#C9A76A]/40 backdrop-blur-md text-right shadow-2xl">
+          <div className="lg:col-span-6 bg-[#241B17] rounded-3xl p-6 sm:p-8 border border-[#D7AE63]/40 text-right shadow-2xl">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full bg-[#C9A76A]/20 border border-[#C9A76A] flex items-center justify-center text-[#C9A76A]">
+              <div className="w-10 h-10 rounded-full bg-[#1B1512] border border-[#D7AE63]/50 flex items-center justify-center text-[#F3E2BE] shadow-sm">
                 <Coffee className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-amiri text-2xl font-bold text-[#F8F3EC]">
+                <h3 className="font-alexandria text-xl font-bold text-[#F7F2EA]">
                   حجز جلسة تذوق خاصة (Tasting Session)
                 </h3>
-                <p className="text-xs text-[#F8F3EC]">
+                <p className="text-xs text-[#E8DCCB] font-medium">
                   احجز وقتك الخاص مع خبير التحميص لتقييم المحاصيل وإعداد القهوة العمانية
                 </p>
               </div>
@@ -98,7 +98,7 @@ export const LocationSection: React.FC = () => {
             {bookingSuccess ? (
               <div className="p-6 bg-emerald-950/90 border border-emerald-500/60 rounded-2xl text-center text-emerald-200 animate-fadeIn">
                 <Check className="w-12 h-12 text-emerald-400 mx-auto mb-3" />
-                <h4 className="font-amiri text-xl font-bold mb-1">تم تأكيد الحجز بنجاح!</h4>
+                <h4 className="font-alexandria text-xl font-bold mb-1">تم تأكيد الحجز بنجاح!</h4>
                 <p className="text-xs font-normal">
                   سيتواصل معك فريق الضيافة في فرع ({selectedBranch.nameAr}) لتأكيد الموعد. أهلاً وسهلاً بكم.
                 </p>
@@ -106,19 +106,19 @@ export const LocationSection: React.FC = () => {
             ) : (
               <form onSubmit={handleBookTasting} className="space-y-4 text-xs">
                 <div>
-                  <label htmlFor="tasting-branch" className="block text-[#F8F3EC] font-semibold mb-1.5">الفرع المختار:</label>
+                  <label htmlFor="tasting-branch" className="block text-[#F7F2EA] font-semibold mb-1.5">الفرع المختار:</label>
                   <input
                     id="tasting-branch"
                     type="text"
                     disabled
                     value={selectedBranch.nameAr}
-                    className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-[#C9A76A] font-bold"
+                    className="w-full p-3 bg-[#1B1512] border border-[#D7AE63]/40 rounded-xl text-[#F3E2BE] font-bold"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="tasting-name" className="block text-[#F8F3EC] font-semibold mb-1.5">الاسم الكريم:</label>
+                    <label htmlFor="tasting-name" className="block text-[#F7F2EA] font-semibold mb-1.5">الاسم الكريم:</label>
                     <input
                       id="tasting-name"
                       type="text"
@@ -126,11 +126,11 @@ export const LocationSection: React.FC = () => {
                       value={guestName}
                       onChange={(e) => setGuestName(e.target.value)}
                       placeholder="أدخل اسمك الكريـم"
-                      className="w-full p-3 bg-white/10 border border-white/30 rounded-xl text-white focus:outline-none focus:border-[#C9A76A]"
+                      className="w-full p-3 bg-[#1B1512] border border-[#D7AE63]/30 rounded-xl text-white placeholder-[#E8DCCB]/40 focus:outline-none focus:border-[#D7AE63]"
                     />
                   </div>
                   <div>
-                    <label htmlFor="tasting-phone" className="block text-[#F8F3EC] font-semibold mb-1.5">رقم الهاتف / الواتساب:</label>
+                    <label htmlFor="tasting-phone" className="block text-[#F7F2EA] font-semibold mb-1.5">رقم الهاتف / الواتساب:</label>
                     <input
                       id="tasting-phone"
                       type="tel"
@@ -138,27 +138,27 @@ export const LocationSection: React.FC = () => {
                       value={guestPhone}
                       onChange={(e) => setGuestPhone(e.target.value)}
                       placeholder="+968 9XXXXXXX"
-                      className="w-full p-3 bg-white/10 border border-white/30 rounded-xl text-white focus:outline-none focus:border-[#C9A76A]"
+                      className="w-full p-3 bg-[#1B1512] border border-[#D7AE63]/30 rounded-xl text-white placeholder-[#E8DCCB]/40 focus:outline-none focus:border-[#D7AE63]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="tasting-date" className="block text-[#F8F3EC] font-semibold mb-1.5">التاريخ المقترح للجلسة:</label>
+                  <label htmlFor="tasting-date" className="block text-[#F7F2EA] font-semibold mb-1.5">التاريخ المقترح للجلسة:</label>
                   <input
                     id="tasting-date"
                     type="date"
                     required
                     value={guestDate}
                     onChange={(e) => setGuestDate(e.target.value)}
-                    className="w-full p-3 bg-white/10 border border-white/30 rounded-xl text-white focus:outline-none focus:border-[#C9A76A]"
+                    className="w-full p-3 bg-[#1B1512] border border-[#D7AE63]/30 rounded-xl text-white focus:outline-none focus:border-[#D7AE63]"
                   />
                 </div>
 
                 <button
                   type="submit"
                   aria-label="تأكيد حجز جلسة التذوق"
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-[#B78A5C] to-[#C9A76A] text-[#2B211B] font-bold text-sm hover:shadow-xl hover:shadow-[#C9A76A]/20 transition-all mt-4 min-h-[48px]"
+                  className="w-full py-4 rounded-xl btn-champagne-primary text-[#120E0C] font-black text-sm hover:shadow-xl transition-all mt-4 min-h-[48px] border border-[#F3E2BE]/60"
                 >
                   تأكيد حجز جلسة التذوق
                 </button>

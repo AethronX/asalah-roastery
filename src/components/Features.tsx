@@ -31,22 +31,22 @@ export const Features: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-[#F8F3EC] border-y border-[#EFE8DE] px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section className="py-16 bg-[#FAF6F0]/70 border-y border-[#D7AE63]/20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
         {featuresList.map((f, idx) => {
           const IconComponent = f.icon;
           return (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-[#EFE8DE]/40 border border-[#EFE8DE] text-right hover:border-[#B78A5C]/40 hover:shadow-lg transition-all duration-300 group"
+              className="p-6 rounded-2xl bg-white border border-[#D7AE63]/25 text-right hover:border-[#D7AE63] hover:shadow-xl transition-all duration-300 group"
             >
-              <div className="w-12 h-12 rounded-xl bg-[#2B211B] text-[#C9A76A] flex items-center justify-center mb-4 group-hover:bg-[#B78A5C] group-hover:text-white transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-[#1B1512] text-[#F3E2BE] border border-[#D7AE63]/40 flex items-center justify-center mb-4 group-hover:bg-gradient-to-r group-hover:from-[#F3E2BE] group-hover:to-[#D7AE63] group-hover:text-[#120E0C] transition-colors shadow-sm">
                 <IconComponent className="w-6 h-6" />
               </div>
-              <h3 className="font-amiri text-lg font-bold text-[#2B211B] mb-2">
+              <h3 className="font-alexandria text-base font-bold text-[#1B1512] mb-2 leading-snug">
                 {f.titleAr}
               </h3>
-              <p className="text-xs text-[#2B211B] leading-relaxed font-medium">
+              <p className="text-xs text-[#4E382A] leading-relaxed font-medium">
                 {f.descAr}
               </p>
             </div>

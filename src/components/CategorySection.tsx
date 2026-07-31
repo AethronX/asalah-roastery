@@ -66,13 +66,13 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Section Header */}
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="text-xs font-bold uppercase tracking-widest text-[#B78A5C] bg-[#B78A5C]/15 px-3.5 py-1.5 rounded-full border border-[#B78A5C]/30 inline-block mb-3">
+        <span className="text-xs font-bold uppercase tracking-widest text-[#F3E2BE] bg-[#241B17] px-4 py-1.5 rounded-full border border-[#D7AE63]/40 inline-block mb-3 shadow-sm">
           تشكيلة الأصالة
         </span>
-        <h2 className="font-amiri text-3xl sm:text-4xl font-bold text-[#2B211B] mb-3">
+        <h2 className="font-amiri text-3xl sm:text-4xl font-bold text-[#1B1512] mb-3">
           تصفح الأقسام الفاخرة
         </h2>
-        <p className="text-[#4A3326] text-sm sm:text-base font-normal">
+        <p className="text-[#4E382A] text-sm sm:text-base font-normal">
           صُممت تشكيلاتنا لتلبي شغف عشاق القهوة العمانية الأصيلة والقهوة المختصة العالمية.
         </p>
       </div>
@@ -90,8 +90,8 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
               aria-label={`تصفح قسم ${cat.titleAr}`}
               className={`group relative rounded-2xl p-5 text-right transition-all duration-300 overflow-hidden flex flex-col justify-between min-h-[220px] ${
                 isSelected
-                  ? 'bg-[#2B211B] text-[#F8F3EC] shadow-xl ring-2 ring-[#C9A76A] scale-[1.02]'
-                  : 'bg-[#F8F3EC] text-[#2B211B] border border-[#EFE8DE] hover:border-[#C9A76A]/80 hover:shadow-lg hover:-translate-y-1'
+                  ? 'bg-[#1B1512] text-[#F7F2EA] shadow-2xl ring-2 ring-[#D7AE63] scale-[1.02]'
+                  : 'bg-white text-[#1B1512] border border-[#D7AE63]/25 hover:border-[#D7AE63]/60 hover:shadow-xl hover:-translate-y-1'
               }`}
             >
               {/* Card Background Subtle Image */}
@@ -111,17 +111,17 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
               {/* Top Row: Icon & Count Badge */}
               <div className="relative z-10 flex items-center justify-between mb-4">
                 <div
-                  className={`w-11 h-11 rounded-xl flex items-center justify-center transition-colors ${
+                  className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all ${
                     isSelected
-                      ? 'bg-[#C9A76A] text-[#2B211B]'
-                      : 'bg-[#B78A5C]/20 text-[#7A532C] group-hover:bg-[#B78A5C] group-hover:text-white'
+                      ? 'bg-gradient-to-r from-[#F3E2BE] to-[#D7AE63] text-[#120E0C] shadow-md'
+                      : 'bg-[#241B17] text-[#F3E2BE] group-hover:bg-gradient-to-r group-hover:from-[#F3E2BE] group-hover:to-[#D7AE63] group-hover:text-[#120E0C]'
                   }`}
                 >
                   <IconComponent className="w-5 h-5" />
                 </div>
                 <span
-                  className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-                    isSelected ? 'bg-white/15 text-[#C9A76A]' : 'bg-[#2B211B]/10 text-[#4A3326]'
+                  className={`text-[10px] px-2.5 py-1 rounded-full font-bold ${
+                    isSelected ? 'bg-[#241B17] text-[#F3E2BE] border border-[#D7AE63]/30' : 'bg-[#FAF6F0] text-[#6C4C35] border border-[#D7AE63]/20'
                   }`}
                 >
                   {cat.count}
@@ -132,14 +132,14 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
               <div className="relative z-10">
                 <h3
                   className={`font-amiri text-lg font-bold mb-1 transition-colors ${
-                    isSelected ? 'text-[#F8F3EC]' : 'text-[#2B211B] group-hover:text-[#8C5D2C]'
+                    isSelected ? 'text-[#F3E2BE]' : 'text-[#1B1512] group-hover:text-[#9B6B3A]'
                   }`}
                 >
                   {cat.titleAr}
                 </h3>
                 <p
                   className={`text-xs line-clamp-2 leading-relaxed font-normal ${
-                    isSelected ? 'text-[#F8F3EC]/90' : 'text-[#4A3326]'
+                    isSelected ? 'text-[#E8DCCB]' : 'text-[#4E382A]'
                   }`}
                 >
                   {cat.subtitleAr}
@@ -148,7 +148,7 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
 
               {/* Active Golden Bar */}
               {isSelected && (
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#B78A5C] to-[#C9A76A]" />
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#F3E2BE] via-[#D7AE63] to-[#C99A52]" />
               )}
             </button>
           );

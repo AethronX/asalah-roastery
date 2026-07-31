@@ -8,7 +8,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore }) => {
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden pt-36 sm:pt-40 lg:pt-44 pb-16 bg-[#2B211B]">
+    <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden pt-36 sm:pt-40 lg:pt-44 pb-16 bg-[#1B1512]">
       {/* Background Image Container with Soft Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -20,35 +20,35 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore }) => {
           decoding="async"
           width="1200"
           height="800"
-          className="w-full h-full object-cover object-center filter brightness-[0.62] contrast-[1.08] scale-105"
+          className="w-full h-full object-cover object-center filter brightness-[0.55] contrast-[1.12] scale-105"
         />
         {/* Cinematic Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#2B211B] via-[#2B211B]/50 to-transparent opacity-90" />
-        <div className="absolute inset-0 bg-radial-vignette opacity-40 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1B1512] via-[#1B1512]/60 to-transparent opacity-95" />
+        <div className="absolute inset-0 bg-radial-vignette opacity-50 pointer-events-none" />
       </div>
 
       {/* Floating Steam Micro-Animations */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 z-10 pointer-events-none opacity-40" aria-hidden="true">
-        <div className="w-16 h-32 bg-white/10 blur-xl rounded-full animate-steam-1" />
-        <div className="w-24 h-40 bg-[#C9A76A]/10 blur-2xl rounded-full animate-steam-2" />
+        <div className="w-16 h-32 bg-[#F3E2BE]/10 blur-xl rounded-full animate-steam-1" />
+        <div className="w-24 h-40 bg-[#D7AE63]/15 blur-2xl rounded-full animate-steam-2" />
       </div>
 
       {/* Hero Content Block */}
-      <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-[#F8F3EC]">
+      <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-[#F7F2EA]">
         
         {/* Luxury Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#4A3326] border border-[#C9A76A]/50 text-[#C9A76A] text-xs font-semibold tracking-widest uppercase mb-8 shadow-2xl backdrop-blur-md">
-          <Sparkles className="w-3.5 h-3.5 text-[#C9A76A]" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#241B17]/90 border border-[#D7AE63]/50 text-[#F3E2BE] text-xs font-semibold tracking-widest uppercase mb-8 shadow-2xl backdrop-blur-md">
+          <Sparkles className="w-3.5 h-3.5 text-[#F3E2BE]" />
           <span>عراقة الضيافة العمانية • محمصة مختصة في نزوى</span>
         </div>
 
         {/* Headline */}
-        <h1 className="font-alexandria text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#F8F3EC] leading-[1.18] mb-6 drop-shadow-lg">
+        <h1 className="font-alexandria text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#F7F2EA] leading-[1.18] mb-6 drop-shadow-xl">
           أصالة الفخامة في <span className="gold-gradient-bright font-black">كل فنجان</span>
         </h1>
 
         {/* Subheadline */}
-        <p className="text-lg sm:text-xl md:text-2xl text-[#F8F3EC] font-medium max-w-3xl mx-auto leading-relaxed mb-10 font-alexandria">
+        <p className="text-lg sm:text-xl md:text-2xl text-[#E8DCCB] font-medium max-w-3xl mx-auto leading-relaxed mb-10 font-alexandria">
           نحمُص لك أنقى سلالات البن العالمي وشغف الخلطات العمانية فور طلبك، لتصلك بطعمها الطازج وعطرها الساحر.
         </p>
 
@@ -57,45 +57,45 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore }) => {
           <button
             onClick={onShopNow}
             aria-label="تصفح محاصيل القهوة والمجموعات"
-            className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-[#B78A5C] via-[#C9A76A] to-[#B78A5C] text-[#2B211B] font-extrabold text-base hover:shadow-2xl hover:shadow-[#C9A76A]/30 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-3 group border border-[#C9A76A]/50 min-h-[48px]"
+            className="w-full sm:w-auto px-8 py-4 rounded-full btn-champagne-primary text-[#120E0C] font-black text-base flex items-center justify-center gap-3 group border border-[#F3E2BE]/60 min-h-[48px]"
           >
             <span>تصفح المحاصيل الآن</span>
-            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform text-[#120E0C]" />
           </button>
 
           <button
             onClick={onExplore}
             aria-label="اختبر ذوقك عبر مستشار القهوة الذكي"
-            className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#4A3326] hover:bg-[#5C3E2E] text-[#F8F3EC] font-bold text-base border border-[#C9A76A]/50 hover:border-[#C9A76A] backdrop-blur-md transition-all duration-300 flex items-center justify-center gap-2 group min-h-[48px]"
+            className="w-full sm:w-auto px-8 py-4 rounded-full btn-champagne-secondary font-bold text-base flex items-center justify-center gap-2 group min-h-[48px]"
           >
-            <Sparkles className="w-4 h-4 text-[#C9A76A] group-hover:rotate-12 transition-transform" />
+            <Sparkles className="w-4 h-4 text-[#F3E2BE] group-hover:rotate-12 transition-transform" />
             <span>مستشار الذوق الذكي (اختبر ذوقك)</span>
           </button>
         </div>
 
         {/* Trust & Craftsmanship Highlights */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 pt-8 border-t border-[#C9A76A]/30 max-w-4xl mx-auto text-right sm:text-center">
-          <div className="flex items-center sm:justify-center gap-3 p-3.5 rounded-xl bg-white/10 border border-white/10">
-            <Flame className="w-6 h-6 text-[#C9A76A] shrink-0" />
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 pt-8 border-t border-[#D7AE63]/25 max-w-4xl mx-auto text-right sm:text-center">
+          <div className="flex items-center sm:justify-center gap-3 p-3.5 rounded-2xl bg-[#241B17]/80 backdrop-blur-md border border-[#D7AE63]/25 shadow-sm">
+            <Flame className="w-6 h-6 text-[#F3E2BE] shrink-0" />
             <div className="text-right">
-              <h2 className="text-sm font-bold text-[#F8F3EC]">تحميص طازج عند الطلب</h2>
-              <p className="text-xs text-[#F8F3EC]/90">محموصة خصيصاً واسمك على الكيس</p>
+              <h2 className="text-sm font-bold text-[#F7F2EA]">تحميص طازج عند الطلب</h2>
+              <p className="text-xs text-[#E8DCCB]">محموصة خصيصاً واسمك على الكيس</p>
             </div>
           </div>
 
-          <div className="flex items-center sm:justify-center gap-3 p-3.5 rounded-xl bg-white/10 border border-white/10">
-            <Award className="w-6 h-6 text-[#C9A76A] shrink-0" />
+          <div className="flex items-center sm:justify-center gap-3 p-3.5 rounded-2xl bg-[#241B17]/80 backdrop-blur-md border border-[#D7AE63]/25 shadow-sm">
+            <Award className="w-6 h-6 text-[#F3E2BE] shrink-0" />
             <div className="text-right">
-              <h2 className="text-sm font-bold text-[#F8F3EC]">سلالات نادرة (SCA 90+)</h2>
-              <p className="text-xs text-[#F8F3EC]/90">محاصيل مختصة تنقيط وحيد</p>
+              <h2 className="text-sm font-bold text-[#F7F2EA]">سلالات نادرة (SCA 90+)</h2>
+              <p className="text-xs text-[#E8DCCB]">محاصيل مختصة تنقيط وحيد</p>
             </div>
           </div>
 
-          <div className="col-span-2 md:col-span-1 flex items-center sm:justify-center gap-3 p-3.5 rounded-xl bg-white/10 border border-white/10">
-            <ShieldCheck className="w-6 h-6 text-[#C9A76A] shrink-0" />
+          <div className="col-span-2 md:col-span-1 flex items-center sm:justify-center gap-3 p-3.5 rounded-2xl bg-[#241B17]/80 backdrop-blur-md border border-[#D7AE63]/25 shadow-sm">
+            <ShieldCheck className="w-6 h-6 text-[#F3E2BE] shrink-0" />
             <div className="text-right">
-              <h2 className="text-sm font-bold text-[#F8F3EC]">خلطات سلطانية فاخرة</h2>
-              <p className="text-xs text-[#F8F3EC]/90">بالهيل والزعفران السوبر نيل</p>
+              <h2 className="text-sm font-bold text-[#F7F2EA]">خلطات سلطانية فاخرة</h2>
+              <p className="text-xs text-[#E8DCCB]">بالهيل والزعفران السوبر نيل</p>
             </div>
           </div>
         </div>
@@ -103,9 +103,9 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore }) => {
       </div>
 
       {/* Down Scroll Indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 text-[#C9A76A] flex flex-col items-center gap-2 animate-bounce" aria-hidden="true">
-        <span className="text-[11px] font-sans tracking-widest uppercase">التفاصيل</span>
-        <div className="w-0.5 h-6 bg-gradient-to-b from-[#C9A76A] to-transparent rounded-full" />
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 text-[#D7AE63] flex flex-col items-center gap-2 animate-bounce" aria-hidden="true">
+        <span className="text-[11px] font-sans tracking-widest uppercase text-[#F3E2BE]">التفاصيل</span>
+        <div className="w-0.5 h-6 bg-gradient-to-b from-[#D7AE63] to-transparent rounded-full" />
       </div>
     </section>
   );
