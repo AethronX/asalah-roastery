@@ -43,10 +43,10 @@ export const Features: React.FC = () => {
               <div className="w-12 h-12 rounded-xl bg-[#1B1512] text-[#F3E2BE] border border-[#D7AE63]/40 flex items-center justify-center mb-4 group-hover:bg-gradient-to-r group-hover:from-[#F3E2BE] group-hover:to-[#D7AE63] group-hover:text-[#120E0C] transition-colors shadow-sm">
                 <IconComponent className="w-6 h-6" />
               </div>
-              <h3 className="font-alexandria text-base font-bold text-[#1B1512] mb-2 leading-snug">
+              <h3 className="font-cairo text-base font-bold text-[#1B1512] mb-2 leading-relaxed">
                 {f.titleAr}
               </h3>
-              <p className="text-xs text-[#4E382A] leading-relaxed font-medium">
+              <p className="text-xs sm:text-sm text-[#4E382A] leading-relaxed font-normal">
                 {f.descAr}
               </p>
             </div>

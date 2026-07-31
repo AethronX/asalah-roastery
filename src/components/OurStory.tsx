@@ -37,15 +37,15 @@ export const OurStory: React.FC = () => {
                 />
               </div>
               <div className="p-6 rounded-3xl bg-[#241B17] border border-[#D7AE63]/30 backdrop-blur-md text-right shadow-xl">
-                <div className="font-amiri text-3xl font-bold text-[#F3E2BE] mb-1">1988</div>
-                <div className="text-xs text-[#E8DCCB] font-medium">بداية شغف الحرفية في تحميص القهوة - نزوى</div>
+                <div className="font-alexandria text-3xl font-black text-[#F3E2BE] mb-1">1988</div>
+                <div className="text-xs text-[#E8DCCB] font-medium leading-relaxed">بداية شغف الحرفية في تحميص القهوة - نزوى</div>
               </div>
             </div>
 
             <div className="space-y-4 pt-8">
               <div className="p-6 rounded-3xl bg-[#241B17] border border-[#D7AE63]/30 backdrop-blur-md text-right shadow-xl">
-                <div className="font-amiri text-3xl font-bold text-[#F3E2BE] mb-1">100%</div>
-                <div className="text-xs text-[#E8DCCB] font-medium">فرز يدوي دقيق لحبات البن الذهبي</div>
+                <div className="font-alexandria text-3xl font-black text-[#F3E2BE] mb-1">100%</div>
+                <div className="text-xs text-[#E8DCCB] font-medium leading-relaxed">فرز يدوي دقيق لحبات البن الذهبي</div>
               </div>
               <div className="rounded-3xl overflow-hidden border border-[#D7AE63]/40 shadow-2xl group">
                 <img
@@ -69,15 +69,15 @@ export const OurStory: React.FC = () => {
               <span>قصة محامص الأصالة العمانية</span>
             </div>
 
-            <h2 className="font-amiri text-4xl sm:text-5xl font-bold leading-tight text-[#F7F2EA]">
-              حرفية تحميص عريقة تجسد <span className="gold-gradient-text">الضيافة العمانية</span>
+            <h2 className="font-alexandria text-3xl sm:text-4xl lg:text-5xl font-black leading-[1.4] text-[#F7F2EA]">
+              حرفية تحميص عريقة تجسد <span className="gold-gradient-text inline-block">الضيافة العمانية</span>
             </h2>
 
-            <p className="text-base sm:text-lg text-[#E8DCCB] font-medium leading-relaxed font-sans">
+            <p className="text-base sm:text-lg text-[#E8DCCB] font-medium leading-[1.8] font-sans">
               تأسست محامص الأصالة من قلب ولاية نزوى وسوقها التراثي العريق، لتكون امتداداً لأعراف الكرم والضيافة التي تتوارثها الأجيال في سلطنة عمان.
             </p>
 
-            <p className="text-sm text-[#E8DCCB] font-normal leading-relaxed">
+            <p className="text-sm text-[#E8DCCB] font-normal leading-[1.8]">
               نحن نؤمن بأن فنجان القهوة ليس مجرد مشروب، بل هو حكاية تجمع الشغف والتقاليد. نتنقل بين أرفع مزارع البن في مدرجات جبال اليمن، وإثيوبيا، وكولومبيا لننتقي أرقى الحبوب، ثم نعيد صياغتها في أفران التحميص المصممة خصيصاً بلمسات شيوخ الكار.
             </p>
 
@@ -86,7 +86,7 @@ export const OurStory: React.FC = () => {
               <div className="flex items-start gap-3 p-4 rounded-2xl bg-[#241B17] border border-[#D7AE63]/25">
                 <Coffee className="w-6 h-6 text-[#F3E2BE] shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-amiri text-base font-bold text-[#F7F2EA]">الهيل والزعفران الملكي</h3>
+                  <h3 className="font-alexandria text-base font-bold text-[#F7F2EA] mb-1">الهيل والزعفران الملكي</h3>
                   <p className="text-xs text-[#E8DCCB] font-medium leading-relaxed">
                     نستخدم الهيل الأخضر البكر النقي والزعفران السوبر نيل لخلطاتنا.
                   </p>
@@ -96,7 +96,7 @@ export const OurStory: React.FC = () => {
               <div className="flex items-start gap-3 p-4 rounded-2xl bg-[#241B17] border border-[#D7AE63]/25">
                 <Flame className="w-6 h-6 text-[#F3E2BE] shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-amiri text-base font-bold text-[#F7F2EA]">تحميص بالدفعة الهادئة</h3>
+                  <h3 className="font-alexandria text-base font-bold text-[#F7F2EA] mb-1">تحميص بالدفعة الهادئة</h3>
                   <p className="text-xs text-[#E8DCCB] font-medium leading-relaxed">
                     درجات حرارة مضبوطة إلكترونياً للحصول على حلاوة متزنة بدون مرارة.
                   </p>

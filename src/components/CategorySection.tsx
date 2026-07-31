@@ -5,6 +5,7 @@ import { Coffee, Flame, Sparkles, Gift, Wrench, PackageCheck } from 'lucide-reac
 interface CategorySectionProps {
   activeCategory: CategoryId;
   onSelectCategory: (id: CategoryId) => void;
+  theme?: 'light' | 'dark';
 }
 
 export const CATEGORIES = [
@@ -61,18 +62,29 @@ export const CATEGORIES = [
 export const CategorySection: React.FC<CategorySectionProps> = ({
   activeCategory,
   onSelectCategory,
+  theme = 'light',
 }) => {
+  const isLight = theme === 'light';
+
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Section Header */}
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="text-xs font-bold uppercase tracking-widest text-[#F3E2BE] bg-[#241B17] px-4 py-1.5 rounded-full border border-[#D7AE63]/40 inline-block mb-3 shadow-sm">
+        <span className={`text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border inline-block mb-3 shadow-sm ${
+          isLight
+            ? 'bg-[#F5F5F7] text-[#1D1D1F] border-[#000000]/10'
+            : 'text-[#F3E2BE] bg-[#241B17] border-[#D7AE63]/40'
+        }`}>
           تشكيلة الأصالة
         </span>
-        <h2 className="font-amiri text-3xl sm:text-4xl font-bold text-[#1B1512] mb-3">
+        <h2 className={`font-ibm text-3xl sm:text-4xl font-bold mb-4 leading-relaxed ${
+          isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'
+        }`}>
           تصفح الأقسام الفاخرة
         </h2>
-        <p className="text-[#4E382A] text-sm sm:text-base font-normal">
+        <p className={`text-sm sm:text-base font-normal ${
+          isLight ? 'text-[#424245]' : 'text-[#E8DCCB]'
+        }`}>
           صُممت تشكيلاتنا لتلبي شغف عشاق القهوة العمانية الأصيلة والقهوة المختصة العالمية.
         </p>
       </div>
@@ -90,8 +102,12 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
               aria-label={`تصفح قسم ${cat.titleAr}`}
               className={`group relative rounded-2xl p-5 text-right transition-all duration-300 overflow-hidden flex flex-col justify-between min-h-[220px] ${
                 isSelected
-                  ? 'bg-[#1B1512] text-[#F7F2EA] shadow-2xl ring-2 ring-[#D7AE63] scale-[1.02]'
-                  : 'bg-white text-[#1B1512] border border-[#D7AE63]/25 hover:border-[#D7AE63]/60 hover:shadow-xl hover:-translate-y-1'
+                  ? isLight
+                    ? 'bg-[#1D1D1F] text-white shadow-xl ring-2 ring-[#1D1D1F] scale-[1.02]'
+                    : 'bg-[#1B1512] text-[#F7F2EA] shadow-2xl ring-2 ring-[#D7AE63] scale-[1.02]'
+                  : isLight
+                    ? 'bg-white text-[#1D1D1F] border border-[#000000]/08 hover:border-[#000000]/20 hover:shadow-lg hover:-translate-y-1'
+                    : 'bg-white text-[#1B1512] border border-[#D7AE63]/25 hover:border-[#D7AE63]/60 hover:shadow-xl hover:-translate-y-1'
               }`}
             >
               {/* Card Background Subtle Image */}
@@ -113,15 +129,25 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
                 <div
                   className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all ${
                     isSelected
-                      ? 'bg-gradient-to-r from-[#F3E2BE] to-[#D7AE63] text-[#120E0C] shadow-md'
-                      : 'bg-[#241B17] text-[#F3E2BE] group-hover:bg-gradient-to-r group-hover:from-[#F3E2BE] group-hover:to-[#D7AE63] group-hover:text-[#120E0C]'
+                      ? isLight
+                        ? 'bg-white text-[#1D1D1F] shadow-md'
+                        : 'bg-gradient-to-r from-[#F3E2BE] to-[#D7AE63] text-[#120E0C] shadow-md'
+                      : isLight
+                        ? 'bg-[#F5F5F7] text-[#1D1D1F] group-hover:bg-[#1D1D1F] group-hover:text-white'
+                        : 'bg-[#241B17] text-[#F3E2BE] group-hover:bg-gradient-to-r group-hover:from-[#F3E2BE] group-hover:to-[#D7AE63] group-hover:text-[#120E0C]'
                   }`}
                 >
                   <IconComponent className="w-5 h-5" />
                 </div>
                 <span
                   className={`text-[10px] px-2.5 py-1 rounded-full font-bold ${
-                    isSelected ? 'bg-[#241B17] text-[#F3E2BE] border border-[#D7AE63]/30' : 'bg-[#FAF6F0] text-[#6C4C35] border border-[#D7AE63]/20'
+                    isSelected
+                      ? isLight
+                        ? 'bg-[#3A3A3C] text-white'
+                        : 'bg-[#241B17] text-[#F3E2BE] border border-[#D7AE63]/30'
+                      : isLight
+                        ? 'bg-[#F5F5F7] text-[#424245] border border-[#000000]/05'
+                        : 'bg-[#FAF6F0] text-[#6C4C35] border border-[#D7AE63]/20'
                   }`}
                 >
                   {cat.count}
@@ -131,24 +157,38 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
               {/* Bottom Content */}
               <div className="relative z-10">
                 <h3
-                  className={`font-amiri text-lg font-bold mb-1 transition-colors ${
-                    isSelected ? 'text-[#F3E2BE]' : 'text-[#1B1512] group-hover:text-[#9B6B3A]'
+                  className={`font-alexandria text-base font-bold mb-1 transition-colors ${
+                    isSelected
+                      ? isLight
+                        ? 'text-white'
+                        : 'text-[#F3E2BE]'
+                      : isLight
+                        ? 'text-[#1D1D1F] group-hover:text-[#9B6B3A]'
+                        : 'text-[#1B1512] group-hover:text-[#9B6B3A]'
                   }`}
                 >
                   {cat.titleAr}
                 </h3>
                 <p
                   className={`text-xs line-clamp-2 leading-relaxed font-normal ${
-                    isSelected ? 'text-[#E8DCCB]' : 'text-[#4E382A]'
+                    isSelected
+                      ? isLight
+                        ? 'text-[#E5E5EA]'
+                        : 'text-[#E8DCCB]'
+                      : isLight
+                        ? 'text-[#6E6E73]'
+                        : 'text-[#4E382A]'
                   }`}
                 >
                   {cat.subtitleAr}
                 </p>
               </div>
 
-              {/* Active Golden Bar */}
+              {/* Active Bar */}
               {isSelected && (
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#F3E2BE] via-[#D7AE63] to-[#C99A52]" />
+                <div className={`absolute bottom-0 left-0 right-0 h-1 ${
+                  isLight ? 'bg-[#9B6B3A]' : 'bg-gradient-to-r from-[#F3E2BE] via-[#D7AE63] to-[#C99A52]'
+                }`} />
               )}
             </button>
           );

@@ -74,7 +74,7 @@ export const CoffeeFinderQuiz: React.FC<CoffeeFinderQuizProps> = ({
             <Sparkles className="w-3.5 h-3.5 text-[#F3E2BE]" />
             <span>مستشار القهوة التفاعلي (مستوحى من محامص Onyx & Blue Bottle)</span>
           </div>
-          <h2 className="font-alexandria text-3xl sm:text-4xl font-black text-[#F7F2EA] leading-tight">
+          <h2 className="font-cairo text-3xl sm:text-4xl font-bold text-[#F7F2EA] leading-relaxed">
             لا تعرف أي محصول تختار؟
           </h2>
           <p className="text-sm sm:text-base text-[#E8DCCB] font-medium mt-2">

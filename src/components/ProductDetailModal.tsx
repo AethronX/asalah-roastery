@@ -131,7 +131,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
             {/* Flavor Profile Visualization */}
             <div className="bg-[#EFE8DE]/60 rounded-2xl p-5 border border-[#B78A5C]/20">
-              <h4 className="font-amiri text-lg font-bold text-[#2B211B] mb-3 flex items-center justify-between">
+              <h4 className="font-cairo text-base font-bold text-[#2B211B] mb-3 flex items-center justify-between">
                 <span>مؤشرات الإيحاءات والطعم</span>
                 <span className="text-xs font-sans text-[#B78A5C]">تقييم المحمصة</span>
               </h4>
@@ -175,10 +175,10 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </div>
 
               {/* Title & Subtitle */}
-              <h1 className="font-alexandria text-2xl sm:text-3xl font-black text-[#2B211B] mb-2 leading-tight">
+              <h1 className="font-cairo text-2xl sm:text-3xl font-bold text-[#2B211B] mb-2 leading-relaxed">
                 {product.nameAr}
               </h1>
-              <p className="text-sm text-[#4A3326]/80 mb-4 font-light leading-relaxed">
+              <p className="text-sm text-[#4A3326]/80 mb-4 font-normal leading-relaxed">
                 {product.subtitleAr}
               </p>
 

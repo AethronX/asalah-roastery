@@ -12,6 +12,7 @@ interface BestSellersProps {
   onToggleWishlist: (product: Product) => void;
   wishlistIds: string[];
   currency: 'OMR' | 'USD';
+  theme?: 'light' | 'dark';
 }
 
 export const BestSellers: React.FC<BestSellersProps> = ({
@@ -24,8 +25,10 @@ export const BestSellers: React.FC<BestSellersProps> = ({
   onToggleWishlist,
   wishlistIds,
   currency,
+  theme = 'light',
 }) => {
   const [addedAnimationId, setAddedAnimationId] = useState<string | null>(null);
+  const isLight = theme === 'light';
 
   const filteredProducts = products.filter((p) => {
     if (activeCategory === 'all') return true;
@@ -51,17 +54,25 @@ export const BestSellers: React.FC<BestSellersProps> = ({
   return (
     <section id="shop-catalog" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Header and Filter Tabs */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-[#D7AE63]/25 pb-6">
+      <div className={`flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b pb-6 transition-colors ${
+        isLight ? 'border-[#000000]/10' : 'border-[#D7AE63]/25'
+      }`}>
         <div>
-          <span className="text-xs font-bold uppercase tracking-widest text-[#F3E2BE] bg-[#241B17] px-4 py-1.5 rounded-full border border-[#D7AE63]/40 inline-block mb-3 font-alexandria shadow-sm">
+          <span className={`text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full inline-block mb-3 font-alexandria shadow-sm border ${
+            isLight
+              ? 'bg-[#F5F5F7] text-[#1D1D1F] border-[#000000]/10'
+              : 'text-[#F3E2BE] bg-[#241B17] border-[#D7AE63]/40'
+          }`}>
             المحتوى المختار
           </span>
-          <h2 className="font-alexandria text-3xl sm:text-4xl font-black text-[#1B1512] leading-tight">
+          <h2 className={`font-ibm text-3xl sm:text-4xl font-bold leading-relaxed ${
+            isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'
+          }`}>
             الأكثر مبيعاً والمنتجات المميزة
           </h2>
         </div>
 
-        {/* Category Tabs Filter */}
+        {/* Category Tabs Filter - Apple Pill Design */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
           {[
             { id: 'all' as CategoryId, label: 'الكل' },
@@ -77,8 +88,12 @@ export const BestSellers: React.FC<BestSellersProps> = ({
               onClick={() => onCategoryChange(tab.id)}
               className={`px-4.5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-300 ${
                 activeCategory === tab.id
-                  ? 'bg-[#1B1512] text-[#F3E2BE] shadow-lg ring-1 ring-[#D7AE63]'
-                  : 'bg-white text-[#4E382A] border border-[#D7AE63]/30 hover:border-[#D7AE63] hover:text-[#1B1512]'
+                  ? isLight
+                    ? 'bg-[#1D1D1F] text-white shadow-md'
+                    : 'bg-[#1B1512] text-[#F3E2BE] shadow-lg ring-1 ring-[#D7AE63]'
+                  : isLight
+                    ? 'bg-[#F5F5F7] text-[#1D1D1F] border border-[#000000]/08 hover:bg-[#E5E5EA]'
+                    : 'bg-white text-[#4E382A] border border-[#D7AE63]/30 hover:border-[#D7AE63] hover:text-[#1B1512]'
               }`}
             >
               {tab.label}
@@ -102,7 +117,11 @@ export const BestSellers: React.FC<BestSellersProps> = ({
             <div
               key={product.id}
               onClick={() => onQuickView(product)}
-              className="group bg-white rounded-3xl border border-[#D7AE63]/25 hover:border-[#D7AE63]/70 hover:shadow-[0_16px_40px_rgba(27,21,18,0.12),0_0_24px_rgba(215,174,99,0.2)] transition-all duration-500 overflow-hidden cursor-pointer flex flex-col justify-between relative"
+              className={`group rounded-3xl border transition-all duration-500 overflow-hidden cursor-pointer flex flex-col justify-between relative ${
+                isLight
+                  ? 'bg-white border-[#000000]/08 hover:border-[#9B6B3A]/40 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]'
+                  : 'bg-white border-[#D7AE63]/25 hover:border-[#D7AE63]/70 hover:shadow-[0_16px_40px_rgba(27,21,18,0.12),0_0_24px_rgba(215,174,99,0.2)]'
+              }`}
             >
               {/* Product Top Image Badge Container */}
               <div className="relative aspect-[4/3] bg-[#FAF6F0] overflow-hidden">
@@ -184,7 +203,7 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                   </div>
 
                   {/* Product Title */}
-                  <h3 className="font-alexandria text-lg font-bold text-[#1B1512] group-hover:text-[#9B6B3A] transition-colors mb-1.5 leading-snug">
+                  <h3 className="font-cairo text-base sm:text-lg font-bold text-[#1B1512] group-hover:text-[#9B6B3A] transition-colors mb-1.5 leading-relaxed">
                     {product.nameAr}
                   </h3>
 

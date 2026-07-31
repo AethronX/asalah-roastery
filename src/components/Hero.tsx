@@ -4,11 +4,16 @@ import { ArrowLeft, Award, Flame, ShieldCheck, Sparkles } from 'lucide-react';
 interface HeroProps {
   onShopNow: () => void;
   onExplore: () => void;
+  theme?: 'light' | 'dark';
 }
 
-export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore }) => {
+export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore, theme = 'light' }) => {
+  const isLight = theme === 'light';
+
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden pt-36 sm:pt-40 lg:pt-44 pb-16 bg-[#1B1512]">
+    <section className={`relative min-h-[92vh] flex items-center justify-center overflow-hidden pt-36 sm:pt-40 lg:pt-44 pb-16 transition-colors duration-300 ${
+      isLight ? 'bg-[#FBFBFD]' : 'bg-[#1B1512]'
+    }`}>
       {/* Background Image Container with Soft Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -20,36 +25,73 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore }) => {
           decoding="async"
           width="1200"
           height="800"
-          className="w-full h-full object-cover object-center filter brightness-[0.55] contrast-[1.12] scale-105"
+          className={`w-full h-full object-cover object-center filter scale-105 transition-all duration-700 ${
+            isLight
+              ? 'brightness-[0.88] contrast-[1.05] opacity-80'
+              : 'brightness-[0.55] contrast-[1.12] opacity-100'
+          }`}
         />
         {/* Cinematic Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1B1512] via-[#1B1512]/60 to-transparent opacity-95" />
-        <div className="absolute inset-0 bg-radial-vignette opacity-50 pointer-events-none" />
+        <div className={`absolute inset-0 transition-all duration-300 ${
+          isLight
+            ? 'bg-gradient-to-t from-[#FBFBFD] via-[#FBFBFD]/70 to-transparent opacity-90'
+            : 'bg-gradient-to-t from-[#1B1512] via-[#1B1512]/60 to-transparent opacity-95'
+        }`} />
+        {!isLight && <div className="absolute inset-0 bg-radial-vignette opacity-50 pointer-events-none" />}
       </div>
 
       {/* Floating Steam Micro-Animations */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 z-10 pointer-events-none opacity-40" aria-hidden="true">
-        <div className="w-16 h-32 bg-[#F3E2BE]/10 blur-xl rounded-full animate-steam-1" />
-        <div className="w-24 h-40 bg-[#D7AE63]/15 blur-2xl rounded-full animate-steam-2" />
+        <div className={`w-16 h-32 blur-xl rounded-full animate-steam-1 ${isLight ? 'bg-[#9B6B3A]/20' : 'bg-[#F3E2BE]/10'}`} />
+        <div className={`w-24 h-40 blur-2xl rounded-full animate-steam-2 ${isLight ? 'bg-[#D7AE63]/25' : 'bg-[#D7AE63]/15'}`} />
       </div>
 
       {/* Hero Content Block */}
-      <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-[#F7F2EA]">
+      <div className={`relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-colors ${
+        isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'
+      }`}>
         
-        {/* Luxury Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#241B17]/90 border border-[#D7AE63]/50 text-[#F3E2BE] text-xs font-semibold tracking-widest uppercase mb-8 shadow-2xl backdrop-blur-md">
-          <Sparkles className="w-3.5 h-3.5 text-[#F3E2BE]" />
-          <span>عراقة الضيافة العمانية • محمصة مختصة في نزوى</span>
+        {/* Psychological Trust & Social Proof Badge */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-6">
+          <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase shadow-sm backdrop-blur-md border transition-all ${
+            isLight
+              ? 'bg-white/90 border-[#000000]/10 text-[#1D1D1F]'
+              : 'bg-[#241B17]/90 border-[#D7AE63]/50 text-[#F3E2BE]'
+          }`}>
+            <Sparkles className={`w-3.5 h-3.5 ${isLight ? 'text-[#9B6B3A]' : 'text-[#F3E2BE]'}`} />
+            <span>عراقة الضيافة العُمانية • محمصة مختصة في نزوى</span>
+          </div>
+
+          <div className={`hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold border ${
+            isLight
+              ? 'bg-[#F5F5F7] text-[#3A3A3C] border-[#000000]/08'
+              : 'bg-[#120E0C]/80 text-[#E8DCCB] border-[#D7AE63]/30'
+          }`}>
+            <span className="text-amber-500">★★★★★</span>
+            <span>4.98/5 ثقة أكثر من 15,000 عشاق القهوة</span>
+          </div>
         </div>
 
-        {/* Headline */}
-        <h1 className="font-alexandria text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#F7F2EA] leading-[1.18] mb-6 drop-shadow-xl">
-          أصالة الفخامة في <span className="gold-gradient-bright font-black">كل فنجان</span>
+        {/* Emotionally-Driven Color Psychology Headline */}
+        <h1 className={`font-ibm text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-normal leading-[1.5] sm:leading-[1.45] mb-8 drop-shadow-sm ${
+          isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'
+        }`}>
+          <span className="block mb-3 sm:mb-4">عبق التحميص الطازج..</span>
+          <span className="block">
+            وفخامة{' '}
+            <span className={isLight ? 'text-[#9B6B3A] font-bold inline-block border-b-2 border-[#9B6B3A]/40 pb-1' : 'gold-gradient-bright font-bold inline-block border-b-2 border-[#D7AE63]/40 pb-1'}>
+              الضيافة العُمانية
+            </span>
+          </span>
         </h1>
 
-        {/* Subheadline */}
-        <p className="text-lg sm:text-xl md:text-2xl text-[#E8DCCB] font-medium max-w-3xl mx-auto leading-relaxed mb-10 font-alexandria">
-          نحمُص لك أنقى سلالات البن العالمي وشغف الخلطات العمانية فور طلبك، لتصلك بطعمها الطازج وعطرها الساحر.
+        {/* Subheadline centered on Sensory Experience & Comfort */}
+        <p className={`text-base sm:text-xl md:text-2xl font-medium max-w-3xl mx-auto leading-relaxed sm:leading-[1.8] mb-10 font-alexandria tracking-wide ${
+          isLight ? 'text-[#3A3A3C]' : 'text-[#E8DCCB]'
+        }`}>
+          نحمُص لك أنقى سلالات البن العالمي وشغف الخلطات العمانية الملكية{' '}
+          <span className="font-bold border-b border-amber-500/50 pb-0.5">فور طلبك</span>
+          ، لتصلك بطعمها الطازج وعطرها الساحر الذي يملأ المكان دفئاً.
         </p>
 
         {/* CTA Action Buttons */}
@@ -57,45 +99,77 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore }) => {
           <button
             onClick={onShopNow}
             aria-label="تصفح محاصيل القهوة والمجموعات"
-            className="w-full sm:w-auto px-8 py-4 rounded-full btn-champagne-primary text-[#120E0C] font-black text-base flex items-center justify-center gap-3 group border border-[#F3E2BE]/60 min-h-[48px]"
+            className={`w-full sm:w-auto px-8 py-4 rounded-full font-black text-base flex items-center justify-center gap-3 group min-h-[50px] shadow-xl transition-all active:scale-98 ${
+              isLight
+                ? 'bg-[#1D1D1F] text-white hover:bg-[#3A3A3C] hover:shadow-2xl'
+                : 'btn-champagne-primary text-[#120E0C] border border-[#F3E2BE]/60'
+            }`}
           >
-            <span>تصفح المحاصيل الآن</span>
-            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform text-[#120E0C]" />
+            <span>اكتشف المحاصيل الفاخرة</span>
+            <ArrowLeft className={`w-5 h-5 group-hover:-translate-x-1.5 transition-transform ${
+              isLight ? 'text-white' : 'text-[#120E0C]'
+            }`} />
           </button>
 
           <button
             onClick={onExplore}
             aria-label="اختبر ذوقك عبر مستشار القهوة الذكي"
-            className="w-full sm:w-auto px-8 py-4 rounded-full btn-champagne-secondary font-bold text-base flex items-center justify-center gap-2 group min-h-[48px]"
+            className={`w-full sm:w-auto px-8 py-4 rounded-full font-bold text-base flex items-center justify-center gap-2.5 group min-h-[50px] border transition-all active:scale-98 ${
+              isLight
+                ? 'bg-white text-[#1D1D1F] border-[#000000]/15 hover:bg-[#F5F5F7] shadow-sm'
+                : 'btn-champagne-secondary text-[#F3E2BE]'
+            }`}
           >
-            <Sparkles className="w-4 h-4 text-[#F3E2BE] group-hover:rotate-12 transition-transform" />
+            <Sparkles className={`w-4 h-4 group-hover:rotate-12 transition-transform ${
+              isLight ? 'text-[#9B6B3A]' : 'text-[#F3E2BE]'
+            }`} />
             <span>مستشار الذوق الذكي (اختبر ذوقك)</span>
           </button>
         </div>
 
-        {/* Trust & Craftsmanship Highlights */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 pt-8 border-t border-[#D7AE63]/25 max-w-4xl mx-auto text-right sm:text-center">
-          <div className="flex items-center sm:justify-center gap-3 p-3.5 rounded-2xl bg-[#241B17]/80 backdrop-blur-md border border-[#D7AE63]/25 shadow-sm">
-            <Flame className="w-6 h-6 text-[#F3E2BE] shrink-0" />
+        {/* Trust & Craftsmanship Highlights - Enhanced Visual Hierarchy & Psychology */}
+        <div className={`grid grid-cols-2 md:grid-cols-3 gap-4 pt-8 border-t max-w-4xl mx-auto text-right sm:text-center ${
+          isLight ? 'border-[#000000]/10' : 'border-[#D7AE63]/25'
+        }`}>
+          <div className={`flex items-center sm:justify-center gap-3 p-4 rounded-2xl backdrop-blur-md border shadow-sm transition-transform hover:-translate-y-0.5 ${
+            isLight
+              ? 'bg-white/95 border-[#000000]/08 text-[#1D1D1F]'
+              : 'bg-[#241B17]/80 border-[#D7AE63]/25 text-[#F7F2EA]'
+          }`}>
+            <div className={`p-2.5 rounded-xl ${isLight ? 'bg-[#9B6B3A]/10 text-[#9B6B3A]' : 'bg-[#D7AE63]/15 text-[#F3E2BE]'}`}>
+              <Flame className="w-5 h-5 shrink-0" />
+            </div>
             <div className="text-right">
-              <h2 className="text-sm font-bold text-[#F7F2EA]">تحميص طازج عند الطلب</h2>
-              <p className="text-xs text-[#E8DCCB]">محموصة خصيصاً واسمك على الكيس</p>
+              <h2 className={`text-sm font-bold ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>تحميص طازج عند الطلب</h2>
+              <p className={`text-xs ${isLight ? 'text-[#6E6E73]' : 'text-[#E8DCCB]'}`}>محموصة خصيصاً واسمك على الكيس</p>
             </div>
           </div>
 
-          <div className="flex items-center sm:justify-center gap-3 p-3.5 rounded-2xl bg-[#241B17]/80 backdrop-blur-md border border-[#D7AE63]/25 shadow-sm">
-            <Award className="w-6 h-6 text-[#F3E2BE] shrink-0" />
+          <div className={`flex items-center sm:justify-center gap-3 p-4 rounded-2xl backdrop-blur-md border shadow-sm transition-transform hover:-translate-y-0.5 ${
+            isLight
+              ? 'bg-white/95 border-[#000000]/08 text-[#1D1D1F]'
+              : 'bg-[#241B17]/80 border-[#D7AE63]/25 text-[#F7F2EA]'
+          }`}>
+            <div className={`p-2.5 rounded-xl ${isLight ? 'bg-[#9B6B3A]/10 text-[#9B6B3A]' : 'bg-[#D7AE63]/15 text-[#F3E2BE]'}`}>
+              <Award className="w-5 h-5 shrink-0" />
+            </div>
             <div className="text-right">
-              <h2 className="text-sm font-bold text-[#F7F2EA]">سلالات نادرة (SCA 90+)</h2>
-              <p className="text-xs text-[#E8DCCB]">محاصيل مختصة تنقيط وحيد</p>
+              <h2 className={`text-sm font-bold ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>سلالات نادرة (SCA 90+)</h2>
+              <p className={`text-xs ${isLight ? 'text-[#6E6E73]' : 'text-[#E8DCCB]'}`}>محاصيل مختصة تنقيط وحيد</p>
             </div>
           </div>
 
-          <div className="col-span-2 md:col-span-1 flex items-center sm:justify-center gap-3 p-3.5 rounded-2xl bg-[#241B17]/80 backdrop-blur-md border border-[#D7AE63]/25 shadow-sm">
-            <ShieldCheck className="w-6 h-6 text-[#F3E2BE] shrink-0" />
+          <div className={`col-span-2 md:col-span-1 flex items-center sm:justify-center gap-3 p-4 rounded-2xl backdrop-blur-md border shadow-sm transition-transform hover:-translate-y-0.5 ${
+            isLight
+              ? 'bg-white/95 border-[#000000]/08 text-[#1D1D1F]'
+              : 'bg-[#241B17]/80 border-[#D7AE63]/25 text-[#F7F2EA]'
+          }`}>
+            <div className={`p-2.5 rounded-xl ${isLight ? 'bg-[#9B6B3A]/10 text-[#9B6B3A]' : 'bg-[#D7AE63]/15 text-[#F3E2BE]'}`}>
+              <ShieldCheck className="w-5 h-5 shrink-0" />
+            </div>
             <div className="text-right">
-              <h2 className="text-sm font-bold text-[#F7F2EA]">خلطات سلطانية فاخرة</h2>
-              <p className="text-xs text-[#E8DCCB]">بالهيل والزعفران السوبر نيل</p>
+              <h2 className={`text-sm font-bold ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>خلطات سلطانية فاخرة</h2>
+              <p className={`text-xs ${isLight ? 'text-[#6E6E73]' : 'text-[#E8DCCB]'}`}>بالهيل والزعفران السوبر نيل</p>
             </div>
           </div>
         </div>
@@ -103,10 +177,13 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore }) => {
       </div>
 
       {/* Down Scroll Indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 text-[#D7AE63] flex flex-col items-center gap-2 animate-bounce" aria-hidden="true">
-        <span className="text-[11px] font-sans tracking-widest uppercase text-[#F3E2BE]">التفاصيل</span>
-        <div className="w-0.5 h-6 bg-gradient-to-b from-[#D7AE63] to-transparent rounded-full" />
+      <div className={`absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 animate-bounce ${
+        isLight ? 'text-[#9B6B3A]' : 'text-[#D7AE63]'
+      }`} aria-hidden="true">
+        <span className={`text-[11px] font-sans tracking-widest uppercase ${isLight ? 'text-[#1D1D1F]' : 'text-[#F3E2BE]'}`}>التفاصيل</span>
+        <div className={`w-0.5 h-6 rounded-full ${isLight ? 'bg-gradient-to-b from-[#9B6B3A] to-transparent' : 'bg-gradient-to-b from-[#D7AE63] to-transparent'}`} />
       </div>
     </section>
   );
 };
+

@@ -29,30 +29,46 @@
   body {
     background-color: var(--light-cream);
     color: var(--espresso-dark);
-    font-family: 'IBM Plex Sans Arabic', 'Tajawal', 'Alexandria', 'Cairo', sans-serif;
+    font-family: 'Cairo', 'IBM Plex Sans Arabic', 'Alexandria', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    line-height: 1.6;
+    letter-spacing: normal;
   }
 
-  h1, h2, h3 {
-    font-family: 'Alexandria', 'IBM Plex Sans Arabic', 'Amiri', serif;
-    font-weight: 800;
-    letter-spacing: -0.015em;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cairo', 'IBM Plex Sans Arabic', 'Alexandria', sans-serif;
+    font-weight: 700;
+    letter-spacing: normal;
+    line-height: 1.45;
   }
 }
 
-/* Typography Utility Classes */
+/* Typography Utility Classes with Pristine Arabic Dot Separation */
 .font-ibm {
-  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-family: 'Cairo', 'IBM Plex Sans Arabic', sans-serif;
 }
 
 .font-tajawal {
-  font-family: 'Tajawal', sans-serif;
+  font-family: 'Cairo', 'Tajawal', sans-serif;
 }
 
 .font-alexandria {
-  font-family: 'Alexandria', sans-serif;
+  font-family: 'Cairo', 'Alexandria', sans-serif;
+}
+
+.font-cairo {
+  font-family: 'Cairo', sans-serif;
+}
+
+/* Prevent ultra-heavy 900 weight dot collisions in Arabic text */
+.font-black {
+  font-weight: 700 !important;
+}
+
+.font-extrabold {
+  font-weight: 700 !important;
 }
 
 .font-amiri {

@@ -34,6 +34,20 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState<CategoryId>('all');
   const [activeSection, setActiveSection] = useState<string>('home');
 
+  // Apple-inspired Theme State (light default or stored)
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('alasalah_theme');
+    return (saved === 'dark' || saved === 'light') ? saved : 'light';
+  });
+
+  const handleToggleTheme = useCallback(() => {
+    setTheme((prev) => {
+      const next = prev === 'light' ? 'dark' : 'light';
+      localStorage.setItem('alasalah_theme', next);
+      return next;
+    });
+  }, []);
+
   // E-commerce state
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [wishlistProducts, setWishlistProducts] = useState<Product[]>([]);
@@ -162,7 +176,9 @@ export default function App() {
 
   // Render main website layout content
   const renderStorefrontContent = () => (
-    <div className="min-h-screen bg-[#F8F3EC] text-[#2B211B]">
+    <div className={`min-h-screen transition-colors duration-300 ${
+      theme === 'light' ? 'bg-[#FBFBFD] text-[#1D1D1F]' : 'bg-[#120E0C] text-[#F7F2EA]'
+    }`}>
       {/* Navigation Header */}
       <Header
         cartCount={cartTotalQuantity}
@@ -176,6 +192,8 @@ export default function App() {
         onNavigateCategory={handleCategorySelect}
         activeSection={activeSection}
         setActiveSection={setActiveSection}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
       />
 
       {/* Main Content Sections */}
@@ -187,12 +205,14 @@ export default function App() {
             const el = document.getElementById('coffee-quiz');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
           }}
+          theme={theme}
         />
 
         {/* Category Cards */}
         <CategorySection
           activeCategory={activeCategory}
           onSelectCategory={handleCategorySelect}
+          theme={theme}
         />
 
         {/* Coffee Finder Quiz */}
@@ -216,6 +236,7 @@ export default function App() {
           onToggleWishlist={handleToggleWishlist}
           wishlistIds={wishlistIds}
           currency={currency}
+          theme={theme}
         />
 
         {/* Coffee Autoship Subscription Engine */}
@@ -266,16 +287,24 @@ export default function App() {
 
       {/* Sticky Express Floating Cart Bar for High Conversions */}
       {cartItems.length > 0 && !isCartOpen && (
-        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-md bg-[#1B1512] text-[#F7F2EA] p-3 rounded-2xl border border-[#D7AE63]/50 shadow-[0_15px_40px_rgba(0,0,0,0.6)] flex items-center justify-between backdrop-blur-md animate-fadeIn gpu-accelerated">
+        <div className={`fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-md p-3 rounded-2xl border shadow-2xl flex items-center justify-between backdrop-blur-md animate-fadeIn gpu-accelerated ${
+          theme === 'light'
+            ? 'bg-white/90 text-[#1D1D1F] border-[#000000]/10 shadow-[0_15px_30px_rgba(0,0,0,0.12)]'
+            : 'bg-[#1B1512] text-[#F7F2EA] border-[#D7AE63]/50 shadow-[0_15px_40px_rgba(0,0,0,0.6)]'
+        }`}>
           <div className="flex items-center gap-3">
             <div className="relative">
-              <span className="w-9 h-9 rounded-xl bg-gradient-to-r from-[#F3E2BE] to-[#D7AE63] text-[#120E0C] font-black text-xs flex items-center justify-center shadow-md">
+              <span className={`w-9 h-9 rounded-xl font-black text-xs flex items-center justify-center shadow-md ${
+                theme === 'light'
+                  ? 'bg-[#1D1D1F] text-white'
+                  : 'bg-gradient-to-r from-[#F3E2BE] to-[#D7AE63] text-[#120E0C]'
+              }`}>
                 {cartTotalQuantity}
               </span>
             </div>
             <div className="text-xs">
-              <span className="block text-[#F3E2BE] font-bold">سلة التسوق المباشرة</span>
-              <span className="text-[11px] text-[#E8DCCB]">
+              <span className={`block font-bold ${theme === 'light' ? 'text-[#1D1D1F]' : 'text-[#F3E2BE]'}`}>سلة التسوق المباشرة</span>
+              <span className={`text-[11px] ${theme === 'light' ? 'text-[#6E6E73]' : 'text-[#E8DCCB]'}`}>
                 إجمالي: {currency === 'OMR' ? `${cartTotalOmr.toFixed(3)} ر.ع` : `$${(cartTotalOmr * 2.6).toFixed(2)}`}
               </span>
             </div>
@@ -286,7 +315,11 @@ export default function App() {
               setCartInitialStep('address');
               setIsCartOpen(true);
             }}
-            className="px-4 py-2 btn-champagne-primary text-[#120E0C] font-black text-xs rounded-xl hover:shadow-lg transition-all flex items-center gap-1.5"
+            className={`px-4 py-2 font-black text-xs rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-1.5 ${
+              theme === 'light'
+                ? 'bg-[#1D1D1F] text-white hover:bg-[#3A3A3C]'
+                : 'btn-champagne-primary text-[#120E0C]'
+            }`}
           >
             <span>إتمام الشراء الآن</span>
             <span>➔</span>
@@ -295,12 +328,14 @@ export default function App() {
       )}
 
       {/* Footer */}
-      <Footer />
+      <Footer theme={theme} />
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-[#1B1512] text-[#F7F2EA] selection:bg-[#D7AE63] selection:text-[#120E0C] font-['IBM_Plex_Sans_Arabic','Tajawal','Alexandria',sans-serif] relative">
+    <div className={`min-h-screen selection:bg-[#9B6B3A] selection:text-white font-['Cairo','IBM_Plex_Sans_Arabic','Alexandria',sans-serif] relative transition-colors duration-300 ${
+      theme === 'light' ? 'bg-[#FBFBFD] text-[#1D1D1F]' : 'bg-[#1B1512] text-[#F7F2EA]'
+    }`}>
       
       {/* Toast Notification with Direct Checkout Action */}
       {toastMessage && (
