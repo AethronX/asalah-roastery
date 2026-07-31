@@ -234,7 +234,7 @@ export const Header: React.FC<HeaderProps> = ({
                   item.action();
                   setMobileMenuOpen(false);
                 }}
-                className={`text-base font-medium py-2 border-b text-right transition-colors font-alexandria ${
+                className={`text-base font-medium py-2 border-b text-right transition-colors font-cairo ${
                   isLight
                     ? 'border-[#000000]/08 text-[#1D1D1F] hover:text-[#9B6B3A]'
                     : 'border-[#D7AE63]/15 text-[#F7F2EA] hover:text-[#F3E2BE]'
@@ -253,7 +253,7 @@ export const Header: React.FC<HeaderProps> = ({
                 }`}
               >
                 {isLight ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-                <span>{isLight ? 'الانتقال إلى المظهر الداكن' : 'الانتقال إلى المظهر الفاتح (Apple)'}</span>
+                <span>{isLight ? 'الانتقال إلى المظهر الداكن' : 'الانتقال إلى المظهر الفاتح'}</span>
               </button>
               <button
                 onClick={() => {
