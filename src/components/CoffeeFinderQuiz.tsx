@@ -221,6 +221,10 @@ export const CoffeeFinderQuiz: React.FC<CoffeeFinderQuizProps> = ({
                 <img
                   src={recommendedProduct.image}
                   alt={recommendedProduct.nameAr}
+                  loading="lazy"
+                  decoding="async"
+                  width="96"
+                  height="96"
                   referrerPolicy="no-referrer"
                   className="w-24 h-24 rounded-xl object-cover border border-[#C9A76A]/30 shrink-0"
                 />
@@ -238,7 +242,7 @@ export const CoffeeFinderQuiz: React.FC<CoffeeFinderQuizProps> = ({
                   </div>
                   <div className="flex flex-wrap gap-1 pt-1">
                     {recommendedProduct.flavorNotes.slice(0, 3).map((note, idx) => (
-                      <span key={idx} className="text-[10px] bg-white/10 text-white/80 px-2 py-0.5 rounded">
+                      <span key={idx} className="text-[10px] bg-white/20 text-white px-2 py-0.5 rounded font-bold">
                         {note}
                       </span>
                     ))}

@@ -74,8 +74,9 @@ export const CoffeeSubscriptionBanner: React.FC<CoffeeSubscriptionBannerProps> =
 
             {/* Product Select */}
             <div>
-              <label className="block text-xs font-bold text-white/80 mb-2">اختر القهوة:</label>
+              <label htmlFor="subscription-product-select" className="block text-xs font-bold text-white mb-2">اختر القهوة:</label>
               <select
+                id="subscription-product-select"
                 value={selectedProduct.id}
                 onChange={(e) => {
                   const p = products.find((prod) => prod.id === e.target.value);

@@ -179,7 +179,8 @@ ${itemsSummary}
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-full hover:bg-white/10 text-white transition-colors"
+              aria-label="إغلاق سلة الشراء"
+              className="p-1.5 rounded-full hover:bg-white/10 text-white transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center"
             >
               <X className="w-5 h-5" />
             </button>
@@ -250,11 +251,15 @@ ${itemsSummary}
                     {cartItems.map((item, idx) => (
                       <div
                         key={idx}
-                        className="p-3 bg-white/90 rounded-2xl border border-[#EFE8DE] flex gap-3 items-center justify-between hover:border-[#B78A5C]/40 transition-colors shadow-sm"
+                        className="p-3 bg-white rounded-2xl border border-[#EFE8DE] flex gap-3 items-center justify-between hover:border-[#B78A5C]/40 transition-colors shadow-sm"
                       >
                         <img
                           src={item.product.image}
                           alt={item.product.nameAr}
+                          loading="lazy"
+                          decoding="async"
+                          width="64"
+                          height="64"
                           referrerPolicy="no-referrer"
                           className="w-16 h-16 rounded-xl object-cover shrink-0 border border-[#EFE8DE]"
                         />
@@ -263,7 +268,7 @@ ${itemsSummary}
                           <h4 className="font-bold text-[#2B211B] font-amiri text-sm line-clamp-1">
                             {item.product.nameAr}
                           </h4>
-                          <div className="text-[11px] text-[#4A3326]/70 mt-0.5">
+                          <div className="text-[11px] text-[#2B211B] font-medium mt-0.5">
                             الوزن: {item.selectedWeight} | {item.selectedGrind.split(' ')[0]}
                           </div>
                           <div className="font-bold text-[#2B211B] mt-1 text-sm">
@@ -277,22 +282,25 @@ ${itemsSummary}
                         <div className="flex flex-col items-end gap-2">
                           <button
                             onClick={() => onRemoveItem(idx)}
-                            className="text-red-500 hover:text-red-700 p-1"
+                            className="text-red-600 hover:text-red-800 p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center"
                             title="حذف"
+                            aria-label={`حذف ${item.product.nameAr} من السلة`}
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
                           <div className="flex items-center border border-[#EFE8DE] bg-[#EFE8DE]/60 rounded-lg overflow-hidden text-xs">
                             <button
                               onClick={() => onUpdateQuantity(idx, Math.max(1, item.quantity - 1))}
-                              className="px-2 py-0.5 font-bold hover:bg-[#B78A5C]/20"
+                              className="px-2.5 py-1 font-bold hover:bg-[#B78A5C]/20 min-w-[28px] min-h-[28px]"
+                              aria-label={`تقليل كمية ${item.product.nameAr}`}
                             >
                               -
                             </button>
-                            <span className="px-2.5 font-bold">{item.quantity}</span>
+                            <span className="px-2.5 font-bold text-[#2B211B]">{item.quantity}</span>
                             <button
                               onClick={() => onUpdateQuantity(idx, item.quantity + 1)}
-                              className="px-2 py-0.5 font-bold hover:bg-[#B78A5C]/20"
+                              className="px-2.5 py-1 font-bold hover:bg-[#B78A5C]/20 min-w-[28px] min-h-[28px]"
+                              aria-label={`زيادة كمية ${item.product.nameAr}`}
                             >
                               +
                             </button>
@@ -302,14 +310,14 @@ ${itemsSummary}
                     ))}
 
                     {/* Promo Coupon Section */}
-                    <div className="p-3.5 bg-white/70 rounded-2xl border border-[#EFE8DE] space-y-2">
+                    <div className="p-3.5 bg-white rounded-2xl border border-[#EFE8DE] space-y-2">
                       <div className="flex items-center justify-between text-xs font-bold text-[#2B211B]">
                         <span className="flex items-center gap-1.5">
                           <Tag className="w-4 h-4 text-[#B78A5C]" />
-                          <span>كوبون الخصم الترحيبي</span>
+                          <label htmlFor="coupon-code-input">كوبون الخصم الترحيبي</label>
                         </span>
                         {appliedCoupon && (
-                          <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold">
+                          <span className="text-[10px] bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded-full font-bold">
                             تم تطبيق {appliedCoupon.code} ({appliedCoupon.discountPercent}%)
                           </span>
                         )}
@@ -317,15 +325,17 @@ ${itemsSummary}
 
                       <div className="flex gap-2">
                         <input
+                          id="coupon-code-input"
                           type="text"
                           value={couponInput}
                           onChange={(e) => setCouponInput(e.target.value)}
                           placeholder="أدخل الكود (مثال: ASALAH10)"
-                          className="flex-grow p-2 text-xs bg-white border border-[#EFE8DE] rounded-xl focus:outline-none focus:border-[#B78A5C] uppercase font-mono"
+                          className="flex-grow p-2 text-xs bg-white border border-[#EFE8DE] text-[#2B211B] rounded-xl focus:outline-none focus:border-[#B78A5C] uppercase font-mono font-bold"
                         />
                         <button
                           onClick={() => handleApplyCoupon()}
-                          className="px-4 py-2 bg-[#2B211B] text-[#C9A76A] rounded-xl text-xs font-bold hover:bg-[#B78A5C] hover:text-white transition-colors shrink-0"
+                          aria-label="تطبيق كود الخصم"
+                          className="px-4 py-2 bg-[#2B211B] text-[#C9A76A] rounded-xl text-xs font-bold hover:bg-[#B78A5C] hover:text-white transition-colors shrink-0 min-h-[38px]"
                         >
                           تطبيق
                         </button>
@@ -400,23 +410,25 @@ ${itemsSummary}
                 </div>
 
                 <div>
-                  <label className="block text-[#4A3326] mb-1 font-bold">اسم المستلم:</label>
+                  <label htmlFor="customer-name-input" className="block text-[#2B211B] mb-1 font-bold">اسم المستلم:</label>
                   <input
+                    id="customer-name-input"
                     type="text"
                     required
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
                     placeholder="أدخل الاسم الكامل"
-                    className="w-full p-3 bg-white border border-[#EFE8DE] rounded-xl focus:outline-none focus:border-[#B78A5C]"
+                    className="w-full p-3 bg-white border border-[#EFE8DE] text-[#2B211B] font-bold rounded-xl focus:outline-none focus:border-[#B78A5C]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[#4A3326] mb-1 font-bold">المدينة / الولاية العمانية:</label>
+                  <label htmlFor="customer-city-select" className="block text-[#2B211B] mb-1 font-bold">المدينة / الولاية العمانية:</label>
                   <select
+                    id="customer-city-select"
                     value={customerCity}
                     onChange={(e) => setCustomerCity(e.target.value)}
-                    className="w-full p-3 bg-white border border-[#EFE8DE] rounded-xl focus:outline-none focus:border-[#B78A5C]"
+                    className="w-full p-3 bg-white border border-[#EFE8DE] text-[#2B211B] font-bold rounded-xl focus:outline-none focus:border-[#B78A5C]"
                   >
                     <option value="مسقط">مسقط (توصيل نفس اليوم - خلال 3 ساعات)</option>
                     <option value="صلالة">صلالة (ظفار - توصيل 24 ساعة)</option>
@@ -428,14 +440,15 @@ ${itemsSummary}
                 </div>
 
                 <div>
-                  <label className="block text-[#4A3326] mb-1 font-bold">رقم الهاتف للواتساب والاتصال:</label>
+                  <label htmlFor="customer-phone-input" className="block text-[#2B211B] mb-1 font-bold">رقم الهاتف للواتساب والاتصال:</label>
                   <input
+                    id="customer-phone-input"
                     type="tel"
                     required
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
                     placeholder="+968 9XXXXXXX"
-                    className="w-full p-3 bg-white border border-[#EFE8DE] rounded-xl focus:outline-none focus:border-[#B78A5C]"
+                    className="w-full p-3 bg-white border border-[#EFE8DE] text-[#2B211B] font-bold rounded-xl focus:outline-none focus:border-[#B78A5C]"
                   />
                 </div>
 

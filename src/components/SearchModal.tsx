@@ -36,17 +36,20 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         {/* Search Bar Top Header */}
         <div className="p-4 sm:p-6 bg-[#2B211B] text-[#F8F3EC] flex items-center gap-3 border-b border-[#C9A76A]/30">
           <Search className="w-6 h-6 text-[#C9A76A]" />
+          <label htmlFor="modal-search-input" className="sr-only">بحث في منتجات المحامص</label>
           <input
+            id="modal-search-input"
             type="text"
             autoFocus
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="ابحث عن بن حرازي، خلطة الأصالة، هيل، تمور، V60..."
-            className="w-full bg-transparent text-sm sm:text-base font-medium text-white placeholder-white/50 focus:outline-none"
+            className="w-full bg-transparent text-sm sm:text-base font-medium text-white placeholder-white/70 focus:outline-none"
           />
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-white/10 text-white transition-colors"
+            aria-label="إغلاق نافذة البحث"
+            className="p-1.5 rounded-full hover:bg-white/10 text-white transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center"
           >
             <X className="w-5 h-5" />
           </button>
@@ -55,15 +58,15 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         {/* Results List */}
         <div className="p-4 sm:p-6 max-h-[60vh] overflow-y-auto space-y-3">
           {searchTerm === '' ? (
-            <div className="py-8 text-center text-xs text-[#4A3326]/70 space-y-2">
-              <Coffee className="w-8 h-8 text-[#B78A5C]/40 mx-auto" />
+            <div className="py-8 text-center text-xs text-[#2B211B] space-y-2">
+              <Coffee className="w-8 h-8 text-[#B78A5C] mx-auto" />
               <p className="font-amiri text-base font-bold text-[#2B211B]">البحث السريع في محامص الأصالة</p>
               <div className="flex flex-wrap justify-center gap-2 pt-2">
                 {['خلطة الأصالة', 'بن حرازي', 'إثيوبيا', 'صندوق الهدايا', 'تمور وخلاص'].map((tag, i) => (
                   <button
                     key={i}
                     onClick={() => setSearchTerm(tag)}
-                    className="px-3 py-1 bg-[#EFE8DE] rounded-full text-xs hover:bg-[#B78A5C] hover:text-white transition-colors"
+                    className="px-3.5 py-1.5 bg-[#EFE8DE] text-[#2B211B] font-bold rounded-full text-xs hover:bg-[#B78A5C] hover:text-white transition-colors min-h-[36px]"
                   >
                     {tag}
                   </button>
@@ -71,7 +74,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               </div>
             </div>
           ) : filtered.length === 0 ? (
-            <div className="py-12 text-center text-xs text-[#4A3326]/70">
+            <div className="py-12 text-center text-xs text-[#2B211B] font-medium">
               لم نجد نتائج تطابق "{searchTerm}"
             </div>
           ) : (
@@ -82,12 +85,16 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   onSelectProduct(product);
                   onClose();
                 }}
-                className="p-3 bg-white/80 rounded-2xl border border-[#EFE8DE] hover:border-[#B78A5C] transition-all cursor-pointer flex items-center justify-between group"
+                className="p-3 bg-white rounded-2xl border border-[#EFE8DE] hover:border-[#B78A5C] transition-all cursor-pointer flex items-center justify-between group shadow-sm"
               >
                 <div className="flex items-center gap-3">
                   <img
                     src={product.image}
                     alt={product.nameAr}
+                    loading="lazy"
+                    decoding="async"
+                    width="56"
+                    height="56"
                     referrerPolicy="no-referrer"
                     className="w-14 h-14 rounded-xl object-cover border border-[#EFE8DE]"
                   />
@@ -95,7 +102,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                     <h4 className="font-bold font-amiri text-sm text-[#2B211B] group-hover:text-[#B78A5C] transition-colors">
                       {product.nameAr}
                     </h4>
-                    <p className="text-[#4A3326]/70 line-clamp-1">{product.originCountry} • {product.roastLevel}</p>
+                    <p className="text-[#2B211B] font-normal line-clamp-1">{product.originCountry} • {product.roastLevel}</p>
                     <span className="font-bold text-[#2B211B] text-xs mt-0.5 block">
                       {currency === 'OMR' ? `${product.priceOmr.toFixed(3)} ر.ع` : `$${product.priceUsd.toFixed(2)}`}
                     </span>

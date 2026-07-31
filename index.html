@@ -2,13 +2,87 @@
 <html lang="ar" dir="rtl" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>محامص الأصالة | Al Asalah Roastery - القهوة العمانية والمختصة الفاخرة</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800;900&family=Almarai:wght@300;400;700;800&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>محامص الأصالة | Al Asalah Roastery - القهوة العمانية والمختصة الفاخرة في نزوى ومسقط</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="محامص الأصالة - المحمصة العمانية المختصة الرائدة في سوق نزوى التاريخي. نحمص أجود سلالات البن العالمي والخلطات العمانية بالهيل والزعفران السوبر نيل عند الطلب مع توصيل مجاني لسلطنة عمان والخليج." />
+    <meta name="keywords" content="محامص الأصالة, قهوة عمانية, بن مختص, محمصة نزوى, قهوة بالهيل والزعفران, Al Asalah Roastery, قهوة مختصة مسقط, حبوب بن فاخرة" />
+    <meta name="author" content="محامص الأصالة العمانية" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#2B211B" />
+    <link rel="canonical" href="https://alasalah-roastery.com" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ar_OM" />
+    <meta property="og:site_name" content="محامص الأصالة العمانية" />
+    <meta property="og:title" content="محامص الأصالة | Al Asalah Roastery - عراقة القهوة العمانية والبن المختص" />
+    <meta property="og:description" content="نحمص لك أنقى سلالات البن العالمي والخلطات العمانية السامية فور طلبك من معملنا في نزوى مع توصيل طازج لجميع ولايات سلطنة عمان ودول الخليج." />
+    <meta property="og:image" content="/assets/images/hero_coffee_beans_1785262866653.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="محامص الأصالة العمانية - بن فاخر محمص طازج" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="محامص الأصالة العمانية - القهوة العمانية والبن المختص" />
+    <meta name="twitter:description" content="أصالة الفخامة في كل فنجان. بن محمص فور الطلب من معملنا التراثي في نزوى." />
+    <meta name="twitter:image" content="/assets/images/hero_coffee_beans_1785262866653.jpg" />
+
+    <!-- SVG Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%232B211B' stroke='%23C9A76A' stroke-width='4'/><path d='M35 32 C35 25, 65 25, 65 32 L60 62 C60 70, 40 70, 40 62 Z' fill='%23C9A76A'/><path d='M50 20 L50 26 M42 22 L44 26 M58 22 L56 26' stroke='%23C9A76A' stroke-width='2' stroke-linecap='round'/></svg>" />
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%232B211B'/><text x='50' y='62' font-size='42' text-anchor='middle' fill='%23C9A76A'>☕</text></svg>" />
+
+    <!-- Performance: Preconnect & Asynchronous Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" />
+    </noscript>
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CoffeeRoaster",
+      "name": "محامص الأصالة العمانية",
+      "alternateName": "Al Asalah Roastery",
+      "image": "/assets/images/hero_coffee_beans_1785262866653.jpg",
+      "description": "محمصة عمانية مختصة رائدة في نزوى ومسقط تحمص أنقى سلالات البن العالمي والخلطات العمانية بالهيل والزعفران عند الطلب.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "سوق نزوى التراثي، بالقرب من قلعة نزوى",
+        "addressLocality": "نزوى",
+        "addressRegion": "الداخلية",
+        "addressCountry": "OM"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "22.9333",
+        "longitude": "57.5333"
+      },
+      "url": "https://alasalah-roastery.com",
+      "telephone": "+968 76923072",
+      "priceRange": "OMR 3.5 - OMR 35.0",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "07:30",
+          "closes": "22:30"
+        }
+      ]
+    }
+    </script>
   </head>
-  <body class="bg-[#F8F3EC] text-[#2B211B] antialiased selection:bg-[#B78A5C] selection:text-white font-['IBM_Plex_Sans_Arabic','Tajawal','Alexandria','Cairo',sans-serif]">
+  <body class="bg-[#F8F3EC] text-[#2B211B] antialiased selection:bg-[#B78A5C] selection:text-white font-['IBM_Plex_Sans_Arabic','Alexandria',sans-serif]">
+    <!-- Accessibility: Skip to Main Content Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#C9A76A] focus:text-[#2B211B] focus:font-bold focus:rounded-lg focus:shadow-xl">
+      التخطي إلى المحتوى الرئيسي
+    </a>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

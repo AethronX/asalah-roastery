@@ -30,17 +30,17 @@ export const Footer: React.FC = () => {
                 محامص الأصالة - Al Asalah Roastery
               </span>
             </div>
-            <p className="text-xs text-[#F8F3EC]/70 leading-relaxed font-light max-w-md">
+            <p className="text-xs text-[#F8F3EC] leading-relaxed font-normal max-w-md">
               علامة عمانية فاخرة رائدة في صناعة وتحميص القهوة العمانية الملكية والقهوة المختصة. نمتزج بالتقاليد ونرتقي بحرفية التحميص لتقديم رشفة فريدة.
             </p>
             <div className="flex items-center gap-3 text-[#C9A76A]">
-              <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#B78A5C] hover:text-white transition-colors">
+              <a href="#" aria-label="حساب محامص الأصالة على إنستغرام" className="p-2.5 rounded-full bg-white/10 hover:bg-[#B78A5C] hover:text-white transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center">
                 <Instagram className="w-4 h-4" />
               </a>
-              <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#B78A5C] hover:text-white transition-colors">
+              <a href="#" aria-label="حساب محامص الأصالة على منصة إكس (تويتر)" className="p-2.5 rounded-full bg-white/10 hover:bg-[#B78A5C] hover:text-white transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center">
                 <Twitter className="w-4 h-4" />
               </a>
-              <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-[#B78A5C] hover:text-white transition-colors">
+              <a href="#" aria-label="حساب محامص الأصالة على فيسبوك" className="p-2.5 rounded-full bg-white/10 hover:bg-[#B78A5C] hover:text-white transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center">
                 <Facebook className="w-4 h-4" />
               </a>
             </div>
@@ -49,8 +49,8 @@ export const Footer: React.FC = () => {
           {/* Quick Links Column */}
           <div className="lg:col-span-3 grid grid-cols-2 gap-4 text-xs">
             <div>
-              <h4 className="font-amiri text-base font-bold text-[#C9A76A] mb-3">التسوق السريع</h4>
-              <ul className="space-y-2 text-[#F8F3EC]/80 font-light">
+              <h3 className="font-amiri text-base font-bold text-[#C9A76A] mb-3">التسوق السريع</h3>
+              <ul className="space-y-2 text-[#F8F3EC] font-normal">
                 <li><a href="#shop-catalog" className="hover:text-[#C9A76A] transition-colors">القهوة العمانية</a></li>
                 <li><a href="#shop-catalog" className="hover:text-[#C9A76A] transition-colors">القهوة المختصة</a></li>
                 <li><a href="#shop-catalog" className="hover:text-[#C9A76A] transition-colors">المكسرات والتمور</a></li>
@@ -58,8 +58,8 @@ export const Footer: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h4 className="font-amiri text-base font-bold text-[#C9A76A] mb-3">عن الأصالة</h4>
-              <ul className="space-y-2 text-[#F8F3EC]/80 font-light">
+              <h3 className="font-amiri text-base font-bold text-[#C9A76A] mb-3">عن الأصالة</h3>
+              <ul className="space-y-2 text-[#F8F3EC] font-normal">
                 <li><a href="#our-story" className="hover:text-[#C9A76A] transition-colors">قصتنا وحرفيتنا</a></li>
                 <li><a href="#location-section" className="hover:text-[#C9A76A] transition-colors">فروعنا في عمان</a></li>
                 <li><a href="#location-section" className="hover:text-[#C9A76A] transition-colors">جلسات التذوق</a></li>
@@ -69,32 +69,35 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Newsletter Box */}
-          <div className="lg:col-span-4 bg-[#4A3326]/50 p-6 rounded-2xl border border-[#C9A76A]/20">
-            <h4 className="font-amiri text-lg font-bold text-[#F8F3EC] mb-1">
+          <div className="lg:col-span-4 bg-[#4A3326] p-6 rounded-2xl border border-[#C9A76A]/30">
+            <h3 className="font-amiri text-lg font-bold text-[#F8F3EC] mb-1">
               النشرة البريدية الحصرية
-            </h4>
-            <p className="text-xs text-[#F8F3EC]/70 mb-4 font-light">
+            </h3>
+            <p className="text-xs text-[#F8F3EC] mb-4 font-normal">
               انضم لنادي متذوقي الأصالة واحصل على خلطات خاصة ودعوات لجلسات التذوق.
             </p>
 
             {subscribed ? (
-              <div className="p-3 bg-emerald-900/60 border border-emerald-500/40 rounded-xl text-emerald-200 text-xs flex items-center gap-2">
+              <div className="p-3 bg-emerald-900/90 border border-emerald-500/60 rounded-xl text-emerald-200 text-xs flex items-center gap-2">
                 <Check className="w-4 h-4 text-emerald-400" />
                 <span>شكراً لانضمامك إلى مجتمع محامص الأصالة!</span>
               </div>
             ) : (
               <form onSubmit={handleNewsletter} className="flex gap-2">
+                <label htmlFor="footer-newsletter-email" className="sr-only">البريد الإلكتروني للنشرة البريدية</label>
                 <input
+                  id="footer-newsletter-email"
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="بريدك الإلكتروني..."
-                  className="w-full px-3.5 py-2.5 bg-white/10 border border-white/20 rounded-xl text-xs text-white placeholder-white/50 focus:outline-none focus:border-[#C9A76A]"
+                  className="w-full px-3.5 py-2.5 bg-white/10 border border-white/30 rounded-xl text-xs text-white placeholder-white/70 focus:outline-none focus:border-[#C9A76A]"
                 />
                 <button
                   type="submit"
-                  className="px-4 py-2.5 bg-[#C9A76A] text-[#2B211B] font-bold text-xs rounded-xl hover:bg-[#B78A5C] hover:text-white transition-colors shrink-0"
+                  aria-label="اشتراك في النشرة البريدية"
+                  className="px-4 py-2.5 bg-[#C9A76A] text-[#2B211B] font-bold text-xs rounded-xl hover:bg-[#B78A5C] hover:text-white transition-colors shrink-0 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 >
                   <Send className="w-4 h-4" />
                 </button>

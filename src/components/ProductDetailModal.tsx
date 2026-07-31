@@ -81,8 +81,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 left-4 z-20 p-2.5 rounded-full bg-[#2B211B]/80 hover:bg-[#2B211B] text-[#F8F3EC] transition-colors"
-          aria-label="Close Product View"
+          className="absolute top-4 left-4 z-20 p-2.5 rounded-full bg-[#2B211B] hover:bg-[#4A3326] text-[#F8F3EC] transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center"
+          aria-label="إغلاق نافذة تفاصيل المنتج"
         >
           <X className="w-5 h-5" />
         </button>
@@ -95,13 +95,18 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               <img
                 src={selectedImage}
                 alt={product.nameAr}
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="600"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center transition-all duration-500 hover:scale-110"
               />
               <button
                 onClick={() => onToggleWishlist(product)}
-                className={`absolute top-4 right-4 p-3 rounded-full backdrop-blur-md transition-all ${
-                  isWishlisted ? 'bg-red-500 text-white' : 'bg-black/40 text-white hover:bg-black/70'
+                aria-label={`إضافة ${product.nameAr} للمفضلة`}
+                className={`absolute top-4 right-4 p-3 rounded-full backdrop-blur-md transition-all min-w-[44px] min-h-[44px] flex items-center justify-center ${
+                  isWishlisted ? 'bg-red-500 text-white' : 'bg-black/60 text-white hover:bg-black/80'
                 }`}
               >
                 <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-current' : ''}`} />
@@ -114,11 +119,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <button
                   key={idx}
                   onClick={() => setSelectedImage(img)}
-                  className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
-                    selectedImage === img ? 'border-[#C9A76A] ring-2 ring-[#C9A76A]/30 scale-105' : 'border-transparent opacity-70 hover:opacity-100'
+                  aria-label={`عرض الصورة المصغرة ${idx + 1}`}
+                  className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 transition-all shrink-0 min-w-[64px] min-h-[64px] ${
+                    selectedImage === img ? 'border-[#C9A76A] ring-2 ring-[#C9A76A]/30 scale-105' : 'border-transparent opacity-80 hover:opacity-100'
                   }`}
                 >
-                  <img src={img} alt="صورة العرض" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
+                  <img src={img} alt={`صورة معروضة ${idx + 1}`} loading="lazy" decoding="async" width="80" height="80" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
@@ -304,7 +310,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <button
                   onClick={() => setActiveTab('details')}
                   className={`pb-2 transition-colors relative ${
-                    activeTab === 'details' ? 'text-[#B78A5C] font-bold border-b-2 border-[#B78A5C]' : 'text-[#4A3326]/70'
+                    activeTab === 'details' ? 'text-[#B78A5C] font-bold border-b-2 border-[#B78A5C]' : 'text-[#2B211B]'
                   }`}
                 >
                   التفاصيل والمنشأ
@@ -312,7 +318,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <button
                   onClick={() => setActiveTab('story')}
                   className={`pb-2 transition-colors relative ${
-                    activeTab === 'story' ? 'text-[#B78A5C] font-bold border-b-2 border-[#B78A5C]' : 'text-[#4A3326]/70'
+                    activeTab === 'story' ? 'text-[#B78A5C] font-bold border-b-2 border-[#B78A5C]' : 'text-[#2B211B]'
                   }`}
                 >
                   قصة المحصول
@@ -320,7 +326,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <button
                   onClick={() => setActiveTab('reviews')}
                   className={`pb-2 transition-colors relative ${
-                    activeTab === 'reviews' ? 'text-[#B78A5C] font-bold border-b-2 border-[#B78A5C]' : 'text-[#4A3326]/70'
+                    activeTab === 'reviews' ? 'text-[#B78A5C] font-bold border-b-2 border-[#B78A5C]' : 'text-[#2B211B]'
                   }`}
                 >
                   آراء المتذوقين ({reviewsList.length})
@@ -329,27 +335,27 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
               {activeTab === 'details' && (
                 <div className="grid grid-cols-2 gap-3 text-xs">
-                  <div className="p-3 bg-white/60 rounded-xl">
-                    <span className="text-[#4A3326]/60 block mb-1">الارتفاع عن سطح البحر:</span>
+                  <div className="p-3 bg-white rounded-xl border border-[#EFE8DE]">
+                    <span className="text-[#2B211B] font-bold block mb-1">الارتفاع عن سطح البحر:</span>
                     <span className="font-bold text-[#2B211B]">{product.altitude}</span>
                   </div>
-                  <div className="p-3 bg-white/60 rounded-xl">
-                    <span className="text-[#4A3326]/60 block mb-1">طريقة المعالجة:</span>
+                  <div className="p-3 bg-white rounded-xl border border-[#EFE8DE]">
+                    <span className="text-[#2B211B] font-bold block mb-1">طريقة المعالجة:</span>
                     <span className="font-bold text-[#2B211B]">{product.process}</span>
                   </div>
-                  <div className="p-3 bg-white/60 rounded-xl">
-                    <span className="text-[#4A3326]/60 block mb-1">طرق التحضير المقترحة:</span>
+                  <div className="p-3 bg-white rounded-xl border border-[#EFE8DE]">
+                    <span className="text-[#2B211B] font-bold block mb-1">طرق التحضير المقترحة:</span>
                     <span className="font-bold text-[#2B211B]">{product.brewingMethods.join(' • ')}</span>
                   </div>
-                  <div className="p-3 bg-white/60 rounded-xl">
-                    <span className="text-[#4A3326]/60 block mb-1">المنطقة والاقليم:</span>
+                  <div className="p-3 bg-white rounded-xl border border-[#EFE8DE]">
+                    <span className="text-[#2B211B] font-bold block mb-1">المنطقة والاقليم:</span>
                     <span className="font-bold text-[#2B211B]">{product.originRegion}</span>
                   </div>
                 </div>
               )}
 
               {activeTab === 'story' && (
-                <p className="text-xs text-[#4A3326] leading-relaxed">
+                <p className="text-xs text-[#2B211B] font-medium leading-relaxed">
                   {product.descriptionAr}
                 </p>
               )}
@@ -357,16 +363,18 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               {activeTab === 'reviews' && (
                 <div className="space-y-4">
                   <form onSubmit={handleAddReview} className="mb-4">
+                    <label htmlFor="product-review-textarea" className="sr-only">أضف انطباعك وتقييمك عن هذه القهوة</label>
                     <textarea
+                      id="product-review-textarea"
                       value={newReviewComment}
                       onChange={(e) => setNewReviewComment(e.target.value)}
                       placeholder="أضف انطباعك وتقييمك عن هذه القهوة..."
-                      className="w-full p-3 text-xs bg-white border border-[#EFE8DE] rounded-xl focus:outline-none focus:border-[#B78A5C]"
+                      className="w-full p-3 text-xs bg-white text-[#2B211B] border border-[#EFE8DE] rounded-xl focus:outline-none focus:border-[#B78A5C]"
                       rows={2}
                     />
                     <button
                       type="submit"
-                      className="mt-2 px-4 py-2 bg-[#B78A5C] text-white rounded-lg text-xs font-bold hover:bg-[#2B211B] transition-colors"
+                      className="mt-2 px-4 py-2 bg-[#B78A5C] text-white rounded-lg text-xs font-bold hover:bg-[#2B211B] transition-colors min-h-[38px]"
                     >
                       إرسال التقييم
                     </button>
@@ -374,12 +382,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
                   <div className="space-y-2.5 max-h-40 overflow-y-auto pr-1">
                     {reviewsList.map((rev, idx) => (
-                      <div key={idx} className="p-3 bg-white/60 rounded-xl border border-[#EFE8DE] text-xs">
+                      <div key={idx} className="p-3 bg-white rounded-xl border border-[#EFE8DE] text-xs">
                         <div className="flex items-center justify-between mb-1">
                           <span className="font-bold text-[#2B211B]">{rev.name} ({rev.city})</span>
-                          <span className="text-[#4A3326]/50 text-[10px]">{rev.date}</span>
+                          <span className="text-[#2B211B] text-[10px] font-bold">{rev.date}</span>
                         </div>
-                        <p className="text-[#4A3326]">{rev.comment}</p>
+                        <p className="text-[#2B211B]">{rev.comment}</p>
                       </div>
                     ))}
                   </div>

@@ -88,7 +88,8 @@ export const BrewingCalculator: React.FC<BrewingCalculatorProps> = ({ isOpen, on
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 left-4 p-2 rounded-full bg-[#2B211B]/10 hover:bg-[#2B211B] hover:text-white transition-colors"
+          aria-label="إغلاق حاسبة التحضير"
+          className="absolute top-4 left-4 p-2 rounded-full bg-[#2B211B]/10 hover:bg-[#2B211B] hover:text-white transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center"
         >
           <X className="w-5 h-5" />
         </button>
@@ -102,7 +103,7 @@ export const BrewingCalculator: React.FC<BrewingCalculatorProps> = ({ isOpen, on
             <h2 className="font-amiri text-2xl font-bold text-[#2B211B]">
               دليل وحاسبة تحضير القهوة المثالية
             </h2>
-            <p className="text-xs text-[#4A3326]/70">
+            <p className="text-xs text-[#2B211B] font-medium">
               احسب مقادير البن والماء والحرارة للحصول على أفضل رشفة
             </p>
           </div>
@@ -119,10 +120,10 @@ export const BrewingCalculator: React.FC<BrewingCalculatorProps> = ({ isOpen, on
             <button
               key={m.id}
               onClick={() => setMethod(m.id as any)}
-              className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all border ${
+              className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all border min-h-[40px] ${
                 method === m.id
                   ? 'bg-[#2B211B] text-[#C9A76A] border-[#C9A76A] shadow-md'
-                  : 'bg-white/60 text-[#4A3326] border-[#EFE8DE] hover:bg-[#EFE8DE]'
+                  : 'bg-white text-[#2B211B] border-[#EFE8DE] hover:bg-[#EFE8DE]'
               }`}
             >
               {m.label}
@@ -131,12 +132,13 @@ export const BrewingCalculator: React.FC<BrewingCalculatorProps> = ({ isOpen, on
         </div>
 
         {/* Cups Range Slider */}
-        <div className="mb-6 bg-white/80 p-4 rounded-2xl border border-[#EFE8DE]">
+        <div className="mb-6 bg-white p-4 rounded-2xl border border-[#EFE8DE]">
           <div className="flex justify-between items-center mb-2 text-xs font-bold">
-            <span>عدد الفناجين / الأكواب المطلوب تحضيرها:</span>
+            <label htmlFor="brewing-cups-slider" className="text-[#2B211B]">عدد الفناجين / الأكواب المطلوب تحضيرها:</label>
             <span className="text-[#B78A5C] text-sm font-black">{cups} فناجين</span>
           </div>
           <input
+            id="brewing-cups-slider"
             type="range"
             min="1"
             max="12"
@@ -144,7 +146,7 @@ export const BrewingCalculator: React.FC<BrewingCalculatorProps> = ({ isOpen, on
             onChange={(e) => setCups(parseInt(e.target.value))}
             className="w-full accent-[#B78A5C] cursor-pointer"
           />
-          <div className="flex justify-between text-[10px] text-[#4A3326]/50 mt-1">
+          <div className="flex justify-between text-[10px] text-[#2B211B] font-bold mt-1">
             <span>فنجان واحد (شخصي)</span>
             <span>6 فناجين (جلسة)</span>
             <span>12 فنجان (مجلس كامل)</span>

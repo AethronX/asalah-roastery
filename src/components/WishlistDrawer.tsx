@@ -39,7 +39,8 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-full hover:bg-white/10 text-white transition-colors"
+              aria-label="إغلاق قائمة المفضلة"
+              className="p-1.5 rounded-full hover:bg-white/10 text-white transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center"
             >
               <X className="w-5 h-5" />
             </button>
@@ -51,17 +52,21 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
               <div className="py-20 text-center space-y-3">
                 <Heart className="w-16 h-16 text-[#B78A5C]/40 mx-auto" />
                 <h4 className="font-amiri text-xl font-bold text-[#2B211B]">لا توجد عناصر محفوظة</h4>
-                <p className="text-xs text-[#4A3326]/70">احفظ منتجاتك المفضلة للعودة إليها بسهولة لاحقاً.</p>
+                <p className="text-xs text-[#2B211B] font-medium">احفظ منتجاتك المفضلة للعودة إليها بسهولة لاحقاً.</p>
               </div>
             ) : (
               wishlistProducts.map((product) => (
                 <div
                   key={product.id}
-                  className="p-3.5 bg-white/80 rounded-2xl border border-[#EFE8DE] flex gap-3 items-center justify-between hover:border-[#B78A5C]/40 transition-colors"
+                  className="p-3.5 bg-white rounded-2xl border border-[#EFE8DE] flex gap-3 items-center justify-between hover:border-[#B78A5C]/40 transition-colors"
                 >
                   <img
                     src={product.image}
                     alt={product.nameAr}
+                    loading="lazy"
+                    decoding="async"
+                    width="64"
+                    height="64"
                     referrerPolicy="no-referrer"
                     className="w-16 h-16 rounded-xl object-cover border border-[#EFE8DE]"
                   />
@@ -70,7 +75,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                     <h4 className="font-bold text-[#2B211B] font-amiri text-sm line-clamp-1">
                       {product.nameAr}
                     </h4>
-                    <div className="text-[11px] text-[#4A3326]/70 mt-0.5">
+                    <div className="text-[11px] text-[#2B211B] font-medium mt-0.5">
                       {product.originCountry} • {product.roastLevel}
                     </div>
                     <div className="font-bold text-[#2B211B] mt-1">
@@ -81,8 +86,9 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                   <div className="flex flex-col items-end gap-2">
                     <button
                       onClick={() => onRemoveFromWishlist(product)}
-                      className="text-red-500 hover:text-red-700 p-1"
+                      className="text-red-600 hover:text-red-800 p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center"
                       title="إزالة من المفضلة"
+                      aria-label={`إزالة ${product.nameAr} من المفضلة`}
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -91,8 +97,9 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                         onAddToCart(product);
                         onRemoveFromWishlist(product);
                       }}
-                      className="p-2 bg-[#2B211B] text-[#C9A76A] hover:bg-[#B78A5C] hover:text-white rounded-lg text-xs font-bold transition-colors"
+                      className="p-2 bg-[#2B211B] text-[#C9A76A] hover:bg-[#B78A5C] hover:text-white rounded-lg text-xs font-bold transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center"
                       title="إضافة للسلة"
+                      aria-label={`إضافة ${product.nameAr} إلى سلة الشراء`}
                     >
                       <ShoppingBag className="w-4 h-4" />
                     </button>

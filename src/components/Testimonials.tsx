@@ -13,7 +13,7 @@ export const Testimonials: React.FC = () => {
         <h2 className="font-amiri text-3xl sm:text-4xl font-bold text-[#2B211B] mb-3">
           ماذا يقول كبار المتذوقين عن تجربة الأصالة؟
         </h2>
-        <p className="text-[#4A3326]/80 text-sm font-light">
+        <p className="text-[#2B211B] text-sm font-medium">
           نعتز بثقة عملائنا في سلطنة عمان ودول مجلس التعاون الخليجي.
         </p>
       </div>
@@ -50,6 +50,10 @@ export const Testimonials: React.FC = () => {
               <img
                 src={t.avatar}
                 alt={t.nameAr}
+                loading="lazy"
+                decoding="async"
+                width="48"
+                height="48"
                 referrerPolicy="no-referrer"
                 className="w-12 h-12 rounded-full object-cover border-2 border-[#C9A76A]"
               />
@@ -58,8 +62,8 @@ export const Testimonials: React.FC = () => {
                   <span>{t.nameAr}</span>
                   <CheckCircle className="w-3.5 h-3.5 text-emerald-600 inline" title="مشتري معتمد" />
                 </h4>
-                <p className="text-xs text-[#4A3326]/70">{t.titleAr} • {t.cityAr}</p>
-                <span className="text-[10px] text-[#B78A5C] font-mono mt-0.5 block">
+                <p className="text-xs text-[#2B211B] font-medium">{t.titleAr} • {t.cityAr}</p>
+                <span className="text-[10px] text-[#B78A5C] font-mono mt-0.5 block font-bold">
                   المنتج: {t.productBought}
                 </span>
               </div>

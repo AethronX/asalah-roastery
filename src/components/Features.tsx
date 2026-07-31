@@ -46,7 +46,7 @@ export const Features: React.FC = () => {
               <h3 className="font-amiri text-lg font-bold text-[#2B211B] mb-2">
                 {f.titleAr}
               </h3>
-              <p className="text-xs text-[#4A3326]/80 leading-relaxed font-light">
+              <p className="text-xs text-[#2B211B] leading-relaxed font-medium">
                 {f.descAr}
               </p>
             </div>

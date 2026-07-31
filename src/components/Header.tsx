@@ -109,9 +109,9 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Search Button */}
           <button
             onClick={onOpenSearch}
-            className="p-2.5 rounded-full hover:bg-white/10 text-[#F8F3EC] hover:text-[#C9A76A] transition-colors relative"
+            className="p-2.5 rounded-full hover:bg-white/10 text-[#F8F3EC] hover:text-[#C9A76A] transition-colors relative min-w-[40px] min-h-[40px] flex items-center justify-center"
             title="بحث في المحامص"
-            aria-label="Search"
+            aria-label="البحث عن منتجات القهوة"
           >
             <Search className="w-5 h-5" />
           </button>
@@ -119,9 +119,9 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Wishlist Button */}
           <button
             onClick={onOpenWishlist}
-            className="p-2.5 rounded-full hover:bg-white/10 text-[#F8F3EC] hover:text-[#C9A76A] transition-colors relative"
+            className="p-2.5 rounded-full hover:bg-white/10 text-[#F8F3EC] hover:text-[#C9A76A] transition-colors relative min-w-[40px] min-h-[40px] flex items-center justify-center"
             title="المفضلة"
-            aria-label="Wishlist"
+            aria-label="عرض قائمة المنتجات المفضلة"
           >
             <Heart className="w-5 h-5" />
             {wishlistCount > 0 && (
@@ -134,9 +134,9 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Cart Button */}
           <button
             onClick={onOpenCart}
-            className="p-2.5 rounded-full hover:bg-white/10 text-[#F8F3EC] hover:text-[#C9A76A] transition-colors relative"
+            className="p-2.5 rounded-full hover:bg-white/10 text-[#F8F3EC] hover:text-[#C9A76A] transition-colors relative min-w-[40px] min-h-[40px] flex items-center justify-center"
             title="سلة التسوق"
-            aria-label="Cart"
+            aria-label="عرض سلة التسوق"
           >
             <ShoppingBag className="w-5 h-5" />
             {cartCount > 0 && (
@@ -149,7 +149,8 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Premium CTA Button */}
           <button
             onClick={() => onNavigateCategory('all')}
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#B78A5C] to-[#C9A76A] text-[#2B211B] font-semibold text-xs tracking-wider uppercase hover:shadow-lg hover:shadow-[#C9A76A]/20 hover:scale-105 active:scale-95 transition-all duration-300 border border-[#C9A76A]/40"
+            className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#B78A5C] to-[#C9A76A] text-[#2B211B] font-bold text-xs tracking-wider uppercase hover:shadow-lg hover:shadow-[#C9A76A]/20 hover:scale-105 active:scale-95 transition-all duration-300 border border-[#C9A76A]/40 min-h-[40px]"
+            aria-label="تسوق الآن في متجر محامص الأصالة"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#2B211B]" />
             <span>تسوق الآن</span>
@@ -158,8 +159,8 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg lg:hidden text-[#F8F3EC] hover:bg-white/10"
-            aria-label="Toggle Navigation Menu"
+            className="p-2 rounded-lg lg:hidden text-[#F8F3EC] hover:bg-white/10 min-w-[44px] min-h-[44px] flex items-center justify-center"
+            aria-label="فتح أو إغلاق القائمة الرئيسية"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>

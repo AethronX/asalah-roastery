@@ -1,6 +1,6 @@
 import React from 'react';
 import { CategoryId } from '../types';
-import { Coffee, Flame, Sparkles, Gift, Wrench, PackageCheck, Award } from 'lucide-react';
+import { Coffee, Flame, Sparkles, Gift, Wrench, PackageCheck } from 'lucide-react';
 
 interface CategorySectionProps {
   activeCategory: CategoryId;
@@ -14,7 +14,7 @@ export const CATEGORIES = [
     subtitleAr: 'محاصيل نادرة بدرجات تقييم عالية',
     icon: Sparkles,
     count: '12 محصول',
-    image: '/src/assets/images/specialty_coffee_bag_1785262894947.jpg'
+    image: '/assets/images/specialty_coffee_bag_1785262894947.jpg'
   },
   {
     id: 'arabic-omani' as CategoryId,
@@ -22,7 +22,7 @@ export const CATEGORIES = [
     subtitleAr: 'خلطات الأصالة بالهيل والزعفران',
     icon: Coffee,
     count: '6 خلطات',
-    image: '/src/assets/images/omani_dallah_set_1785262881798.jpg'
+    image: '/assets/images/omani_dallah_set_1785262881798.jpg'
   },
   {
     id: 'beans' as CategoryId,
@@ -30,7 +30,7 @@ export const CATEGORIES = [
     subtitleAr: 'سلالات محمصة بدرجة احترافية',
     icon: Flame,
     count: '15 خيار',
-    image: '/src/assets/images/hero_coffee_beans_1785262866653.jpg'
+    image: '/assets/images/hero_coffee_beans_1785262866653.jpg'
   },
   {
     id: 'nuts-dates' as CategoryId,
@@ -38,7 +38,7 @@ export const CATEGORIES = [
     subtitleAr: 'مكسرات محمصة وتمور خلاص محشوة',
     icon: PackageCheck,
     count: '8 تشكيلات',
-    image: '/src/assets/images/nuts_and_dates_1785262922164.jpg'
+    image: '/assets/images/nuts_and_dates_1785262922164.jpg'
   },
   {
     id: 'gifts' as CategoryId,
@@ -46,7 +46,7 @@ export const CATEGORIES = [
     subtitleAr: 'صناديق الضيافة والأطقم الملكية',
     icon: Gift,
     count: '10 صناديق',
-    image: '/src/assets/images/luxury_gift_box_1785262908848.jpg'
+    image: '/assets/images/luxury_gift_box_1785262908848.jpg'
   },
   {
     id: 'tools' as CategoryId,
@@ -54,7 +54,7 @@ export const CATEGORIES = [
     subtitleAr: 'دلات نحاسية وأدوات V60',
     icon: Wrench,
     count: '14 أداة',
-    image: '/src/assets/images/omani_dallah_set_1785262881798.jpg'
+    image: '/assets/images/omani_dallah_set_1785262881798.jpg'
   }
 ];
 
@@ -66,13 +66,13 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Section Header */}
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="text-xs font-semibold uppercase tracking-widest text-[#B78A5C] bg-[#B78A5C]/10 px-3.5 py-1.5 rounded-full border border-[#B78A5C]/20 inline-block mb-3">
+        <span className="text-xs font-bold uppercase tracking-widest text-[#B78A5C] bg-[#B78A5C]/15 px-3.5 py-1.5 rounded-full border border-[#B78A5C]/30 inline-block mb-3">
           تشكيلة الأصالة
         </span>
         <h2 className="font-amiri text-3xl sm:text-4xl font-bold text-[#2B211B] mb-3">
           تصفح الأقسام الفاخرة
         </h2>
-        <p className="text-[#4A3326]/80 text-sm sm:text-base font-light">
+        <p className="text-[#4A3326] text-sm sm:text-base font-normal">
           صُممت تشكيلاتنا لتلبي شغف عشاق القهوة العمانية الأصيلة والقهوة المختصة العالمية.
         </p>
       </div>
@@ -87,10 +87,11 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat.id)}
+              aria-label={`تصفح قسم ${cat.titleAr}`}
               className={`group relative rounded-2xl p-5 text-right transition-all duration-300 overflow-hidden flex flex-col justify-between min-h-[220px] ${
                 isSelected
                   ? 'bg-[#2B211B] text-[#F8F3EC] shadow-xl ring-2 ring-[#C9A76A] scale-[1.02]'
-                  : 'bg-[#F8F3EC] text-[#2B211B] border border-[#EFE8DE] hover:border-[#C9A76A]/60 hover:shadow-lg hover:-translate-y-1'
+                  : 'bg-[#F8F3EC] text-[#2B211B] border border-[#EFE8DE] hover:border-[#C9A76A]/80 hover:shadow-lg hover:-translate-y-1'
               }`}
             >
               {/* Card Background Subtle Image */}
@@ -98,6 +99,10 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
                 <img
                   src={cat.image}
                   alt={cat.titleAr}
+                  loading="lazy"
+                  decoding="async"
+                  width="200"
+                  height="200"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter grayscale group-hover:grayscale-0"
                 />
@@ -109,14 +114,14 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
                   className={`w-11 h-11 rounded-xl flex items-center justify-center transition-colors ${
                     isSelected
                       ? 'bg-[#C9A76A] text-[#2B211B]'
-                      : 'bg-[#B78A5C]/15 text-[#B78A5C] group-hover:bg-[#B78A5C] group-hover:text-white'
+                      : 'bg-[#B78A5C]/20 text-[#7A532C] group-hover:bg-[#B78A5C] group-hover:text-white'
                   }`}
                 >
                   <IconComponent className="w-5 h-5" />
                 </div>
                 <span
-                  className={`text-[10px] px-2 py-0.5 rounded-full font-sans ${
-                    isSelected ? 'bg-white/10 text-[#C9A76A]' : 'bg-[#2B211B]/5 text-[#4A3326]/70'
+                  className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
+                    isSelected ? 'bg-white/15 text-[#C9A76A]' : 'bg-[#2B211B]/10 text-[#4A3326]'
                   }`}
                 >
                   {cat.count}
@@ -127,14 +132,14 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
               <div className="relative z-10">
                 <h3
                   className={`font-amiri text-lg font-bold mb-1 transition-colors ${
-                    isSelected ? 'text-[#F8F3EC]' : 'text-[#2B211B] group-hover:text-[#B78A5C]'
+                    isSelected ? 'text-[#F8F3EC]' : 'text-[#2B211B] group-hover:text-[#8C5D2C]'
                   }`}
                 >
                   {cat.titleAr}
                 </h3>
                 <p
-                  className={`text-xs line-clamp-2 leading-relaxed ${
-                    isSelected ? 'text-[#F8F3EC]/70' : 'text-[#4A3326]/70'
+                  className={`text-xs line-clamp-2 leading-relaxed font-normal ${
+                    isSelected ? 'text-[#F8F3EC]/90' : 'text-[#4A3326]'
                   }`}
                 >
                   {cat.subtitleAr}

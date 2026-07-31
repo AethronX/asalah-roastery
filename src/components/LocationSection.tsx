@@ -61,7 +61,7 @@ export const LocationSection: React.FC = () => {
                   )}
                 </div>
 
-                <div className="space-y-2 text-xs text-[#F8F3EC]/80 font-light">
+                <div className="space-y-2 text-xs text-[#F8F3EC] font-normal">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-[#C9A76A] shrink-0" />
                     <span>{b.addressAr}</span>
@@ -80,7 +80,7 @@ export const LocationSection: React.FC = () => {
           </div>
 
           {/* Tasting Appointment Booking Form */}
-          <div className="lg:col-span-6 bg-[#4A3326]/60 rounded-3xl p-6 sm:p-8 border border-[#C9A76A]/30 backdrop-blur-md text-right">
+          <div className="lg:col-span-6 bg-[#4A3326] rounded-3xl p-6 sm:p-8 border border-[#C9A76A]/40 backdrop-blur-md text-right shadow-2xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-full bg-[#C9A76A]/20 border border-[#C9A76A] flex items-center justify-center text-[#C9A76A]">
                 <Coffee className="w-5 h-5" />
@@ -89,25 +89,26 @@ export const LocationSection: React.FC = () => {
                 <h3 className="font-amiri text-2xl font-bold text-[#F8F3EC]">
                   حجز جلسة تذوق خاصة (Tasting Session)
                 </h3>
-                <p className="text-xs text-[#F8F3EC]/70">
+                <p className="text-xs text-[#F8F3EC]">
                   احجز وقتك الخاص مع خبير التحميص لتقييم المحاصيل وإعداد القهوة العمانية
                 </p>
               </div>
             </div>
 
             {bookingSuccess ? (
-              <div className="p-6 bg-emerald-950/80 border border-emerald-500/50 rounded-2xl text-center text-emerald-200 animate-fadeIn">
+              <div className="p-6 bg-emerald-950/90 border border-emerald-500/60 rounded-2xl text-center text-emerald-200 animate-fadeIn">
                 <Check className="w-12 h-12 text-emerald-400 mx-auto mb-3" />
                 <h4 className="font-amiri text-xl font-bold mb-1">تم تأكيد الحجز بنجاح!</h4>
-                <p className="text-xs font-light">
+                <p className="text-xs font-normal">
                   سيتواصل معك فريق الضيافة في فرع ({selectedBranch.nameAr}) لتأكيد الموعد. أهلاً وسهلاً بكم.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleBookTasting} className="space-y-4 text-xs">
                 <div>
-                  <label className="block text-[#F8F3EC]/80 mb-1.5">الفرع المختار:</label>
+                  <label htmlFor="tasting-branch" className="block text-[#F8F3EC] font-semibold mb-1.5">الفرع المختار:</label>
                   <input
+                    id="tasting-branch"
                     type="text"
                     disabled
                     value={selectedBranch.nameAr}
@@ -117,43 +118,47 @@ export const LocationSection: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#F8F3EC]/80 mb-1.5">الاسم الكريم:</label>
+                    <label htmlFor="tasting-name" className="block text-[#F8F3EC] font-semibold mb-1.5">الاسم الكريم:</label>
                     <input
+                      id="tasting-name"
                       type="text"
                       required
                       value={guestName}
                       onChange={(e) => setGuestName(e.target.value)}
                       placeholder="أدخل اسمك الكريـم"
-                      className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-[#C9A76A]"
+                      className="w-full p-3 bg-white/10 border border-white/30 rounded-xl text-white focus:outline-none focus:border-[#C9A76A]"
                     />
                   </div>
                   <div>
-                    <label className="block text-[#F8F3EC]/80 mb-1.5">رقم الهاتف / الواتساب:</label>
+                    <label htmlFor="tasting-phone" className="block text-[#F8F3EC] font-semibold mb-1.5">رقم الهاتف / الواتساب:</label>
                     <input
+                      id="tasting-phone"
                       type="tel"
                       required
                       value={guestPhone}
                       onChange={(e) => setGuestPhone(e.target.value)}
                       placeholder="+968 9XXXXXXX"
-                      className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-[#C9A76A]"
+                      className="w-full p-3 bg-white/10 border border-white/30 rounded-xl text-white focus:outline-none focus:border-[#C9A76A]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[#F8F3EC]/80 mb-1.5">التاريخ المقترح للجلسة:</label>
+                  <label htmlFor="tasting-date" className="block text-[#F8F3EC] font-semibold mb-1.5">التاريخ المقترح للجلسة:</label>
                   <input
+                    id="tasting-date"
                     type="date"
                     required
                     value={guestDate}
                     onChange={(e) => setGuestDate(e.target.value)}
-                    className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-[#C9A76A]"
+                    className="w-full p-3 bg-white/10 border border-white/30 rounded-xl text-white focus:outline-none focus:border-[#C9A76A]"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-[#B78A5C] to-[#C9A76A] text-[#2B211B] font-bold text-sm hover:shadow-xl hover:shadow-[#C9A76A]/20 transition-all mt-4"
+                  aria-label="تأكيد حجز جلسة التذوق"
+                  className="w-full py-4 rounded-xl bg-gradient-to-r from-[#B78A5C] to-[#C9A76A] text-[#2B211B] font-bold text-sm hover:shadow-xl hover:shadow-[#C9A76A]/20 transition-all mt-4 min-h-[48px]"
                 >
                   تأكيد حجز جلسة التذوق
                 </button>
