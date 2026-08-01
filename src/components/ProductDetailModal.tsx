@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Product, GrindType } from '../types';
-import { X, Star, ShoppingBag, Flame, MapPin, Mountain, Layers, Coffee, Check, ShieldCheck, Share2, ThumbsUp, Zap } from 'lucide-react';
+import { X, Star, ShoppingBag, Flame, MapPin, Coffee, Check, ShieldCheck, Zap } from 'lucide-react';
 import { Picture } from './Picture';
+import { useModalA11y } from '../hooks/useModalA11y';
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -20,12 +21,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   currency,
   theme = 'light',
 }) => {
-  if (!product) return null;
-
-  const isLight = theme === 'light';
-
-  const [selectedImage, setSelectedImage] = useState(product.image);
-  const [selectedWeight, setSelectedWeight] = useState(product.weights[0] || { label: '250 جرام', grams: 250, priceMultiplier: 1 });
+  const [selectedImage, setSelectedImage] = useState(product?.image ?? '');
+  const [selectedWeight, setSelectedWeight] = useState(product?.weights[0] || { label: '250 جرام', grams: 250, priceMultiplier: 1 });
   const [selectedGrind, setSelectedGrind] = useState<GrindType>('حبوب كاملة (Whole Beans)');
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<'details' | 'story' | 'reviews'>('details');
@@ -33,11 +30,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
   // New review form state
   const [newReviewComment, setNewReviewComment] = useState('');
-  const [newReviewRating, setNewReviewRating] = useState(5);
+  const newReviewRating = 5;
   const [reviewsList, setReviewsList] = useState([
     { name: 'علي الريامي', city: 'مسقط', comment: 'من أفضل المحاصيل المعتمدة في مجلسنا. نكهة الهيل متوازنة جداً مع البن الزكي.', rating: 5, date: 'قبل يومين' },
     { name: 'سارة الهنائية', city: 'نزوى', comment: 'التغليف فاخر للغاية والبن طازج جداً برائحة التحميص الممتازة.', rating: 5, date: 'قبل أسبوع' }
   ]);
+  const panelRef = useModalA11y<HTMLDivElement>(true);
+
+  if (!product) return null;
+
+  const isLight = theme === 'light';
 
   const currentPriceOmr = product.priceOmr * selectedWeight.priceMultiplier * quantity;
   const currentPriceUsd = product.priceUsd * selectedWeight.priceMultiplier * quantity;
@@ -77,7 +79,13 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn">
-      <div className={`rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto border shadow-2xl relative text-right transition-colors ${
+      <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={product.nameAr}
+        tabIndex={-1}
+        className={`outline-none rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto border shadow-2xl relative text-right transition-colors ${
         isLight
           ? 'bg-white text-[#1D1D1F] border-[#EFE7DD]'
           : 'bg-[#1D1613] text-[#F7F2EA] border-[#D7AE63]/40'

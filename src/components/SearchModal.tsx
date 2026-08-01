@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Product } from '../types';
-import { Search, X, Star, ArrowLeft, Coffee } from 'lucide-react';
+import { Search, X, ArrowLeft, Coffee } from 'lucide-react';
+import { Picture } from './Picture';
+import { useModalA11y } from '../hooks/useModalA11y';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -19,10 +21,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   currency,
   theme = 'light',
 }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const panelRef = useModalA11y<HTMLDivElement>(isOpen);
+
   if (!isOpen) return null;
 
   const isLight = theme === 'light';
-  const [searchTerm, setSearchTerm] = useState('');
 
   const filtered = products.filter(
     (p) =>
@@ -34,7 +38,13 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-md flex items-start justify-center pt-16 sm:pt-20 p-3 sm:p-4 animate-fadeIn">
-      <div className={`rounded-3xl max-w-2xl w-full border shadow-2xl overflow-hidden relative text-right transition-colors ${
+      <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="بحث في منتجات المحامص"
+        tabIndex={-1}
+        className={`outline-none rounded-3xl max-w-2xl w-full border shadow-2xl overflow-hidden relative text-right transition-colors ${
         isLight
           ? 'bg-white text-[#1D1D1F] border-[#EFE7DD]'
           : 'bg-[#1D1613] text-[#F7F2EA] border-[#D7AE63]/40'
@@ -107,7 +117,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <img
+                  <Picture
                     src={product.image}
                     alt={product.nameAr}
                     loading="lazy"

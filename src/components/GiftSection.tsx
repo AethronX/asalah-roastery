@@ -8,7 +8,7 @@ interface GiftSectionProps {
   giftProduct?: Product;
 }
 
-export const GiftSection: React.FC<GiftSectionProps> = ({ onSelectGift, giftProduct }) => {
+export const GiftSection: React.FC<GiftSectionProps> = React.memo(({ onSelectGift, giftProduct }) => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="bg-gradient-to-br from-[#1B1512] via-[#241B17] to-[#120E0C] text-[#F7F2EA] rounded-3xl p-8 sm:p-12 md:p-16 border border-[#D7AE63]/40 shadow-2xl relative overflow-hidden">
@@ -101,4 +101,4 @@ export const GiftSection: React.FC<GiftSectionProps> = ({ onSelectGift, giftProd
       </div>
     </section>
   );
-};
+});

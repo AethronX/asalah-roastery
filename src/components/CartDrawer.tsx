@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { CartItem } from '../types';
-import { X, Trash2, ShoppingBag, ArrowLeft, CheckCircle2, ShieldCheck, Truck, Sparkles, Tag, CreditCard, Zap, Check, MapPin, MessageCircle, Send } from 'lucide-react';
+import { X, Trash2, ShoppingBag, ArrowLeft, CheckCircle2, Truck, Tag, CreditCard, Zap, MessageCircle, Send } from 'lucide-react';
+import { Picture } from './Picture';
+import { useModalA11y } from '../hooks/useModalA11y';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -25,10 +27,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   onClearCart,
   initialStep = 'cart',
 }) => {
-  if (!isOpen) return null;
-
   const [checkoutStep, setCheckoutStep] = useState<'cart' | 'address' | 'success'>(initialStep);
-  
+  const panelRef = useModalA11y<HTMLDivElement>(isOpen);
+
   // Customer & Shipping Info
   const [customerName, setCustomerName] = useState('');
   const [customerCity, setCustomerCity] = useState('مسقط');
@@ -43,6 +44,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     discountPercent: 10, // Pre-applied welcome discount
   });
   const [couponError, setCouponError] = useState('');
+
+  if (!isOpen) return null;
 
   // Subtotal Calculations
   const subtotalOmr = cartItems.reduce((acc, item) => acc + item.unitPriceOmr * item.quantity, 0);
@@ -166,7 +169,14 @@ ${itemsSummary}
       <div className="absolute inset-0" onClick={onClose} />
 
       <div className="fixed inset-y-0 left-0 max-w-full flex pl-0 sm:pl-10 text-right">
-        <div className="w-screen max-w-md bg-[#FAF6F0] text-[#1B1512] shadow-2xl border-r border-[#D7AE63]/40 flex flex-col justify-between relative z-10">
+        <div
+          ref={panelRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="سلة الشراء المباشر"
+          tabIndex={-1}
+          className="w-screen max-w-md bg-[#FAF6F0] text-[#1B1512] shadow-2xl border-r border-[#D7AE63]/40 flex flex-col justify-between relative z-10 outline-none"
+        >
           
           {/* Drawer Top Header */}
           <div className="p-4 sm:p-5 bg-[#1B1512] text-[#F7F2EA] border-b border-[#D7AE63]/30 flex items-center justify-between">
@@ -191,7 +201,7 @@ ${itemsSummary}
             
             {/* Express 1-Click Buy Header (Apple Pay / Instant) */}
             {cartItems.length > 0 && checkoutStep === 'cart' && (
-              <div className="p-3 bg.gradient-to-r bg-[#1B1512] rounded-2xl border border-[#D7AE63]/40 text-white space-y-2">
+              <div className="p-3 bg-[#1B1512] rounded-2xl border border-[#D7AE63]/40 text-white space-y-2">
                 <div className="flex items-center justify-between text-xs text-[#F3E2BE] font-bold">
                   <span className="flex items-center gap-1.5">
                     <Zap className="w-4 h-4 fill-current text-[#F3E2BE]" />
@@ -253,7 +263,7 @@ ${itemsSummary}
                         key={idx}
                         className="p-3 bg-white rounded-2xl border border-[#D7AE63]/25 flex gap-3 items-center justify-between hover:border-[#D7AE63] transition-colors shadow-sm"
                       >
-                        <img
+                        <Picture
                           src={item.product.image}
                           alt={item.product.nameAr}
                           loading="lazy"
