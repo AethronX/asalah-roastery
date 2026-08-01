@@ -17,7 +17,7 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore, theme = 'light
       {/* Background Image Container with Soft Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/assets/images/hero_coffee_beans_1785262866653.jpg"
+          src="/assets/images/hero_luxury_roast_1785572872948.jpg"
           alt="محامص الأصالة - بن فاخر محمص في نزوى"
           referrerPolicy="no-referrer"
           fetchPriority="high"

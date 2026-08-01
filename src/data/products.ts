@@ -392,8 +392,9 @@ export const PRODUCTS: Product[] = [
     priceUsd: 23.90,
     rating: 10.0,
     reviewsCount: 83,
-    image: '/assets/images/omani_dallah_set_1785262881798.jpg',
+    image: '/assets/images/hero_luxury_roast_1785572872948.jpg',
     gallery: [
+      '/assets/images/hero_luxury_roast_1785572872948.jpg',
       '/assets/images/omani_dallah_set_1785262881798.jpg',
       '/assets/images/luxury_gift_box_1785262908848.jpg'
     ],
@@ -650,9 +651,10 @@ export const PRODUCTS: Product[] = [
     priceUsd: 46.80,
     rating: 10.0,
     reviewsCount: 45,
-    image: '/assets/images/specialty_coffee_bag_1785262894947.jpg',
+    image: '/assets/images/coffee_tools_set_1785572885322.jpg',
     gallery: [
-      '/assets/images/specialty_coffee_bag_1785262894947.jpg'
+      '/assets/images/coffee_tools_set_1785572885322.jpg',
+      'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&q=80&w=800'
     ],
     roastLevel: 'متوسط (Medium)',
     roastValue: 3,
@@ -686,9 +688,10 @@ export const PRODUCTS: Product[] = [
     priceUsd: 58.50,
     rating: 10.0,
     reviewsCount: 59,
-    image: '/assets/images/omani_dallah_set_1785262881798.jpg',
+    image: '/assets/images/coffee_tools_set_1785572885322.jpg',
     gallery: [
-      '/assets/images/omani_dallah_set_1785262881798.jpg'
+      '/assets/images/coffee_tools_set_1785572885322.jpg',
+      'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=800'
     ],
     roastLevel: 'متوسط (Medium)',
     roastValue: 3,
@@ -793,7 +796,7 @@ export const BRANCHES: BranchLocation[] = [
     addressAr: 'السوق التراثي، بالقرب من قلعة نزوى، محافظة الداخلية',
     phone: '+968 2541 3344',
     hoursAr: 'يومياً: 7:30 صباحاً - 10:30 مساءً',
-    image: '/assets/images/specialty_coffee_bag_1785262894947.jpg',
+    image: '/assets/images/boutique_roastery_1785572898074.jpg',
     isRoastery: true
   },
   {
@@ -803,7 +806,7 @@ export const BRANCHES: BranchLocation[] = [
     addressAr: 'مجمع القرم التجاري، شارع السلطان قابوس، مسقط',
     phone: '+968 2456 7890',
     hoursAr: 'يومياً: 7:00 صباحاً - 11:00 مساءً',
-    image: '/assets/images/hero_coffee_beans_1785262866653.jpg',
+    image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800',
     isRoastery: false
   },
   {
@@ -813,7 +816,7 @@ export const BRANCHES: BranchLocation[] = [
     addressAr: 'طريق شاطئ الحافة، صلالة، محافظة ظفار',
     phone: '+968 2329 1122',
     hoursAr: 'يومياً: 8:00 صباحاً - 12:00 منتصف الليل',
-    image: '/assets/images/omani_dallah_set_1785262881798.jpg',
+    image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=800',
     isRoastery: false
   }
 ];

@@ -55,7 +55,7 @@ export const CATEGORIES = [
     subtitleAr: 'دلات نحاسية وأدوات V60',
     icon: Wrench,
     count: '14 أداة',
-    image: '/assets/images/omani_dallah_set_1785262881798.jpg'
+    image: '/assets/images/coffee_tools_set_1785572885322.jpg'
   }
 ];
 

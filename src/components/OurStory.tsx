@@ -5,9 +5,9 @@ export const OurStory: React.FC = () => {
   return (
     <section id="our-story" className="py-24 bg-gradient-to-b from-[#1B1512] via-[#241B17] to-[#1B1512] text-[#F7F2EA] relative overflow-hidden border-y border-[#D7AE63]/25">
       {/* Background Subtle Asset */}
-      <div className="absolute right-0 top-0 bottom-0 w-1/2 opacity-10 pointer-events-none hidden lg:block" aria-hidden="true">
+      <div className="absolute right-0 top-0 bottom-0 w-1/2 opacity-15 pointer-events-none hidden lg:block" aria-hidden="true">
         <img
-          src="/assets/images/hero_coffee_beans_1785262866653.jpg"
+          src="/assets/images/boutique_roastery_1785572898074.jpg"
           alt="محامص الأصالة"
           loading="lazy"
           decoding="async"
@@ -49,7 +49,7 @@ export const OurStory: React.FC = () => {
               </div>
               <div className="rounded-3xl overflow-hidden border border-[#D7AE63]/40 shadow-2xl group">
                 <img
-                  src="/assets/images/specialty_coffee_bag_1785262894947.jpg"
+                  src="/assets/images/hero_luxury_roast_1785572872948.jpg"
                   alt="تعبئة وتغليف محامص الأصالة"
                   loading="lazy"
                   decoding="async"
