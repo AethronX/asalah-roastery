@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { BRANCHES } from '../data/products';
-import { MapPin, Phone, Clock, Calendar, Check, Coffee } from 'lucide-react';
+import { MapPin, Phone, Clock, Check, Coffee } from 'lucide-react';
 
 interface LocationSectionProps {
   theme?: 'light' | 'dark';
 }
 
-export const LocationSection: React.FC<LocationSectionProps> = ({ theme = 'light' }) => {
+export const LocationSection: React.FC<LocationSectionProps> = React.memo(({ theme = 'light' }) => {
   const isLight = theme === 'light';
   const [selectedBranch, setSelectedBranch] = useState(BRANCHES[0]);
   const [bookingSuccess, setBookingSuccess] = useState(false);
@@ -219,4 +219,4 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ theme = 'light
       </div>
     </section>
   );
-};
+});

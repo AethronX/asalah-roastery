@@ -8,7 +8,7 @@ interface HeroProps {
   theme?: 'light' | 'dark';
 }
 
-export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore, theme = 'light' }) => {
+export const Hero: React.FC<HeroProps> = React.memo(({ onShopNow, onExplore, theme = 'light' }) => {
   const isLight = theme === 'light';
 
   return (
@@ -186,5 +186,5 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore, theme = 'light
       </div>
     </section>
   );
-};
+});
 

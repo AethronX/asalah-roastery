@@ -5,7 +5,7 @@ interface FooterProps {
   theme?: 'light' | 'dark';
 }
 
-export const Footer: React.FC<FooterProps> = ({ theme = 'light' }) => {
+export const Footer: React.FC<FooterProps> = React.memo(({ theme = 'light' }) => {
   const isLight = theme === 'light';
 
   return (
@@ -94,4 +94,4 @@ export const Footer: React.FC<FooterProps> = ({ theme = 'light' }) => {
       </div>
     </footer>
   );
-};
+});

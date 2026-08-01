@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alasalah-roastery.com/sitemap.xml

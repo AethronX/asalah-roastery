@@ -2,7 +2,7 @@ import React from 'react';
 import { Flame, Sparkles, Coffee } from 'lucide-react';
 import { Picture } from './Picture';
 
-export const OurStory: React.FC = () => {
+export const OurStory: React.FC = React.memo(() => {
   return (
     <section id="our-story" className="py-24 bg-gradient-to-b from-[#1B1512] via-[#241B17] to-[#1B1512] text-[#F7F2EA] relative overflow-hidden border-y border-[#D7AE63]/25">
       {/* Background Subtle Asset */}
@@ -121,4 +121,4 @@ export const OurStory: React.FC = () => {
       </div>
     </section>
   );
-};
+});

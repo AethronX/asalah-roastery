@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Search, ShoppingBag, Menu, X, Coffee, Sparkles, Sun, Moon } from 'lucide-react';
+import { CategoryId } from '../types';
 
 interface HeaderProps {
   cartCount: number;
   onOpenCart: () => void;
   onOpenSearch: () => void;
-  onNavigateCategory: (catId: string) => void;
-  activeSection: string;
-  setActiveSection: (sec: string) => void;
+  onNavigateCategory: (catId: CategoryId) => void;
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
   currency?: 'OMR' | 'USD';
   onToggleCurrency?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({
+export const Header: React.FC<HeaderProps> = React.memo(({
   cartCount,
   onOpenCart,
   onOpenSearch,
   onNavigateCategory,
-  activeSection,
-  setActiveSection,
   theme,
   onToggleTheme,
   currency = 'OMR',
@@ -32,25 +29,27 @@ export const Header: React.FC<HeaderProps> = ({
   const isLight = theme === 'light';
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > 40) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 40);
+        ticking = false;
+      });
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navItems = [
-    { label: 'الرئيسية', action: () => { setActiveSection('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
+    { label: 'الرئيسية', action: () => { window.scrollTo({ top: 0, behavior: 'smooth' }); } },
     { label: 'المتجر', action: () => { onNavigateCategory('all'); } },
     { label: 'القهوة', action: () => { onNavigateCategory('specialty'); } },
     { label: 'المكسرات', action: () => { onNavigateCategory('nuts-dates'); } },
     { label: 'الهدايا', action: () => { onNavigateCategory('gifts'); } },
-    { label: 'من نحن', action: () => { setActiveSection('story'); const el = document.getElementById('our-story'); if(el) el.scrollIntoView({ behavior: 'smooth' }); } },
-    { label: 'تواصل', action: () => { setActiveSection('contact'); const el = document.getElementById('location-section'); if(el) el.scrollIntoView({ behavior: 'smooth' }); } },
+    { label: 'من نحن', action: () => { const el = document.getElementById('our-story'); if(el) el.scrollIntoView({ behavior: 'smooth' }); } },
+    { label: 'تواصل', action: () => { const el = document.getElementById('location-section'); if(el) el.scrollIntoView({ behavior: 'smooth' }); } },
   ];
 
   return (
@@ -71,7 +70,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Logo Section */}
         <div className="flex items-center gap-2.5">
           <button
-            onClick={() => { setActiveSection('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="group flex items-center gap-2 text-right focus:outline-none"
           >
             <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full border flex items-center justify-center transition-all duration-300 shrink-0 shadow-inner ${
@@ -271,5 +270,5 @@ export const Header: React.FC<HeaderProps> = ({
     </header>
     </>
   );
-};
+});
 

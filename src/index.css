@@ -50,10 +50,6 @@
   font-family: 'Cairo', 'IBM Plex Sans Arabic', sans-serif;
 }
 
-.font-tajawal {
-  font-family: 'Cairo', 'Tajawal', sans-serif;
-}
-
 .font-alexandria {
   font-family: 'Cairo', 'Alexandria', sans-serif;
 }
@@ -84,12 +80,6 @@
 
 .gold-gradient-bright {
   background: linear-gradient(135deg, #FFFFFF 0%, #F3E2BE 45%, #D7AE63 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.gold-gradient-[#1B1512] {
-  background: linear-gradient(135deg, #1B1512 0%, #4E382A 50%, #8C5D2C 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -196,23 +186,6 @@
   background: linear-gradient(180deg, #F3E2BE 0%, #D7AE63 100%);
 }
 
-/* Glassmorphism Panels */
-.glass-panel {
-  background: rgba(250, 246, 240, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(215, 174, 99, 0.25);
-  box-shadow: 0 12px 36px rgba(27, 21, 18, 0.08);
-}
-
-.glass-panel-dark {
-  background: rgba(27, 21, 18, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(215, 174, 99, 0.3);
-  box-shadow: 0 16px 48px rgba(18, 14, 12, 0.6);
-}
-
 /* Steam Animation */
 @keyframes rise {
   0% {
@@ -237,10 +210,6 @@
   animation: rise 5s infinite ease-out 1.5s;
 }
 
-.animate-steam-3 {
-  animation: rise 4.5s infinite ease-out 0.8s;
-}
-
 /* Performance & GPU Acceleration Optimizations */
 .cv-auto {
   content-visibility: auto;
@@ -253,10 +222,4 @@
   perspective: 1000px;
   will-change: transform;
 }
-
-.gold-border-glow {
-  box-shadow: 0 0 25px -3px rgba(215, 174, 99, 0.35);
-}
-
-
 

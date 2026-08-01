@@ -14,7 +14,7 @@ interface BestSellersProps {
   theme?: 'light' | 'dark';
 }
 
-export const BestSellers: React.FC<BestSellersProps> = ({
+export const BestSellers: React.FC<BestSellersProps> = React.memo(({
   products,
   activeCategory,
   onCategoryChange,
@@ -272,4 +272,4 @@ export const BestSellers: React.FC<BestSellersProps> = ({
       </div>
     </section>
   );
-};
+});

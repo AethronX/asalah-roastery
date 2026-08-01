@@ -5,7 +5,7 @@ interface FeaturesProps {
   theme?: 'light' | 'dark';
 }
 
-export const Features: React.FC<FeaturesProps> = ({ theme = 'light' }) => {
+export const Features: React.FC<FeaturesProps> = React.memo(({ theme = 'light' }) => {
   const isLight = theme === 'light';
 
   const featuresList = [
@@ -41,6 +41,7 @@ export const Features: React.FC<FeaturesProps> = ({ theme = 'light' }) => {
       isLight ? 'bg-[#FAF8F5]' : 'bg-[#181310]'
     }`}>
       <div className="max-w-7xl mx-auto">
+        <h2 className="sr-only">مزايا وضمانات محامص الأصالة</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {featuresList.map((f, idx) => {
             const IconComponent = f.icon;
@@ -77,4 +78,4 @@ export const Features: React.FC<FeaturesProps> = ({ theme = 'light' }) => {
       </div>
     </section>
   );
-};
+});

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, Suspense, lazy } from 'react';
 import { PRODUCTS } from './data/products';
 import { Product, CartItem, CategoryId, GrindType } from './types';
 
@@ -11,22 +11,26 @@ import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { CategorySection } from './components/CategorySection';
 import { BestSellers } from './components/BestSellers';
-import { ProductDetailModal } from './components/ProductDetailModal';
 import { OurStory } from './components/OurStory';
 import { Features } from './components/Features';
 import { GiftSection } from './components/GiftSection';
 import { LocationSection } from './components/LocationSection';
 import { Footer } from './components/Footer';
-import { CartDrawer } from './components/CartDrawer';
-import { SearchModal } from './components/SearchModal';
 
 import { Check } from 'lucide-react';
+
+// Interaction-gated overlays: never needed for first paint, so they're
+// split out of the main bundle and only fetched when the user opens them.
+const ProductDetailModal = lazy(() =>
+  import('./components/ProductDetailModal').then((m) => ({ default: m.ProductDetailModal }))
+);
+const CartDrawer = lazy(() => import('./components/CartDrawer').then((m) => ({ default: m.CartDrawer })));
+const SearchModal = lazy(() => import('./components/SearchModal').then((m) => ({ default: m.SearchModal })));
 
 export default function App() {
   // App view state
   const [currency, setCurrency] = useState<'OMR' | 'USD'>('OMR');
   const [activeCategory, setActiveCategory] = useState<CategoryId>('all');
-  const [activeSection, setActiveSection] = useState<string>('home');
 
   // Apple-inspired Theme State (light default or stored)
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -152,6 +156,30 @@ export default function App() {
     }
   }, []);
 
+  const handleShopAll = useCallback(() => handleCategorySelect('all'), [handleCategorySelect]);
+
+  // Modal open/close handlers (stable references so memoized children skip re-renders)
+  const handleOpenCart = useCallback(() => {
+    setCartInitialStep('cart');
+    setIsCartOpen(true);
+  }, []);
+
+  const handleOpenCartToCheckout = useCallback(() => {
+    setCartInitialStep('address');
+    setIsCartOpen(true);
+  }, []);
+
+  const handleCloseCart = useCallback(() => setIsCartOpen(false), []);
+  const handleOpenCartFromToast = useCallback(() => {
+    setCartInitialStep('cart');
+    setIsCartOpen(true);
+    setToastMessage(null);
+  }, []);
+  const handleOpenSearch = useCallback(() => setIsSearchOpen(true), []);
+  const handleCloseSearch = useCallback(() => setIsSearchOpen(false), []);
+  const handleSelectProductView = useCallback((p: Product) => setSelectedProductView(p), []);
+  const handleCloseProductView = useCallback(() => setSelectedProductView(null), []);
+
   // Memoized Total Cart Computations for Header & Floating Bar
   const cartTotalQuantity = useMemo(
     () => cartItems.reduce((acc, item) => acc + item.quantity, 0),
@@ -163,6 +191,8 @@ export default function App() {
     [cartItems]
   );
 
+  const giftProduct = useMemo(() => PRODUCTS.find((p) => p.id === 'luxury-royal-gift-box'), []);
+
   // Render main website layout content
   const renderStorefrontContent = () => (
     <div className={`min-h-screen transition-colors duration-300 ${
@@ -171,14 +201,9 @@ export default function App() {
       {/* Navigation Header */}
       <Header
         cartCount={cartTotalQuantity}
-        onOpenCart={() => {
-          setCartInitialStep('cart');
-          setIsCartOpen(true);
-        }}
-        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenCart={handleOpenCart}
+        onOpenSearch={handleOpenSearch}
         onNavigateCategory={handleCategorySelect}
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
         theme={theme}
         onToggleTheme={handleToggleTheme}
         currency={currency}
@@ -189,8 +214,8 @@ export default function App() {
       <main id="main-content">
         {/* Hero Section */}
         <Hero
-          onShopNow={() => handleCategorySelect('all')}
-          onExplore={() => handleCategorySelect('all')}
+          onShopNow={handleShopAll}
+          onExplore={handleShopAll}
           theme={theme}
         />
 
@@ -208,7 +233,7 @@ export default function App() {
           onCategoryChange={setActiveCategory}
           onAddToCart={handleAddToCart}
           onExpressBuy={handleExpressBuy}
-          onQuickView={(p) => setSelectedProductView(p)}
+          onQuickView={handleSelectProductView}
           currency={currency}
           theme={theme}
         />
@@ -226,8 +251,8 @@ export default function App() {
         {/* Gift Section */}
         <div className="cv-auto">
           <GiftSection
-            onSelectGift={(p) => setSelectedProductView(p)}
-            giftProduct={PRODUCTS.find((p) => p.id === 'luxury-royal-gift-box')}
+            onSelectGift={handleSelectProductView}
+            giftProduct={giftProduct}
           />
         </div>
 
@@ -263,10 +288,7 @@ export default function App() {
           </div>
 
           <button
-            onClick={() => {
-              setCartInitialStep('address');
-              setIsCartOpen(true);
-            }}
+            onClick={handleOpenCartToCheckout}
             className={`px-4 py-2 font-black text-xs rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-1.5 ${
               theme === 'light'
                 ? 'bg-[#1D1D1F] text-white hover:bg-[#3A3A3C]'
@@ -295,11 +317,7 @@ export default function App() {
           <Check className="w-4 h-4 text-emerald-400" />
           <span>{toastMessage}</span>
           <button
-            onClick={() => {
-              setCartInitialStep('cart');
-              setIsCartOpen(true);
-              setToastMessage(null);
-            }}
+            onClick={handleOpenCartFromToast}
             className="px-2.5 py-1 bg-[#D7AE63] text-[#120E0C] rounded-lg text-[10px] font-bold hover:bg-white transition-colors mr-2"
           >
             عرض السلة والدفع ➔
@@ -310,41 +328,45 @@ export default function App() {
       {/* Main Storefront Content */}
       {renderStorefrontContent()}
 
-      {/* Modals & Drawers - Rendered conditionally to keep DOM lightweight & fast */}
-      {selectedProductView && (
-        <ProductDetailModal
-          product={selectedProductView}
-          onClose={() => setSelectedProductView(null)}
-          onAddToCart={handleAddToCart}
-          onExpressBuy={handleExpressBuy}
-          currency={currency}
-          theme={theme}
-        />
-      )}
+      {/* Modals & Drawers - lazy-loaded and rendered conditionally to keep the
+          initial bundle & DOM lightweight; each is only fetched on first use. */}
+      <Suspense fallback={null}>
+        {selectedProductView && (
+          <ProductDetailModal
+            key={selectedProductView.id}
+            product={selectedProductView}
+            onClose={handleCloseProductView}
+            onAddToCart={handleAddToCart}
+            onExpressBuy={handleExpressBuy}
+            currency={currency}
+            theme={theme}
+          />
+        )}
 
-      {isCartOpen && (
-        <CartDrawer
-          isOpen={isCartOpen}
-          onClose={() => setIsCartOpen(false)}
-          cartItems={cartItems}
-          onUpdateQuantity={handleUpdateCartQuantity}
-          onRemoveItem={handleRemoveCartItem}
-          currency={currency}
-          onClearCart={handleClearCart}
-          initialStep={cartInitialStep}
-        />
-      )}
+        {isCartOpen && (
+          <CartDrawer
+            isOpen={isCartOpen}
+            onClose={handleCloseCart}
+            cartItems={cartItems}
+            onUpdateQuantity={handleUpdateCartQuantity}
+            onRemoveItem={handleRemoveCartItem}
+            currency={currency}
+            onClearCart={handleClearCart}
+            initialStep={cartInitialStep}
+          />
+        )}
 
-      {isSearchOpen && (
-        <SearchModal
-          isOpen={isSearchOpen}
-          onClose={() => setIsSearchOpen(false)}
-          products={PRODUCTS}
-          onSelectProduct={(p) => setSelectedProductView(p)}
-          currency={currency}
-          theme={theme}
-        />
-      )}
+        {isSearchOpen && (
+          <SearchModal
+            isOpen={isSearchOpen}
+            onClose={handleCloseSearch}
+            products={PRODUCTS}
+            onSelectProduct={handleSelectProductView}
+            currency={currency}
+            theme={theme}
+          />
+        )}
+      </Suspense>
 
     </div>
   );
