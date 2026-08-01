@@ -115,35 +115,35 @@ export const BestSellers: React.FC<BestSellersProps> = ({
     <section id="shop-catalog" className="py-6 sm:py-10 bg-[#F5F5F7] text-[#1D1D1F]">
       <div className="max-w-7xl mx-auto px-2 sm:px-4">
         
-        {/* Temu/AliExpress Flash Header Bar */}
-        <div className="bg-gradient-to-r from-[#FF5000] via-[#E03E00] to-[#FF7A00] text-white p-3 rounded-2xl shadow-md mb-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+        {/* Temu/AliExpress Flash Header Bar - Omani Roastery Warm Coffee Identity */}
+        <div className="bg-gradient-to-r from-[#120E0C] via-[#241B17] to-[#1B1512] text-white p-3 rounded-2xl shadow-md mb-4 flex flex-col sm:flex-row items-center justify-between gap-2 border border-[#D7AE63]/30">
           <div className="flex items-center gap-2">
-            <span className="bg-white/20 p-1.5 rounded-lg backdrop-blur-sm animate-pulse">
-              <Zap className="w-5 h-5 text-yellow-300 fill-yellow-300" />
+            <span className="bg-[#D7AE63]/20 p-1.5 rounded-lg border border-[#D7AE63]/30 backdrop-blur-sm animate-pulse">
+              <Zap className="w-5 h-5 text-[#F3E2BE] fill-[#F3E2BE]" />
             </span>
             <div>
-              <h2 className="font-cairo text-sm sm:text-base font-extrabold leading-tight">
+              <h2 className="font-cairo text-sm sm:text-base font-extrabold text-[#F3E2BE] leading-tight">
                 عروض الخصم الفائق السريعة ⚡
               </h2>
-              <p className="text-[11px] text-white/90">
-                منتجات ممتازة بأسعار المحمص التنافسية • توصيل سريع لجميع المحافظات
+              <p className="text-[11px] text-[#E8DCCB]">
+                محاصيل طازجة بأسعار المحمصة التنافسية • توصيل سريع لجميع المحافظات
               </p>
             </div>
           </div>
 
           {/* Flash Timer */}
-          <div className="flex items-center gap-1.5 bg-black/20 px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-md">
-            <Clock className="w-3.5 h-3.5 text-yellow-300" />
-            <span className="text-[11px] font-bold">ينتهي خلال:</span>
-            <span className="font-mono font-bold text-xs bg-black/40 px-1.5 py-0.5 rounded text-yellow-300">
+          <div className="flex items-center gap-1.5 bg-[#120E0C]/80 px-3 py-1.5 rounded-xl border border-[#D7AE63]/30 backdrop-blur-md">
+            <Clock className="w-3.5 h-3.5 text-[#D7AE63]" />
+            <span className="text-[11px] font-bold text-[#F3E2BE]">ينتهي خلال:</span>
+            <span className="font-mono font-bold text-xs bg-[#241B17] px-1.5 py-0.5 rounded text-[#D7AE63] border border-[#D7AE63]/20">
               {String(timeLeft.hours).padStart(2, '0')}
             </span>
-            <span className="text-xs">:</span>
-            <span className="font-mono font-bold text-xs bg-black/40 px-1.5 py-0.5 rounded text-yellow-300">
+            <span className="text-xs text-[#D7AE63]">:</span>
+            <span className="font-mono font-bold text-xs bg-[#241B17] px-1.5 py-0.5 rounded text-[#D7AE63] border border-[#D7AE63]/20">
               {String(timeLeft.minutes).padStart(2, '0')}
             </span>
-            <span className="text-xs">:</span>
-            <span className="font-mono font-bold text-xs bg-black/40 px-1.5 py-0.5 rounded text-yellow-300">
+            <span className="text-xs text-[#D7AE63]">:</span>
+            <span className="font-mono font-bold text-xs bg-[#241B17] px-1.5 py-0.5 rounded text-[#D7AE63] border border-[#D7AE63]/20">
               {String(timeLeft.seconds).padStart(2, '0')}
             </span>
           </div>
@@ -152,7 +152,7 @@ export const BestSellers: React.FC<BestSellersProps> = ({
         {/* Category Sticky Filters - Horizontal Scrollable Pills */}
         <div className="sticky top-[60px] z-30 bg-[#F5F5F7]/95 backdrop-blur-md py-2.5 mb-2 -mx-2 px-2 overflow-x-auto scrollbar-none flex items-center gap-2 border-b border-gray-200">
           <div className="flex items-center gap-1 pl-2 text-xs font-bold text-gray-500 shrink-0">
-            <Filter className="w-3.5 h-3.5" />
+            <Filter className="w-3.5 h-3.5 text-[#9B6B3A]" />
             <span>الأقسام:</span>
           </div>
           {[
@@ -174,14 +174,14 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                 }}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 border shrink-0 ${
                   isActive
-                    ? 'bg-[#FF5000] text-white border-[#FF5000] shadow-sm'
-                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100 hover:text-black'
+                    ? 'bg-[#1B1512] text-[#F3E2BE] border-[#D7AE63] shadow-sm'
+                    : 'bg-white text-gray-700 border-gray-200 hover:bg-[#F9F6F0] hover:text-[#1B1512]'
                 }`}
               >
                 <span>{tab.label}</span>
                 {tab.badge && (
                   <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-extrabold ${
-                    isActive ? 'bg-white/20 text-white' : 'bg-orange-100 text-[#FF5000]'
+                    isActive ? 'bg-[#D7AE63] text-[#120E0C]' : 'bg-[#EFE8DE] text-[#9B6B3A]'
                   }`}>
                     {tab.badge}
                   </span>
@@ -213,7 +213,7 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                 className="product-card group relative flex flex-col justify-between cursor-pointer select-none h-full"
               >
                 {/* Product Image Container - 1:1 Aspect Ratio (Square) */}
-                <div className="relative overflow-hidden w-full aspect-square bg-[#F9F9F9]">
+                <div className="relative overflow-hidden w-full aspect-square bg-[#F9F6F0]">
                   <img
                     src={product.image}
                     alt={product.nameAr}
@@ -225,22 +225,22 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                   {/* Top Right Promo Badge */}
                   <div className="absolute top-1.5 right-1.5 z-10 flex flex-col gap-1 items-end">
                     {product.isBestSeller ? (
-                      <span className="bg-[#FF5000] text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
-                        <Flame className="w-2.5 h-2.5 fill-current" />
+                      <span className="bg-[#1B1512] text-[#F3E2BE] border border-[#D7AE63]/40 text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+                        <Flame className="w-2.5 h-2.5 text-[#D7AE63] fill-[#D7AE63]" />
                         الأكثر مبيعاً
                       </span>
                     ) : product.isLimited ? (
-                      <span className="bg-[#E02020] text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+                      <span className="bg-[#9B6B3A] text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
                         <Zap className="w-2.5 h-2.5 fill-current" />
                         عرض اليوم
                       </span>
                     ) : product.isNew ? (
-                      <span className="bg-[#10B981] text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+                      <span className="bg-[#241B17] text-[#D7AE63] border border-[#D7AE63]/30 text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
                         <Sparkles className="w-2.5 h-2.5 fill-current" />
                         وصل حديثاً
                       </span>
                     ) : (
-                      <span className="bg-[#FF7A00] text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm">
+                      <span className="bg-[#B78A5C] text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm">
                         تخفيض 20%
                       </span>
                     )}
@@ -254,12 +254,12 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                     }}
                     className={`absolute top-1.5 left-1.5 w-7 h-7 rounded-full flex items-center justify-center transition-all z-10 ${
                       isWishlisted
-                        ? 'bg-rose-500 text-white shadow-md scale-105'
-                        : 'bg-white/80 hover:bg-white text-gray-700 backdrop-blur-md shadow-sm'
+                        ? 'bg-[#1B1512] text-[#D7AE63] shadow-md scale-105 border border-[#D7AE63]/50'
+                        : 'bg-white/85 hover:bg-white text-gray-700 backdrop-blur-md shadow-sm'
                     }`}
                     aria-label="إضافة للمفضلة"
                   >
-                    <Heart className={`w-3.5 h-3.5 ${isWishlisted ? 'fill-current' : ''}`} />
+                    <Heart className={`w-3.5 h-3.5 ${isWishlisted ? 'fill-[#D7AE63] text-[#D7AE63]' : ''}`} />
                   </button>
                 </div>
 
@@ -268,23 +268,23 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                   <div>
                     {/* Sales Count & Origin Badge */}
                     <div className="flex items-center justify-between text-[10px] text-gray-500 mb-1 font-medium">
-                      <span className="text-[#FF5000] font-extrabold flex items-center gap-0.5">
-                        <Flame className="w-3 h-3 text-[#FF5000] fill-[#FF5000]" />
+                      <span className="text-[#9B6B3A] font-extrabold flex items-center gap-0.5">
+                        <Flame className="w-3 h-3 text-[#9B6B3A] fill-[#9B6B3A]" />
                         {salesText}
                       </span>
-                      <span className="truncate max-w-[80px] bg-gray-100 text-gray-600 px-1.5 py-0.2 rounded">
+                      <span className="truncate max-w-[80px] bg-[#F9F6F0] text-[#4E382A] px-1.5 py-0.2 rounded border border-[#EFE8DE]">
                         {product.originCountry.split(' ')[0]}
                       </span>
                     </div>
 
                     {/* Product Name (1 or 2 lines ellipsis) */}
-                    <h3 className="font-cairo text-xs sm:text-sm font-bold text-[#1D1D1F] line-clamp-2 leading-snug mb-1 group-hover:text-[#FF5000] transition-colors">
+                    <h3 className="font-cairo text-xs sm:text-sm font-bold text-[#1D1D1F] line-clamp-2 leading-snug mb-1 group-hover:text-[#9B6B3A] transition-colors">
                       {product.nameAr}
                     </h3>
 
                     {/* Star Rating */}
-                    <div className="flex items-center gap-1 text-[11px] mb-2 text-amber-500 font-bold">
-                      <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                    <div className="flex items-center gap-1 text-[11px] mb-2 text-[#9B6B3A] font-bold">
+                      <Star className="w-3 h-3 fill-[#D7AE63] text-[#D7AE63]" />
                       <span>{product.rating.toFixed(1)}</span>
                       <span className="text-gray-400 font-normal text-[10px]">({product.reviewsCount})</span>
                     </div>
@@ -294,7 +294,7 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                   <div className="pt-2 border-t border-gray-100 flex items-center justify-between mt-auto">
                     {/* Price Column */}
                     <div className="flex flex-col text-right">
-                      <span className="font-extrabold text-sm sm:text-base text-[#FF5000] leading-none font-cairo">
+                      <span className="font-extrabold text-sm sm:text-base text-[#9B6B3A] leading-none font-cairo">
                         {displayPrice}
                       </span>
                       {origPrice && (
@@ -309,8 +309,8 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                       onClick={(e) => handleAddToCartClick(e, product)}
                       className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 shadow-sm active:scale-90 ${
                         addedAnimationId === product.id
-                          ? 'bg-emerald-600 text-white scale-105'
-                          : 'bg-[#FF5000] hover:bg-[#E04700] text-white'
+                          ? 'bg-[#10B981] text-white scale-105'
+                          : 'bg-[#1B1512] hover:bg-[#9B6B3A] text-[#F3E2BE]'
                       }`}
                       title="أضف إلى السلة"
                       aria-label={`أضف ${product.nameAr} للسلة`}
@@ -331,20 +331,20 @@ export const BestSellers: React.FC<BestSellersProps> = ({
         {/* Infinite Scroll Trigger Indicator */}
         <div ref={loadMoreRef} className="py-8 text-center flex flex-col items-center justify-center gap-2">
           {isLoadingMore ? (
-            <div className="flex items-center gap-2 text-xs text-[#FF5000] font-bold animate-pulse">
-              <div className="w-4 h-4 border-2 border-[#FF5000] border-t-transparent rounded-full animate-spin"></div>
-              <span>جاري تحميل المزيد من العروض والمنتجات...</span>
+            <div className="flex items-center gap-2 text-xs text-[#9B6B3A] font-bold animate-pulse">
+              <div className="w-4 h-4 border-2 border-[#9B6B3A] border-t-transparent rounded-full animate-spin"></div>
+              <span>جاري تحميل المزيد من المحاصيل والعروض...</span>
             </div>
           ) : visibleCount < 40 ? (
             <button
               onClick={handleLoadMore}
-              className="px-6 py-2.5 bg-white text-[#FF5000] border border-[#FF5000]/40 rounded-full text-xs font-bold hover:bg-[#FF5000] hover:text-white transition-all shadow-sm"
+              className="px-6 py-2.5 bg-white text-[#1B1512] border border-[#9B6B3A]/40 rounded-full text-xs font-bold hover:bg-[#1B1512] hover:text-[#F3E2BE] transition-all shadow-sm"
             >
-              عرض المزيد من المنتجات 🔥
+              عرض المزيد من المحاصيل 🔥
             </button>
           ) : (
             <span className="text-xs text-gray-400 font-medium">
-              وصلت إلى نهاية قائمة المنتجات المتاحة ✨
+              وصلت إلى نهاية قائمة المحاصيل والمنتجات المتاحة ✨
             </span>
           )}
         </div>
