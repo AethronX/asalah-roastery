@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Heart, ShoppingBag, Menu, X, Coffee, Sparkles, Sun, Moon } from 'lucide-react';
+import { Search, ShoppingBag, Menu, X, Coffee, Sparkles, Sun, Moon } from 'lucide-react';
 
 interface HeaderProps {
   cartCount: number;
-  wishlistCount: number;
   onOpenCart: () => void;
-  onOpenWishlist: () => void;
   onOpenSearch: () => void;
   onNavigateCategory: (catId: string) => void;
   activeSection: string;
@@ -16,9 +14,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({
   cartCount,
-  wishlistCount,
   onOpenCart,
-  onOpenWishlist,
   onOpenSearch,
   onNavigateCategory,
   activeSection,
@@ -152,25 +148,6 @@ export const Header: React.FC<HeaderProps> = ({
             aria-label="البحث عن منتجات القهوة"
           >
             <Search className={`w-5 h-5 ${isLight ? 'text-[#1D1D1F]' : 'text-[#E8C98D]'}`} />
-          </button>
-
-          {/* Wishlist Button */}
-          <button
-            onClick={onOpenWishlist}
-            className={`w-10 h-10 rounded-full transition-colors relative flex items-center justify-center ${
-              isLight ? 'hover:bg-[#000000]/06 text-[#1D1D1F]' : 'hover:bg-[#D7AE63]/15 text-[#F7F2EA]'
-            }`}
-            title="المفضلة"
-            aria-label="عرض قائمة المنتجات المفضلة"
-          >
-            <Heart className={`w-5 h-5 ${isLight ? 'text-[#1D1D1F]' : 'text-[#E8C98D]'}`} />
-            {wishlistCount > 0 && (
-              <span className={`absolute top-0 right-0 text-[10px] font-bold w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-sm ${
-                isLight ? 'bg-[#1D1D1F] text-white' : 'bg-[#D7AE63] text-[#120E0C]'
-              }`}>
-                {wishlistCount}
-              </span>
-            )}
           </button>
 
           {/* Cart Button */}

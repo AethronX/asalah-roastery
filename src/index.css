@@ -163,16 +163,16 @@
 
 .product-card {
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  border: 1px solid #f1f1f1;
-  transition: all 0.25s ease-in-out;
+  border: 1px solid rgba(220, 210, 200, 0.7);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  border-color: #e2e2e2;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(155, 107, 58, 0.12);
+  border-color: rgba(215, 174, 99, 0.5);
 }
 
 .product-image {

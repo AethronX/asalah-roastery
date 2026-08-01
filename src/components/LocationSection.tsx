@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { BRANCHES } from '../data/products';
 import { MapPin, Phone, Clock, Calendar, Check, Coffee } from 'lucide-react';
 
-export const LocationSection: React.FC = () => {
+interface LocationSectionProps {
+  theme?: 'light' | 'dark';
+}
+
+export const LocationSection: React.FC<LocationSectionProps> = ({ theme = 'light' }) => {
+  const isLight = theme === 'light';
   const [selectedBranch, setSelectedBranch] = useState(BRANCHES[0]);
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [guestName, setGuestName] = useState('');
@@ -21,17 +26,27 @@ export const LocationSection: React.FC = () => {
   };
 
   return (
-    <section id="location-section" className="py-24 bg-[#1B1512] text-[#F7F2EA] relative overflow-hidden border-t border-[#D7AE63]/25">
+    <section id="location-section" className={`py-20 sm:py-24 relative overflow-hidden transition-colors duration-300 ${
+      isLight ? 'bg-[#FAF8F5] text-[#1D1D1F]' : 'bg-[#181310] text-[#F7F2EA]'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#F3E2BE] bg-[#241B17] px-4 py-1.5 rounded-full border border-[#D7AE63]/40 inline-block mb-3 shadow-sm font-alexandria">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <span className={`text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border inline-block mb-3 shadow-sm font-alexandria ${
+            isLight
+              ? 'bg-white text-[#734726] border-[#EFE7DD]'
+              : 'bg-[#241B17] text-[#F3E2BE] border-[#D7AE63]/40'
+          }`}>
             فروعنا وجلسات التذوق
           </span>
-          <h2 className="font-alexandria text-3xl sm:text-4xl font-black text-[#F7F2EA] mb-3">
+          <h2 className={`font-alexandria text-2xl sm:text-4xl font-black mb-3 ${
+            isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'
+          }`}>
             زوروا فروع محامص الأصالة في سلطنة عمان
           </h2>
-          <p className="text-[#E8DCCB] text-sm font-medium">
+          <p className={`text-sm sm:text-base font-medium ${
+            isLight ? 'text-[#5C554E]' : 'text-[#E8DCCB]'
+          }`}>
             استمتعوا بتجربة تذوق حيّة للبن المحمص طازجاً في صالات العرض المخصصة.
           </p>
         </div>
@@ -46,32 +61,44 @@ export const LocationSection: React.FC = () => {
                 onClick={() => setSelectedBranch(b)}
                 className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer text-right ${
                   selectedBranch.id === b.id
-                    ? 'bg-[#241B17] border-[#D7AE63] shadow-2xl ring-1 ring-[#D7AE63]/50'
-                    : 'bg-[#241B17]/50 border-[#D7AE63]/20 hover:border-[#D7AE63]/60 hover:bg-[#241B17]'
+                    ? isLight
+                      ? 'bg-white border-[#9B6B3A] shadow-xl ring-2 ring-[#9B6B3A]/20'
+                      : 'bg-[#241B17] border-[#D7AE63] shadow-2xl ring-1 ring-[#D7AE63]/50'
+                    : isLight
+                      ? 'bg-white/80 border-[#EFE7DD] hover:border-[#9B6B3A]/40 hover:bg-white'
+                      : 'bg-[#241B17]/50 border-[#D7AE63]/20 hover:border-[#D7AE63]/60 hover:bg-[#241B17]'
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-alexandria text-xl font-bold text-[#F7F2EA]">
+                  <h3 className={`font-alexandria text-xl font-bold ${
+                    isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'
+                  }`}>
                     {b.nameAr}
                   </h3>
                   {b.isRoastery && (
-                    <span className="bg-gradient-to-r from-[#F3E2BE] to-[#D7AE63] text-[#120E0C] text-[10px] font-black px-3 py-1 rounded-full shadow-sm">
+                    <span className={`text-[10px] font-black px-3 py-1 rounded-full shadow-sm ${
+                      isLight
+                        ? 'bg-[#1D1D1F] text-white'
+                        : 'bg-gradient-to-r from-[#F3E2BE] to-[#D7AE63] text-[#120E0C]'
+                    }`}>
                       المحمصة الرئيسية
                     </span>
                   )}
                 </div>
 
-                <div className="space-y-2 text-xs text-[#E8DCCB] font-medium">
+                <div className={`space-y-2 text-xs font-medium ${
+                  isLight ? 'text-[#5C554E]' : 'text-[#E8DCCB]'
+                }`}>
                   <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-[#F3E2BE] shrink-0" />
+                    <MapPin className={`w-4 h-4 shrink-0 ${isLight ? 'text-[#9B6B3A]' : 'text-[#F3E2BE]'}`} />
                     <span>{b.addressAr}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-[#F3E2BE] shrink-0" />
+                    <Clock className={`w-4 h-4 shrink-0 ${isLight ? 'text-[#9B6B3A]' : 'text-[#F3E2BE]'}`} />
                     <span>{b.hoursAr}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-[#F3E2BE] shrink-0" />
+                    <Phone className={`w-4 h-4 shrink-0 ${isLight ? 'text-[#9B6B3A]' : 'text-[#F3E2BE]'}`} />
                     <span dir="ltr">{b.phone}</span>
                   </div>
                 </div>
@@ -80,16 +107,22 @@ export const LocationSection: React.FC = () => {
           </div>
 
           {/* Tasting Appointment Booking Form */}
-          <div className="lg:col-span-6 bg-[#241B17] rounded-3xl p-6 sm:p-8 border border-[#D7AE63]/40 text-right shadow-2xl">
+          <div className={`lg:col-span-6 rounded-3xl p-6 sm:p-8 border text-right shadow-xl transition-colors ${
+            isLight
+              ? 'bg-white border-[#EFE7DD]'
+              : 'bg-[#241B17] border-[#D7AE63]/40 shadow-2xl'
+          }`}>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full bg-[#1B1512] border border-[#D7AE63]/50 flex items-center justify-center text-[#F3E2BE] shadow-sm">
+              <div className={`w-10 h-10 rounded-full border flex items-center justify-center shadow-sm ${
+                isLight ? 'bg-[#FAF6F0] border-[#9B6B3A]/30 text-[#9B6B3A]' : 'bg-[#1B1512] border-[#D7AE63]/50 text-[#F3E2BE]'
+              }`}>
                 <Coffee className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-alexandria text-xl font-bold text-[#F7F2EA]">
+                <h3 className={`font-alexandria text-xl font-bold ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>
                   حجز جلسة تذوق خاصة (Tasting Session)
                 </h3>
-                <p className="text-xs text-[#E8DCCB] font-medium">
+                <p className={`text-xs font-medium ${isLight ? 'text-[#5C554E]' : 'text-[#E8DCCB]'}`}>
                   احجز وقتك الخاص مع خبير التحميص لتقييم المحاصيل وإعداد القهوة العمانية
                 </p>
               </div>
@@ -106,19 +139,21 @@ export const LocationSection: React.FC = () => {
             ) : (
               <form onSubmit={handleBookTasting} className="space-y-4 text-xs">
                 <div>
-                  <label htmlFor="tasting-branch" className="block text-[#F7F2EA] font-semibold mb-1.5">الفرع المختار:</label>
+                  <label htmlFor="tasting-branch" className={`block font-semibold mb-1.5 ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>الفرع المختار:</label>
                   <input
                     id="tasting-branch"
                     type="text"
                     disabled
                     value={selectedBranch.nameAr}
-                    className="w-full p-3 bg-[#1B1512] border border-[#D7AE63]/40 rounded-xl text-[#F3E2BE] font-bold"
+                    className={`w-full p-3 border rounded-xl font-bold ${
+                      isLight ? 'bg-[#FAF6F0] border-[#EFE7DD] text-[#9B6B3A]' : 'bg-[#1B1512] border-[#D7AE63]/40 text-[#F3E2BE]'
+                    }`}
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="tasting-name" className="block text-[#F7F2EA] font-semibold mb-1.5">الاسم الكريم:</label>
+                    <label htmlFor="tasting-name" className={`block font-semibold mb-1.5 ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>الاسم الكريم:</label>
                     <input
                       id="tasting-name"
                       type="text"
@@ -126,11 +161,15 @@ export const LocationSection: React.FC = () => {
                       value={guestName}
                       onChange={(e) => setGuestName(e.target.value)}
                       placeholder="أدخل اسمك الكريـم"
-                      className="w-full p-3 bg-[#1B1512] border border-[#D7AE63]/30 rounded-xl text-white placeholder-[#E8DCCB]/40 focus:outline-none focus:border-[#D7AE63]"
+                      className={`w-full p-3 border rounded-xl focus:outline-none ${
+                        isLight
+                          ? 'bg-white border-[#EFE7DD] text-[#1D1D1F] placeholder-[#8E8E93] focus:border-[#9B6B3A]'
+                          : 'bg-[#1B1512] border-[#D7AE63]/30 text-white placeholder-[#E8DCCB]/40 focus:border-[#D7AE63]'
+                      }`}
                     />
                   </div>
                   <div>
-                    <label htmlFor="tasting-phone" className="block text-[#F7F2EA] font-semibold mb-1.5">رقم الهاتف / الواتساب:</label>
+                    <label htmlFor="tasting-phone" className={`block font-semibold mb-1.5 ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>رقم الهاتف / الواتساب:</label>
                     <input
                       id="tasting-phone"
                       type="tel"
@@ -138,20 +177,28 @@ export const LocationSection: React.FC = () => {
                       value={guestPhone}
                       onChange={(e) => setGuestPhone(e.target.value)}
                       placeholder="+968 9XXXXXXX"
-                      className="w-full p-3 bg-[#1B1512] border border-[#D7AE63]/30 rounded-xl text-white placeholder-[#E8DCCB]/40 focus:outline-none focus:border-[#D7AE63]"
+                      className={`w-full p-3 border rounded-xl focus:outline-none ${
+                        isLight
+                          ? 'bg-white border-[#EFE7DD] text-[#1D1D1F] placeholder-[#8E8E93] focus:border-[#9B6B3A]'
+                          : 'bg-[#1B1512] border-[#D7AE63]/30 text-white placeholder-[#E8DCCB]/40 focus:border-[#D7AE63]'
+                      }`}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="tasting-date" className="block text-[#F7F2EA] font-semibold mb-1.5">التاريخ المقترح للجلسة:</label>
+                  <label htmlFor="tasting-date" className={`block font-semibold mb-1.5 ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>التاريخ المقترح للجلسة:</label>
                   <input
                     id="tasting-date"
                     type="date"
                     required
                     value={guestDate}
                     onChange={(e) => setGuestDate(e.target.value)}
-                    className="w-full p-3 bg-[#1B1512] border border-[#D7AE63]/30 rounded-xl text-white focus:outline-none focus:border-[#D7AE63]"
+                    className={`w-full p-3 border rounded-xl focus:outline-none ${
+                      isLight
+                        ? 'bg-white border-[#EFE7DD] text-[#1D1D1F] focus:border-[#9B6B3A]'
+                        : 'bg-[#1B1512] border-[#D7AE63]/30 text-white focus:border-[#D7AE63]'
+                    }`}
                   />
                 </div>
 

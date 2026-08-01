@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { PRODUCTS } from './data/products';
 import { Product, CartItem, CategoryId, GrindType } from './types';
 
@@ -12,19 +12,13 @@ import { Hero } from './components/Hero';
 import { CategorySection } from './components/CategorySection';
 import { BestSellers } from './components/BestSellers';
 import { ProductDetailModal } from './components/ProductDetailModal';
-import { BrewingCalculator } from './components/BrewingCalculator';
 import { OurStory } from './components/OurStory';
 import { Features } from './components/Features';
 import { GiftSection } from './components/GiftSection';
-import { Testimonials } from './components/Testimonials';
-import { InstagramGrid } from './components/InstagramGrid';
 import { LocationSection } from './components/LocationSection';
 import { Footer } from './components/Footer';
 import { CartDrawer } from './components/CartDrawer';
-import { WishlistDrawer } from './components/WishlistDrawer';
 import { SearchModal } from './components/SearchModal';
-import { CoffeeFinderQuiz } from './components/CoffeeFinderQuiz';
-import { CoffeeSubscriptionBanner } from './components/CoffeeSubscriptionBanner';
 
 import { Check } from 'lucide-react';
 
@@ -50,15 +44,25 @@ export default function App() {
 
   // E-commerce state
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [wishlistProducts, setWishlistProducts] = useState<Product[]>([]);
   
   // Modals & Drawers state
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartInitialStep, setCartInitialStep] = useState<'cart' | 'address'>('cart');
-  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isBrewingCalcOpen, setIsBrewingCalcOpen] = useState(false);
   const [selectedProductView, setSelectedProductView] = useState<Product | null>(null);
+
+  // Global Keyboard Shortcuts (ESC to close modals)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsCartOpen(false);
+        setIsSearchOpen(false);
+        setSelectedProductView(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Toast Notification State
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -135,20 +139,6 @@ export default function App() {
     setCartItems([]);
   }, []);
 
-  // Wishlist operations
-  const handleToggleWishlist = useCallback((product: Product) => {
-    setWishlistProducts((prev) => {
-      const exists = prev.some((p) => p.id === product.id);
-      if (exists) {
-        showToast('تمت إزالة المنتج من المفضلة');
-        return prev.filter((p) => p.id !== product.id);
-      } else {
-        showToast('تم حفظ المنتج في المفضلة');
-        return [...prev, product];
-      }
-    });
-  }, [showToast]);
-
   // Navigation handlers
   const handleCategorySelect = useCallback((catId: CategoryId) => {
     setActiveCategory(catId);
@@ -169,11 +159,6 @@ export default function App() {
     [cartItems]
   );
 
-  const wishlistIds = useMemo(
-    () => wishlistProducts.map((p) => p.id),
-    [wishlistProducts]
-  );
-
   // Render main website layout content
   const renderStorefrontContent = () => (
     <div className={`min-h-screen transition-colors duration-300 ${
@@ -182,12 +167,10 @@ export default function App() {
       {/* Navigation Header */}
       <Header
         cartCount={cartTotalQuantity}
-        wishlistCount={wishlistProducts.length}
         onOpenCart={() => {
           setCartInitialStep('cart');
           setIsCartOpen(true);
         }}
-        onOpenWishlist={() => setIsWishlistOpen(true)}
         onOpenSearch={() => setIsSearchOpen(true)}
         onNavigateCategory={handleCategorySelect}
         activeSection={activeSection}
@@ -201,10 +184,7 @@ export default function App() {
         {/* Hero Section */}
         <Hero
           onShopNow={() => handleCategorySelect('all')}
-          onExplore={() => {
-            const el = document.getElementById('coffee-quiz');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }}
+          onExplore={() => handleCategorySelect('all')}
           theme={theme}
         />
 
@@ -215,16 +195,6 @@ export default function App() {
           theme={theme}
         />
 
-        {/* Coffee Finder Quiz */}
-        <div id="coffee-quiz" className="cv-auto">
-          <CoffeeFinderQuiz
-            products={PRODUCTS}
-            onAddToCart={handleAddToCart}
-            onExpressBuy={handleExpressBuy}
-            currency={currency}
-          />
-        </div>
-
         {/* Best Sellers & Product Catalog */}
         <BestSellers
           products={PRODUCTS}
@@ -233,23 +203,9 @@ export default function App() {
           onAddToCart={handleAddToCart}
           onExpressBuy={handleExpressBuy}
           onQuickView={(p) => setSelectedProductView(p)}
-          onToggleWishlist={handleToggleWishlist}
-          wishlistIds={wishlistIds}
           currency={currency}
           theme={theme}
         />
-
-        {/* Coffee Autoship Subscription Engine */}
-        <div className="cv-auto">
-          <CoffeeSubscriptionBanner
-            products={PRODUCTS}
-            onSubscribe={(product, freq) => {
-              handleExpressBuy(product, 250, 'حبوب كاملة (Whole Beans)');
-              showToast(`تم بدء طلب اشتراكك (${freq === 'weekly' ? 'أسبوعي' : freq === 'biweekly' ? 'كل أسبوعين' : 'شهري'}) لمنتج ${product.nameAr}`);
-            }}
-            currency={currency}
-          />
-        </div>
 
         {/* Story Section */}
         <div className="cv-auto">
@@ -258,7 +214,7 @@ export default function App() {
 
         {/* Brand Guarantees Features */}
         <div className="cv-auto">
-          <Features />
+          <Features theme={theme} />
         </div>
 
         {/* Gift Section */}
@@ -269,19 +225,9 @@ export default function App() {
           />
         </div>
 
-        {/* Testimonials */}
+        {/* Branch Locations */}
         <div className="cv-auto">
-          <Testimonials />
-        </div>
-
-        {/* Instagram Lifestyle Gallery */}
-        <div className="cv-auto">
-          <InstagramGrid />
-        </div>
-
-        {/* Branch Locations & Tasting Sessions */}
-        <div className="cv-auto">
-          <LocationSection />
+          <LocationSection theme={theme} />
         </div>
       </main>
 
@@ -366,15 +312,7 @@ export default function App() {
           onAddToCart={handleAddToCart}
           onExpressBuy={handleExpressBuy}
           currency={currency}
-          onToggleWishlist={handleToggleWishlist}
-          isWishlisted={wishlistProducts.some((p) => p.id === selectedProductView.id)}
-        />
-      )}
-
-      {isBrewingCalcOpen && (
-        <BrewingCalculator
-          isOpen={isBrewingCalcOpen}
-          onClose={() => setIsBrewingCalcOpen(false)}
+          theme={theme}
         />
       )}
 
@@ -388,17 +326,6 @@ export default function App() {
           currency={currency}
           onClearCart={handleClearCart}
           initialStep={cartInitialStep}
-        />
-      )}
-
-      {isWishlistOpen && (
-        <WishlistDrawer
-          isOpen={isWishlistOpen}
-          onClose={() => setIsWishlistOpen(false)}
-          wishlistProducts={wishlistProducts}
-          onRemoveFromWishlist={handleToggleWishlist}
-          onAddToCart={handleAddToCart}
-          currency={currency}
         />
       )}
 

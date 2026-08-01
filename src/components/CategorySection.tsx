@@ -104,10 +104,10 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
                 isSelected
                   ? isLight
                     ? 'bg-[#1D1D1F] text-white shadow-xl ring-2 ring-[#1D1D1F] scale-[1.02]'
-                    : 'bg-[#1B1512] text-[#F7F2EA] shadow-2xl ring-2 ring-[#D7AE63] scale-[1.02]'
+                    : 'bg-[#241B17] text-[#F7F2EA] shadow-2xl ring-2 ring-[#D7AE63] scale-[1.02]'
                   : isLight
-                    ? 'bg-white text-[#1D1D1F] border border-[#000000]/08 hover:border-[#000000]/20 hover:shadow-lg hover:-translate-y-1'
-                    : 'bg-white text-[#1B1512] border border-[#D7AE63]/25 hover:border-[#D7AE63]/60 hover:shadow-xl hover:-translate-y-1'
+                    ? 'bg-white text-[#1D1D1F] border border-[#EFE7DD] hover:border-[#9B6B3A]/40 hover:shadow-lg hover:-translate-y-1'
+                    : 'bg-[#241B17]/70 text-[#F7F2EA] border border-[#D7AE63]/25 hover:border-[#D7AE63]/60 hover:bg-[#241B17] hover:shadow-xl hover:-translate-y-1'
               }`}
             >
               {/* Card Background Subtle Image */}
@@ -164,7 +164,7 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
                         : 'text-[#F3E2BE]'
                       : isLight
                         ? 'text-[#1D1D1F] group-hover:text-[#9B6B3A]'
-                        : 'text-[#1B1512] group-hover:text-[#9B6B3A]'
+                        : 'text-[#F7F2EA] group-hover:text-[#F3E2BE]'
                   }`}
                 >
                   {cat.titleAr}
@@ -177,7 +177,7 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
                         : 'text-[#E8DCCB]'
                       : isLight
                         ? 'text-[#6E6E73]'
-                        : 'text-[#4E382A]'
+                        : 'text-[#E8DCCB]/80'
                   }`}
                 >
                   {cat.subtitleAr}

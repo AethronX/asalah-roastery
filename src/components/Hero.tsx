@@ -99,13 +99,13 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore, theme = 'light
           <button
             onClick={onShopNow}
             aria-label="تصفح محاصيل القهوة والمجموعات"
-            className={`w-full sm:w-auto px-8 py-4 rounded-full font-black text-base flex items-center justify-center gap-3 group min-h-[50px] shadow-xl transition-all active:scale-98 ${
+            className={`w-full sm:w-auto px-8 py-4 rounded-full font-bold text-base flex items-center justify-center gap-3 group min-h-[50px] shadow-lg transition-all active:scale-98 ${
               isLight
-                ? 'bg-[#1D1D1F] text-white hover:bg-[#3A3A3C] hover:shadow-2xl'
+                ? 'bg-[#1D1D1F] text-white hover:bg-[#3A3A3C] hover:shadow-xl'
                 : 'btn-champagne-primary text-[#120E0C] border border-[#F3E2BE]/60'
             }`}
           >
-            <span>اكتشف المحاصيل الفاخرة</span>
+            <span>تسوق المحاصيل الفاخرة</span>
             <ArrowLeft className={`w-5 h-5 group-hover:-translate-x-1.5 transition-transform ${
               isLight ? 'text-white' : 'text-[#120E0C]'
             }`} />
@@ -113,17 +113,17 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore, theme = 'light
 
           <button
             onClick={onExplore}
-            aria-label="اختبر ذوقك عبر مستشار القهوة الذكي"
+            aria-label="تصفح كافة الأقسام والمنتجات"
             className={`w-full sm:w-auto px-8 py-4 rounded-full font-bold text-base flex items-center justify-center gap-2.5 group min-h-[50px] border transition-all active:scale-98 ${
               isLight
-                ? 'bg-white text-[#1D1D1F] border-[#000000]/15 hover:bg-[#F5F5F7] shadow-sm'
+                ? 'bg-white text-[#1D1D1F] border-[#EFE7DD] hover:bg-[#FAF6F0] hover:border-[#9B6B3A]/30 shadow-sm'
                 : 'btn-champagne-secondary text-[#F3E2BE]'
             }`}
           >
             <Sparkles className={`w-4 h-4 group-hover:rotate-12 transition-transform ${
               isLight ? 'text-[#9B6B3A]' : 'text-[#F3E2BE]'
             }`} />
-            <span>مستشار الذوق الذكي (اختبر ذوقك)</span>
+            <span>تصفح كافة الأقسام</span>
           </button>
         </div>
 

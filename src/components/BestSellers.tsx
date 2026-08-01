@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Product, CategoryId } from '../types';
-import { Heart, ShoppingCart, Check, Sparkles, Filter } from 'lucide-react';
+import { ShoppingCart, Check, Sparkles, Filter } from 'lucide-react';
 
 interface BestSellersProps {
   products: Product[];
@@ -9,8 +9,6 @@ interface BestSellersProps {
   onAddToCart: (product: Product, weightGrams: number) => void;
   onExpressBuy?: (product: Product, weightGrams: number) => void;
   onQuickView: (product: Product) => void;
-  onToggleWishlist: (product: Product) => void;
-  wishlistIds: string[];
   currency: 'OMR' | 'USD';
   theme?: 'light' | 'dark';
 }
@@ -21,8 +19,6 @@ export const BestSellers: React.FC<BestSellersProps> = ({
   onCategoryChange,
   onAddToCart,
   onQuickView,
-  onToggleWishlist,
-  wishlistIds,
   currency,
   theme = 'light',
 }) => {
@@ -37,16 +33,8 @@ export const BestSellers: React.FC<BestSellersProps> = ({
     return p.categoryId === activeCategory;
   });
 
-  // To simulate Temu/AliExpress infinite scroll seamlessly, we repeat items if category list is small
   const displayProducts = React.useMemo(() => {
-    if (filteredProducts.length === 0) return [];
-    if (filteredProducts.length >= visibleCount) return filteredProducts.slice(0, visibleCount);
-    // Fill up to visibleCount by cycling if needed for infinite scroll test
-    const list = [...filteredProducts];
-    while (list.length < visibleCount && list.length < 50) {
-      list.push(...filteredProducts);
-    }
-    return list;
+    return filteredProducts.slice(0, visibleCount);
   }, [filteredProducts, visibleCount]);
 
   // Infinite Scroll Observer
@@ -87,20 +75,32 @@ export const BestSellers: React.FC<BestSellersProps> = ({
   };
 
   return (
-    <section id="shop-catalog" className="py-6 sm:py-10 bg-[#F5F5F7] text-[#1D1D1F]">
-      <div className="max-w-7xl mx-auto px-2 sm:px-4">
+    <section id="shop-catalog" className={`py-12 sm:py-16 transition-colors duration-300 ${
+      isLight ? 'bg-[#FAF8F5] text-[#1D1D1F]' : 'bg-[#181310] text-[#F7F2EA]'
+    }`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Roastery Collection Header Bar */}
-        <div className="bg-[#120E0C] text-[#F3E2BE] p-3.5 sm:p-4 rounded-2xl shadow-sm mb-4 flex items-center justify-between border border-[#D7AE63]/30">
-          <div className="flex items-center gap-2.5">
-            <span className="bg-[#D7AE63]/20 p-2 rounded-xl border border-[#D7AE63]/30">
-              <Sparkles className="w-5 h-5 text-[#D7AE63]" />
-            </span>
+        <div className={`p-4 sm:p-6 rounded-2xl shadow-sm mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border transition-colors ${
+          isLight
+            ? 'bg-white border-[#EFE7DD] text-[#1D1D1F]'
+            : 'bg-[#241B17] border-[#D7AE63]/30 text-[#F7F2EA]'
+        }`}>
+          <div className="flex items-center gap-3">
+            <div className={`p-2.5 rounded-xl border flex items-center justify-center shrink-0 ${
+              isLight ? 'bg-[#FAF6F0] border-[#9B6B3A]/20 text-[#9B6B3A]' : 'bg-[#1B1512] border-[#D7AE63]/40 text-[#F3E2BE]'
+            }`}>
+              <Sparkles className="w-5 h-5" />
+            </div>
             <div>
-              <h2 className="font-cairo text-sm sm:text-base font-bold text-[#F3E2BE] leading-tight">
-                تشكيلة محاصيل ومنتجات أصالة القهوة ☕
+              <h2 className={`font-alexandria text-base sm:text-xl font-bold leading-tight ${
+                isLight ? 'text-[#1D1D1F]' : 'text-[#F3E2BE]'
+              }`}>
+                تشكيلة محاصيل ومنتجات الأصالة ☕
               </h2>
-              <p className="text-[11px] text-[#E8DCCB] mt-0.5">
+              <p className={`text-xs sm:text-sm mt-1 ${
+                isLight ? 'text-[#6C5D53]' : 'text-[#E8DCCB]'
+              }`}>
                 تصفح المحاصيل الفاخرة والطازجة المسجلة مباشرة من المحمصة
               </p>
             </div>
@@ -108,9 +108,15 @@ export const BestSellers: React.FC<BestSellersProps> = ({
         </div>
 
         {/* Category Sticky Filters - Horizontal Scrollable Pills */}
-        <div className="sticky top-[60px] z-30 bg-[#F5F5F7]/95 backdrop-blur-md py-2.5 mb-2 -mx-2 px-2 overflow-x-auto scrollbar-none flex items-center gap-2 border-b border-gray-200">
-          <div className="flex items-center gap-1 pl-2 text-xs font-bold text-gray-500 shrink-0">
-            <Filter className="w-3.5 h-3.5 text-[#9B6B3A]" />
+        <div className={`sticky top-[60px] z-30 py-3 mb-6 -mx-4 px-4 sm:-mx-6 sm:px-6 overflow-x-auto scrollbar-none flex items-center gap-2 border-b transition-colors backdrop-blur-md ${
+          isLight
+            ? 'bg-[#FAF8F5]/90 border-[#EFE7DD]'
+            : 'bg-[#181310]/90 border-[#D7AE63]/20'
+        }`}>
+          <div className={`flex items-center gap-1.5 pl-2 text-xs font-bold shrink-0 ${
+            isLight ? 'text-[#734726]' : 'text-[#D7AE63]'
+          }`}>
+            <Filter className="w-3.5 h-3.5" />
             <span>الأقسام:</span>
           </div>
           {[
@@ -130,10 +136,14 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                   onCategoryChange(tab.id);
                   setVisibleCount(10);
                 }}
-                className={`px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 border shrink-0 ${
+                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex items-center gap-1.5 border shrink-0 min-h-[38px] ${
                   isActive
-                    ? 'bg-[#1B1512] text-[#F3E2BE] border-[#D7AE63] shadow-sm'
-                    : 'bg-white text-gray-700 border-gray-200 hover:bg-[#F9F6F0] hover:text-[#1B1512]'
+                    ? isLight
+                      ? 'bg-[#1D1D1F] text-white border-[#1D1D1F] shadow-md'
+                      : 'bg-[#D7AE63] text-[#120E0C] border-[#D7AE63] shadow-md'
+                    : isLight
+                      ? 'bg-white text-[#424245] border-[#EFE7DD] hover:bg-[#FAF6F0] hover:text-[#1D1D1F]'
+                      : 'bg-[#241B17] text-[#E8DCCB] border-[#D7AE63]/20 hover:bg-[#2C211C] hover:text-[#F3E2BE]'
                 }`}
               >
                 <span>{tab.label}</span>
@@ -145,63 +155,66 @@ export const BestSellers: React.FC<BestSellersProps> = ({
         {/* Product Mobile-First 2-Column Grid */}
         <div className="products-grid">
           {displayProducts.map((product, index) => {
-            const isWishlisted = wishlistIds.includes(product.id);
             const displayPrice = currency === 'OMR' ? `${product.priceOmr.toFixed(3)} ر.ع` : `$${product.priceUsd.toFixed(2)}`;
 
             return (
               <div
                 key={`${product.id}-${index}`}
                 onClick={() => onQuickView(product)}
-                className="product-card group relative flex flex-col justify-between cursor-pointer select-none h-full"
+                className={`product-card group relative flex flex-col justify-between cursor-pointer select-none h-full transition-all duration-300 rounded-2xl overflow-hidden border ${
+                  isLight
+                    ? 'bg-white border-[#EFE7DD] hover:border-[#9B6B3A]/40 hover:shadow-xl'
+                    : 'bg-[#241B17] border-[#D7AE63]/20 hover:border-[#D7AE63]/50 hover:shadow-2xl'
+                }`}
               >
                 {/* Product Image Container - 1:1 Aspect Ratio (Square) */}
-                <div className="relative overflow-hidden w-full aspect-square bg-[#F9F6F0]">
+                <div className={`relative overflow-hidden w-full aspect-square ${
+                  isLight ? 'bg-[#FAF6F0]' : 'bg-[#1D1613]'
+                }`}>
                   <img
                     src={product.image}
                     alt={product.nameAr}
                     loading="lazy"
                     decoding="async"
-                    className="product-image group-hover:scale-105 transition-transform duration-300 ease-out"
+                    className="product-image group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
-
-                  {/* Wishlist Heart Button Top Left */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onToggleWishlist(product);
-                    }}
-                    className={`absolute top-1.5 left-1.5 w-7 h-7 rounded-full flex items-center justify-center transition-all z-10 ${
-                      isWishlisted
-                        ? 'bg-[#1B1512] text-[#D7AE63] shadow-md scale-105 border border-[#D7AE63]/50'
-                        : 'bg-white/85 hover:bg-white text-gray-700 backdrop-blur-md shadow-sm'
-                    }`}
-                    aria-label="إضافة للمفضلة"
-                  >
-                    <Heart className={`w-3.5 h-3.5 ${isWishlisted ? 'fill-[#D7AE63] text-[#D7AE63]' : ''}`} />
-                  </button>
                 </div>
 
                 {/* Product Card Details */}
-                <div className="p-2.5 sm:p-3 flex flex-col flex-grow justify-between text-right bg-white">
+                <div className={`p-3 sm:p-4 flex flex-col flex-grow justify-between text-right transition-colors ${
+                  isLight ? 'bg-white' : 'bg-[#241B17]'
+                }`}>
                   <div>
                     {/* Origin Badge */}
-                    <div className="flex items-center justify-between text-[10px] text-gray-500 mb-1 font-medium">
-                      <span className="bg-[#F9F6F0] text-[#4E382A] px-1.5 py-0.5 rounded border border-[#EFE8DE] font-semibold">
+                    <div className="flex items-center justify-between text-[11px] mb-2 font-medium">
+                      <span className={`px-2 py-0.5 rounded-full border text-[10px] font-bold ${
+                        isLight
+                          ? 'bg-[#FAF6F0] text-[#734726] border-[#EFE7DD]'
+                          : 'bg-[#1B1512] text-[#F3E2BE] border-[#D7AE63]/30'
+                      }`}>
                         {product.originCountry}
                       </span>
                     </div>
 
                     {/* Product Name */}
-                    <h3 className="font-cairo text-xs sm:text-sm font-bold text-[#1D1D1F] line-clamp-2 leading-snug mb-2 group-hover:text-[#9B6B3A] transition-colors">
+                    <h3 className={`font-alexandria text-xs sm:text-sm font-bold line-clamp-2 leading-relaxed mb-3 transition-colors ${
+                      isLight
+                        ? 'text-[#1D1D1F] group-hover:text-[#9B6B3A]'
+                        : 'text-[#F7F2EA] group-hover:text-[#F3E2BE]'
+                    }`}>
                       {product.nameAr}
                     </h3>
                   </div>
 
                   {/* Price & Add to Cart Circle Button */}
-                  <div className="pt-2 border-t border-gray-100 flex items-center justify-between mt-auto">
+                  <div className={`pt-2.5 border-t flex items-center justify-between mt-auto ${
+                    isLight ? 'border-[#EFE7DD]' : 'border-[#D7AE63]/15'
+                  }`}>
                     {/* Price Column */}
                     <div className="flex flex-col text-right">
-                      <span className="font-extrabold text-sm sm:text-base text-[#1B1512] leading-none font-cairo">
+                      <span className={`font-extrabold text-sm sm:text-base font-alexandria leading-none ${
+                        isLight ? 'text-[#1D1D1F]' : 'text-[#F3E2BE]'
+                      }`}>
                         {displayPrice}
                       </span>
                     </div>
@@ -209,10 +222,12 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                     {/* Circular Add-to-Cart Action Button */}
                     <button
                       onClick={(e) => handleAddToCartClick(e, product)}
-                      className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 shadow-sm active:scale-90 ${
+                      className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 shadow-sm active:scale-95 ${
                         addedAnimationId === product.id
-                          ? 'bg-[#10B981] text-white scale-105'
-                          : 'bg-[#1B1512] hover:bg-[#9B6B3A] text-[#F3E2BE]'
+                          ? 'bg-emerald-600 text-white scale-105'
+                          : isLight
+                            ? 'bg-[#1D1D1F] hover:bg-[#9B6B3A] text-white'
+                            : 'bg-[#D7AE63] hover:bg-[#F3E2BE] text-[#120E0C]'
                       }`}
                       title="أضف إلى السلة"
                       aria-label={`أضف ${product.nameAr} للسلة`}

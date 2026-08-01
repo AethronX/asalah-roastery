@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Product, GrindType } from '../types';
-import { X, Star, ShoppingBag, Flame, MapPin, Mountain, Layers, Coffee, Check, ShieldCheck, Heart, Share2, ThumbsUp, Zap } from 'lucide-react';
+import { X, Star, ShoppingBag, Flame, MapPin, Mountain, Layers, Coffee, Check, ShieldCheck, Share2, ThumbsUp, Zap } from 'lucide-react';
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -8,8 +8,7 @@ interface ProductDetailModalProps {
   onAddToCart: (product: Product, weightGrams: number, grind: GrindType, qty: number) => void;
   onExpressBuy?: (product: Product, weightGrams: number, grind: GrindType, qty: number) => void;
   currency: 'OMR' | 'USD';
-  onToggleWishlist: (p: Product) => void;
-  isWishlisted: boolean;
+  theme?: 'light' | 'dark';
 }
 
 export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
@@ -18,10 +17,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   onAddToCart,
   onExpressBuy,
   currency,
-  onToggleWishlist,
-  isWishlisted,
+  theme = 'light',
 }) => {
   if (!product) return null;
+
+  const isLight = theme === 'light';
 
   const [selectedImage, setSelectedImage] = useState(product.image);
   const [selectedWeight, setSelectedWeight] = useState(product.weights[0] || { label: '250 جرام', grams: 250, priceMultiplier: 1 });
@@ -102,15 +102,6 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center transition-all duration-500 hover:scale-110"
               />
-              <button
-                onClick={() => onToggleWishlist(product)}
-                aria-label={`إضافة ${product.nameAr} للمفضلة`}
-                className={`absolute top-4 right-4 p-3 rounded-full backdrop-blur-md transition-all min-w-[44px] min-h-[44px] flex items-center justify-center ${
-                  isWishlisted ? 'bg-red-500 text-white' : 'bg-black/60 text-white hover:bg-black/80'
-                }`}
-              >
-                <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-current' : ''}`} />
-              </button>
             </div>
 
             {/* Thumbnails Row */}
