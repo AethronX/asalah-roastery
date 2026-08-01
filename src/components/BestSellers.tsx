@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Product, CategoryId } from '../types';
-import { Star, Plus, Eye, Flame, MapPin, Heart, Sparkles, Check, Zap } from 'lucide-react';
+import { Star, Heart, Flame, Zap, ShoppingCart, Check, Clock, Sparkles, Filter } from 'lucide-react';
 
 interface BestSellersProps {
   products: Product[];
@@ -28,253 +28,327 @@ export const BestSellers: React.FC<BestSellersProps> = ({
   theme = 'light',
 }) => {
   const [addedAnimationId, setAddedAnimationId] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState<number>(10);
+  const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
   const isLight = theme === 'light';
 
+  // Live countdown timer for Temu/AliExpress Flash Sale vibe
+  const [timeLeft, setTimeLeft] = useState({ hours: 4, minutes: 12, seconds: 35 });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
+        if (prev.minutes > 0) return { ...prev, minutes: 59, seconds: 59 };
+        if (prev.hours > 0) return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
+        return { hours: 6, minutes: 0, seconds: 0 };
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Filter products by active category
   const filteredProducts = products.filter((p) => {
     if (activeCategory === 'all') return true;
     return p.categoryId === activeCategory;
   });
 
+  // To simulate Temu/AliExpress infinite scroll seamlessly, we repeat items if category list is small
+  const displayProducts = React.useMemo(() => {
+    if (filteredProducts.length === 0) return [];
+    if (filteredProducts.length >= visibleCount) return filteredProducts.slice(0, visibleCount);
+    // Fill up to visibleCount by cycling if needed for infinite scroll test
+    const list = [...filteredProducts];
+    while (list.length < visibleCount && list.length < 50) {
+      list.push(...filteredProducts);
+    }
+    return list;
+  }, [filteredProducts, visibleCount]);
+
+  // Infinite Scroll Observer
+  const loadMoreRef = useRef<HTMLDivElement>(null);
+
+  const handleLoadMore = useCallback(() => {
+    if (isLoadingMore || visibleCount >= 40) return;
+    setIsLoadingMore(true);
+    setTimeout(() => {
+      setVisibleCount((prev) => Math.min(prev + 6, 40));
+      setIsLoadingMore(false);
+    }, 600);
+  }, [isLoadingMore, visibleCount]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          handleLoadMore();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [handleLoadMore]);
+
+  // Add to cart click
   const handleAddToCartClick = (e: React.MouseEvent, p: Product) => {
     e.stopPropagation();
     onAddToCart(p, 250);
     setAddedAnimationId(p.id);
-    setTimeout(() => setAddedAnimationId(null), 1500);
+    setTimeout(() => setAddedAnimationId(null), 1200);
   };
 
-  const handleExpressBuyClick = (e: React.MouseEvent, p: Product) => {
-    e.stopPropagation();
-    if (onExpressBuy) {
-      onExpressBuy(p, 250);
-    } else {
-      onAddToCart(p, 250);
+  // Helper to format sales count like Temu (e.g. 4.2K+ Sold / +4.2K مباع)
+  const getSalesCountText = (product: Product) => {
+    const rawSales = Math.floor(product.reviewsCount * 28 + (product.priceOmr * 30));
+    if (rawSales >= 1000) {
+      return `${(rawSales / 1000).toFixed(1)}K+ مباع`;
     }
+    return `${rawSales}+ مباع`;
   };
 
   return (
-    <section id="shop-catalog" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* Header and Filter Tabs */}
-      <div className={`flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b pb-6 transition-colors ${
-        isLight ? 'border-[#000000]/10' : 'border-[#D7AE63]/25'
-      }`}>
-        <div>
-          <span className={`text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full inline-block mb-3 font-alexandria shadow-sm border ${
-            isLight
-              ? 'bg-[#F5F5F7] text-[#1D1D1F] border-[#000000]/10'
-              : 'text-[#F3E2BE] bg-[#241B17] border-[#D7AE63]/40'
-          }`}>
-            المحتوى المختار
-          </span>
-          <h2 className={`font-ibm text-3xl sm:text-4xl font-bold leading-relaxed ${
-            isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'
-          }`}>
-            الأكثر مبيعاً والمنتجات المميزة
-          </h2>
+    <section id="shop-catalog" className="py-6 sm:py-10 bg-[#F5F5F7] text-[#1D1D1F]">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4">
+        
+        {/* Temu/AliExpress Flash Header Bar */}
+        <div className="bg-gradient-to-r from-[#FF5000] via-[#E03E00] to-[#FF7A00] text-white p-3 rounded-2xl shadow-md mb-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <span className="bg-white/20 p-1.5 rounded-lg backdrop-blur-sm animate-pulse">
+              <Zap className="w-5 h-5 text-yellow-300 fill-yellow-300" />
+            </span>
+            <div>
+              <h2 className="font-cairo text-sm sm:text-base font-extrabold leading-tight">
+                عروض الخصم الفائق السريعة ⚡
+              </h2>
+              <p className="text-[11px] text-white/90">
+                منتجات ممتازة بأسعار المحمص التنافسية • توصيل سريع لجميع المحافظات
+              </p>
+            </div>
+          </div>
+
+          {/* Flash Timer */}
+          <div className="flex items-center gap-1.5 bg-black/20 px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-md">
+            <Clock className="w-3.5 h-3.5 text-yellow-300" />
+            <span className="text-[11px] font-bold">ينتهي خلال:</span>
+            <span className="font-mono font-bold text-xs bg-black/40 px-1.5 py-0.5 rounded text-yellow-300">
+              {String(timeLeft.hours).padStart(2, '0')}
+            </span>
+            <span className="text-xs">:</span>
+            <span className="font-mono font-bold text-xs bg-black/40 px-1.5 py-0.5 rounded text-yellow-300">
+              {String(timeLeft.minutes).padStart(2, '0')}
+            </span>
+            <span className="text-xs">:</span>
+            <span className="font-mono font-bold text-xs bg-black/40 px-1.5 py-0.5 rounded text-yellow-300">
+              {String(timeLeft.seconds).padStart(2, '0')}
+            </span>
+          </div>
         </div>
 
-        {/* Category Tabs Filter - Apple Pill Design */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+        {/* Category Sticky Filters - Horizontal Scrollable Pills */}
+        <div className="sticky top-[60px] z-30 bg-[#F5F5F7]/95 backdrop-blur-md py-2.5 mb-2 -mx-2 px-2 overflow-x-auto scrollbar-none flex items-center gap-2 border-b border-gray-200">
+          <div className="flex items-center gap-1 pl-2 text-xs font-bold text-gray-500 shrink-0">
+            <Filter className="w-3.5 h-3.5" />
+            <span>الأقسام:</span>
+          </div>
           {[
-            { id: 'all' as CategoryId, label: 'الكل' },
-            { id: 'arabic-omani' as CategoryId, label: 'القهوة العمانية' },
-            { id: 'specialty' as CategoryId, label: 'المختصة' },
-            { id: 'beans' as CategoryId, label: 'حبوب البن' },
-            { id: 'nuts-dates' as CategoryId, label: 'المكسرات والتمور' },
-            { id: 'gifts' as CategoryId, label: 'الهدايا' },
-            { id: 'tools' as CategoryId, label: 'الأدوات' },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => onCategoryChange(tab.id)}
-              className={`px-4.5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-300 ${
-                activeCategory === tab.id
-                  ? isLight
-                    ? 'bg-[#1D1D1F] text-white shadow-md'
-                    : 'bg-[#1B1512] text-[#F3E2BE] shadow-lg ring-1 ring-[#D7AE63]'
-                  : isLight
-                    ? 'bg-[#F5F5F7] text-[#1D1D1F] border border-[#000000]/08 hover:bg-[#E5E5EA]'
-                    : 'bg-white text-[#4E382A] border border-[#D7AE63]/30 hover:border-[#D7AE63] hover:text-[#1B1512]'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+            { id: 'all' as CategoryId, label: '🔥 الكل', badge: 'الشائع' },
+            { id: 'arabic-omani' as CategoryId, label: 'القهوة العمانية', badge: 'ملكي' },
+            { id: 'specialty' as CategoryId, label: 'القهوة المختصة', badge: 'SCA' },
+            { id: 'beans' as CategoryId, label: 'حبوب البن', badge: 'طازج' },
+            { id: 'nuts-dates' as CategoryId, label: 'المكسرات والتمور', badge: 'فاخر' },
+            { id: 'gifts' as CategoryId, label: 'الهدايا', badge: 'خصم' },
+            { id: 'tools' as CategoryId, label: 'أدوات القهوة', badge: 'جديد' },
+          ].map((tab) => {
+            const isActive = activeCategory === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => {
+                  onCategoryChange(tab.id);
+                  setVisibleCount(10);
+                }}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 border shrink-0 ${
+                  isActive
+                    ? 'bg-[#FF5000] text-white border-[#FF5000] shadow-sm'
+                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100 hover:text-black'
+                }`}
+              >
+                <span>{tab.label}</span>
+                {tab.badge && (
+                  <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-extrabold ${
+                    isActive ? 'bg-white/20 text-white' : 'bg-orange-100 text-[#FF5000]'
+                  }`}>
+                    {tab.badge}
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
-      </div>
 
-      {/* Products Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {filteredProducts.map((product) => {
-          const isWishlisted = wishlistIds.includes(product.id);
-          const displayPrice = currency === 'OMR' ? `${product.priceOmr.toFixed(3)} ر.ع` : `$${product.priceUsd.toFixed(2)}`;
-          const origPrice = product.originalPriceOmr
-            ? currency === 'OMR'
-              ? `${product.originalPriceOmr.toFixed(3)} ر.ع`
-              : `$${(product.originalPriceOmr * 2.6).toFixed(2)}`
-            : null;
+        {/* Product Mobile-First 2-Column Grid (AliExpress & Temu Exact CSS Specs) */}
+        <div className="products-grid">
+          {displayProducts.map((product, index) => {
+            const isWishlisted = wishlistIds.includes(product.id);
+            const displayPrice = currency === 'OMR' ? `${product.priceOmr.toFixed(3)} ر.ع` : `$${product.priceUsd.toFixed(2)}`;
+            const origPrice = product.originalPriceOmr
+              ? currency === 'OMR'
+                ? `${product.originalPriceOmr.toFixed(3)} ر.ع`
+                : `$${(product.originalPriceOmr * 2.6).toFixed(2)}`
+              : currency === 'OMR'
+              ? `${(product.priceOmr * 1.25).toFixed(3)} ر.ع`
+              : `$${(product.priceUsd * 1.25).toFixed(2)}`;
 
-          return (
-            <div
-              key={product.id}
-              onClick={() => onQuickView(product)}
-              className={`group rounded-3xl border transition-all duration-500 overflow-hidden cursor-pointer flex flex-col justify-between relative ${
-                isLight
-                  ? 'bg-white border-[#000000]/08 hover:border-[#9B6B3A]/40 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]'
-                  : 'bg-white border-[#D7AE63]/25 hover:border-[#D7AE63]/70 hover:shadow-[0_16px_40px_rgba(27,21,18,0.12),0_0_24px_rgba(215,174,99,0.2)]'
-              }`}
-            >
-              {/* Product Top Image Badge Container */}
-              <div className="relative aspect-[4/3] bg-[#FAF6F0] overflow-hidden">
-                <img
-                  src={product.image}
-                  alt={product.nameAr}
-                  loading="lazy"
-                  decoding="async"
-                  width="400"
-                  height="300"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
-                />
+            const salesText = getSalesCountText(product);
 
-                {/* Floating Badges */}
-                <div className="absolute top-3 right-3 flex flex-col gap-1.5 z-10">
-                  {product.isBestSeller && (
-                    <span className="bg-[#1B1512]/90 text-[#F3E2BE] text-[10px] font-bold px-3 py-1 rounded-full border border-[#D7AE63]/40 backdrop-blur-md shadow-sm">
-                      الأكثر مبيعاً
-                    </span>
-                  )}
-                  {product.isLimited && (
-                    <span className="bg-[#241B17]/90 text-[#FAF6F0] text-[10px] font-bold px-3 py-1 rounded-full border border-[#D7AE63]/30 backdrop-blur-md shadow-sm">
-                      إصدار محدود
-                    </span>
-                  )}
-                  {product.isNew && (
-                    <span className="bg-gradient-to-r from-[#F3E2BE] to-[#D7AE63] text-[#120E0C] text-[10px] font-black px-3 py-1 rounded-full shadow-sm">
-                      وصل حديثاً
-                    </span>
-                  )}
-                </div>
+            return (
+              <div
+                key={`${product.id}-${index}`}
+                onClick={() => onQuickView(product)}
+                className="product-card group relative flex flex-col justify-between cursor-pointer select-none h-full"
+              >
+                {/* Product Image Container - 1:1 Aspect Ratio (Square) */}
+                <div className="relative overflow-hidden w-full aspect-square bg-[#F9F9F9]">
+                  <img
+                    src={product.image}
+                    alt={product.nameAr}
+                    loading="lazy"
+                    decoding="async"
+                    className="product-image group-hover:scale-105 transition-transform duration-300 ease-out"
+                  />
 
-                {/* Wishlist Button */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onToggleWishlist(product);
-                  }}
-                  className={`absolute top-3 left-3 p-2.5 rounded-full transition-all duration-300 z-10 min-w-[40px] min-h-[40px] flex items-center justify-center ${
-                    isWishlisted
-                      ? 'bg-rose-600 text-white shadow-md'
-                      : 'bg-[#1B1512]/60 hover:bg-[#1B1512] text-[#F3E2BE] backdrop-blur-md border border-[#D7AE63]/30'
-                  }`}
-                  aria-label={`إضافة ${product.nameAr} للمفضلة`}
-                >
-                  <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
-                </button>
+                  {/* Top Right Promo Badge */}
+                  <div className="absolute top-1.5 right-1.5 z-10 flex flex-col gap-1 items-end">
+                    {product.isBestSeller ? (
+                      <span className="bg-[#FF5000] text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+                        <Flame className="w-2.5 h-2.5 fill-current" />
+                        الأكثر مبيعاً
+                      </span>
+                    ) : product.isLimited ? (
+                      <span className="bg-[#E02020] text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+                        <Zap className="w-2.5 h-2.5 fill-current" />
+                        عرض اليوم
+                      </span>
+                    ) : product.isNew ? (
+                      <span className="bg-[#10B981] text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+                        <Sparkles className="w-2.5 h-2.5 fill-current" />
+                        وصل حديثاً
+                      </span>
+                    ) : (
+                      <span className="bg-[#FF7A00] text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm">
+                        تخفيض 20%
+                      </span>
+                    )}
+                  </div>
 
-                {/* Quick View Hover Overlay */}
-                <div className="absolute inset-0 bg-[#1B1512]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-[3px]">
+                  {/* Wishlist Heart Button Top Left */}
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      onQuickView(product);
+                      onToggleWishlist(product);
                     }}
-                    aria-label={`عرض تفاصيل ${product.nameAr}`}
-                    className="px-5 py-2.5 rounded-full btn-champagne-primary text-xs font-bold flex items-center gap-2 shadow-lg min-h-[40px]"
+                    className={`absolute top-1.5 left-1.5 w-7 h-7 rounded-full flex items-center justify-center transition-all z-10 ${
+                      isWishlisted
+                        ? 'bg-rose-500 text-white shadow-md scale-105'
+                        : 'bg-white/80 hover:bg-white text-gray-700 backdrop-blur-md shadow-sm'
+                    }`}
+                    aria-label="إضافة للمفضلة"
                   >
-                    <Eye className="w-4 h-4 text-[#120E0C]" />
-                    <span>عرض التفاصيل</span>
+                    <Heart className={`w-3.5 h-3.5 ${isWishlisted ? 'fill-current' : ''}`} />
                   </button>
                 </div>
-              </div>
 
-              {/* Product Information Body */}
-              <div className="p-6 flex flex-col flex-grow justify-between text-right">
-                <div>
-                  {/* Origin & Roast Level Bar */}
-                  <div className="flex items-center justify-between text-xs text-[#4E382A] mb-2 font-medium">
-                    <span className="flex items-center gap-1 font-bold text-[#9B6B3A]">
-                      <MapPin className="w-3.5 h-3.5 text-[#D7AE63]" />
-                      {product.originCountry}
-                    </span>
-                    <span className="flex items-center gap-1 bg-[#FAF6F0] text-[#1B1512] px-2.5 py-0.5 rounded-md text-[11px] font-bold border border-[#D7AE63]/30">
-                      <Flame className="w-3 h-3 text-[#D7AE63]" />
-                      {product.roastLevel}
-                    </span>
-                  </div>
-
-                  {/* Product Title */}
-                  <h3 className="font-cairo text-base sm:text-lg font-bold text-[#1B1512] group-hover:text-[#9B6B3A] transition-colors mb-1.5 leading-relaxed">
-                    {product.nameAr}
-                  </h3>
-
-                  {/* Subtitle / Description excerpt */}
-                  <p className="text-xs text-[#4E382A] line-clamp-2 mb-3 leading-relaxed font-normal">
-                    {product.subtitleAr}
-                  </p>
-
-                  {/* Flavor Notes Chips */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {product.flavorNotes.slice(0, 3).map((note, idx) => (
-                      <span
-                        key={idx}
-                        className="text-[10px] bg-[#FAF6F0] text-[#6C4C35] font-bold px-2.5 py-0.5 rounded-full border border-[#D7AE63]/30"
-                      >
-                        {note}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Rating & Pricing Bottom Bar */}
-                <div className="pt-4 border-t border-[#D7AE63]/20 flex items-center justify-between">
+                {/* Product Card Details */}
+                <div className="p-2.5 sm:p-3 flex flex-col flex-grow justify-between text-right bg-white">
                   <div>
-                    <div className="flex items-center gap-1 text-xs mb-1">
-                      <Star className="w-3.5 h-3.5 text-[#D7AE63] fill-[#D7AE63]" />
-                      <span className="font-bold text-[#1B1512]">{product.rating.toFixed(1)}/10</span>
-                      <span className="text-[#6C4C35] font-semibold text-[10px]">({product.reviewsCount})</span>
+                    {/* Sales Count & Origin Badge */}
+                    <div className="flex items-center justify-between text-[10px] text-gray-500 mb-1 font-medium">
+                      <span className="text-[#FF5000] font-extrabold flex items-center gap-0.5">
+                        <Flame className="w-3 h-3 text-[#FF5000] fill-[#FF5000]" />
+                        {salesText}
+                      </span>
+                      <span className="truncate max-w-[80px] bg-gray-100 text-gray-600 px-1.5 py-0.2 rounded">
+                        {product.originCountry.split(' ')[0]}
+                      </span>
                     </div>
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-extrabold text-lg text-[#1B1512]">{displayPrice}</span>
+
+                    {/* Product Name (1 or 2 lines ellipsis) */}
+                    <h3 className="font-cairo text-xs sm:text-sm font-bold text-[#1D1D1F] line-clamp-2 leading-snug mb-1 group-hover:text-[#FF5000] transition-colors">
+                      {product.nameAr}
+                    </h3>
+
+                    {/* Star Rating */}
+                    <div className="flex items-center gap-1 text-[11px] mb-2 text-amber-500 font-bold">
+                      <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                      <span>{product.rating.toFixed(1)}</span>
+                      <span className="text-gray-400 font-normal text-[10px]">({product.reviewsCount})</span>
+                    </div>
+                  </div>
+
+                  {/* Price & Add to Cart Circle Button */}
+                  <div className="pt-2 border-t border-gray-100 flex items-center justify-between mt-auto">
+                    {/* Price Column */}
+                    <div className="flex flex-col text-right">
+                      <span className="font-extrabold text-sm sm:text-base text-[#FF5000] leading-none font-cairo">
+                        {displayPrice}
+                      </span>
                       {origPrice && (
-                        <span className="text-xs text-[#9B6B3A]/70 line-through font-medium">{origPrice}</span>
+                        <span className="text-[10px] text-gray-400 line-through leading-none mt-1 font-medium">
+                          {origPrice}
+                        </span>
                       )}
                     </div>
-                  </div>
 
-                  {/* Quick Action Buttons */}
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={(e) => handleExpressBuyClick(e, product)}
-                      className="px-3.5 py-2.5 bg-[#1B1512] text-[#F3E2BE] hover:bg-gradient-to-r hover:from-[#F3E2BE] hover:to-[#D7AE63] hover:text-[#120E0C] rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1 border border-[#D7AE63]/40 active:scale-95 min-h-[40px]"
-                      title="شراء سريع فوري"
-                      aria-label={`شراء سريع لمنتج ${product.nameAr}`}
-                    >
-                      <Zap className="w-3.5 h-3.5 fill-current" />
-                      <span>شراء</span>
-                    </button>
-
+                    {/* Circular Add-to-Cart Action Button */}
                     <button
                       onClick={(e) => handleAddToCartClick(e, product)}
-                      className={`p-2.5 rounded-xl transition-all duration-300 shadow-sm min-w-[40px] min-h-[40px] flex items-center justify-center border ${
+                      className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 shadow-sm active:scale-90 ${
                         addedAnimationId === product.id
-                          ? 'bg-emerald-600 text-white border-emerald-500 scale-110'
-                          : 'bg-[#FAF6F0] text-[#1B1512] border-[#D7AE63]/30 hover:bg-[#D7AE63] hover:text-[#120E0C]'
+                          ? 'bg-emerald-600 text-white scale-105'
+                          : 'bg-[#FF5000] hover:bg-[#E04700] text-white'
                       }`}
                       title="أضف إلى السلة"
-                      aria-label={`أضف ${product.nameAr} إلى سلة التسوق`}
+                      aria-label={`أضف ${product.nameAr} للسلة`}
                     >
                       {addedAnimationId === product.id ? (
                         <Check className="w-4 h-4" />
                       ) : (
-                        <Plus className="w-4 h-4" />
+                        <ShoppingCart className="w-4 h-4" />
                       )}
                     </button>
                   </div>
                 </div>
               </div>
+            );
+          })}
+        </div>
+
+        {/* Infinite Scroll Trigger Indicator */}
+        <div ref={loadMoreRef} className="py-8 text-center flex flex-col items-center justify-center gap-2">
+          {isLoadingMore ? (
+            <div className="flex items-center gap-2 text-xs text-[#FF5000] font-bold animate-pulse">
+              <div className="w-4 h-4 border-2 border-[#FF5000] border-t-transparent rounded-full animate-spin"></div>
+              <span>جاري تحميل المزيد من العروض والمنتجات...</span>
             </div>
-          );
-        })}
+          ) : visibleCount < 40 ? (
+            <button
+              onClick={handleLoadMore}
+              className="px-6 py-2.5 bg-white text-[#FF5000] border border-[#FF5000]/40 rounded-full text-xs font-bold hover:bg-[#FF5000] hover:text-white transition-all shadow-sm"
+            >
+              عرض المزيد من المنتجات 🔥
+            </button>
+          ) : (
+            <span className="text-xs text-gray-400 font-medium">
+              وصلت إلى نهاية قائمة المنتجات المتاحة ✨
+            </span>
+          )}
+        </div>
+
       </div>
     </section>
   );
