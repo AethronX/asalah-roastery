@@ -53,44 +53,44 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore, theme = 'light
         
         {/* Psychological Trust & Social Proof Badge */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-6">
-          <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase shadow-sm backdrop-blur-md border transition-all ${
+          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase shadow-sm backdrop-blur-md border transition-all ${
             isLight
-              ? 'bg-white/90 border-[#000000]/10 text-[#1D1D1F]'
-              : 'bg-[#241B17]/90 border-[#D7AE63]/50 text-[#F3E2BE]'
+              ? 'bg-white/95 border-[#000000]/12 text-[#1D1D1F]'
+              : 'bg-[#241B17]/95 border-[#D7AE63]/60 text-[#F3E2BE]'
           }`}>
-            <Sparkles className={`w-3.5 h-3.5 ${isLight ? 'text-[#9B6B3A]' : 'text-[#F3E2BE]'}`} />
+            <Sparkles className={`w-4 h-4 ${isLight ? 'text-[#9B6B3A]' : 'text-[#F3E2BE]'}`} />
             <span>عراقة الضيافة العُمانية • محمصة مختصة في نزوى</span>
           </div>
 
-          <div className={`hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold border ${
+          <div className={`hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-extrabold border ${
             isLight
-              ? 'bg-[#F5F5F7] text-[#3A3A3C] border-[#000000]/08'
-              : 'bg-[#120E0C]/80 text-[#E8DCCB] border-[#D7AE63]/30'
+              ? 'bg-[#F5F5F7] text-[#1D1D1F] border-[#000000]/10'
+              : 'bg-[#120E0C]/90 text-[#F7F2EA] border-[#D7AE63]/40'
           }`}>
             <span className="text-amber-500">★★★★★</span>
-            <span>4.98/5 ثقة أكثر من 15,000 عشاق القهوة</span>
+            <span>4.98/5 ثقة أكثر من 15,000 من عشاق القهوة</span>
           </div>
         </div>
 
         {/* Emotionally-Driven Color Psychology Headline */}
-        <h1 className={`font-ibm text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-normal leading-[1.5] sm:leading-[1.45] mb-8 drop-shadow-sm ${
+        <h1 className={`font-ibm text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-normal leading-[1.35] sm:leading-[1.3] mb-8 drop-shadow-sm ${
           isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'
         }`}>
           <span className="block mb-3 sm:mb-4">عبق التحميص الطازج..</span>
           <span className="block">
             وفخامة{' '}
-            <span className={isLight ? 'text-[#9B6B3A] font-bold inline-block border-b-2 border-[#9B6B3A]/40 pb-1' : 'gold-gradient-bright font-bold inline-block border-b-2 border-[#D7AE63]/40 pb-1'}>
+            <span className={isLight ? 'text-[#9B6B3A] font-black inline-block border-b-3 border-[#9B6B3A]/50 pb-1' : 'gold-gradient-bright font-black inline-block border-b-3 border-[#D7AE63]/50 pb-1'}>
               الضيافة العُمانية
             </span>
           </span>
         </h1>
 
         {/* Subheadline centered on Sensory Experience & Comfort */}
-        <p className={`text-base sm:text-xl md:text-2xl font-medium max-w-3xl mx-auto leading-relaxed sm:leading-[1.8] mb-10 font-alexandria tracking-wide ${
-          isLight ? 'text-[#3A3A3C]' : 'text-[#E8DCCB]'
+        <p className={`text-base sm:text-lg md:text-xl lg:text-2xl font-semibold max-w-3xl mx-auto leading-relaxed sm:leading-[1.8] mb-10 font-alexandria tracking-wide ${
+          isLight ? 'text-[#2C2C2E]' : 'text-[#F7F2EA]'
         }`}>
           نحمُص لك أنقى سلالات البن العالمي وشغف الخلطات العمانية الملكية{' '}
-          <span className="font-bold border-b border-amber-500/50 pb-0.5">فور طلبك</span>
+          <span className="font-extrabold border-b border-amber-500/70 pb-0.5">فور طلبك</span>
           ، لتصلك بطعمها الطازج وعطرها الساحر الذي يملأ المكان دفئاً.
         </p>
 
@@ -140,8 +140,8 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore, theme = 'light
               <Flame className="w-5 h-5 shrink-0" />
             </div>
             <div className="text-right">
-              <h2 className={`text-sm font-bold ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>تحميص طازج عند الطلب</h2>
-              <p className={`text-xs ${isLight ? 'text-[#6E6E73]' : 'text-[#E8DCCB]'}`}>محموصة خصيصاً واسمك على الكيس</p>
+              <h2 className={`text-sm sm:text-base font-extrabold ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>تحميص طازج عند الطلب</h2>
+              <p className={`text-xs sm:text-sm font-medium ${isLight ? 'text-[#3A3A3C]' : 'text-[#E8DCCB]'}`}>محموصة خصيصاً واسمك على الكيس</p>
             </div>
           </div>
 
@@ -154,8 +154,8 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore, theme = 'light
               <Award className="w-5 h-5 shrink-0" />
             </div>
             <div className="text-right">
-              <h2 className={`text-sm font-bold ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>سلالات نادرة (SCA 90+)</h2>
-              <p className={`text-xs ${isLight ? 'text-[#6E6E73]' : 'text-[#E8DCCB]'}`}>محاصيل مختصة تنقيط وحيد</p>
+              <h2 className={`text-sm sm:text-base font-extrabold ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>سلالات نادرة (SCA 90+)</h2>
+              <p className={`text-xs sm:text-sm font-medium ${isLight ? 'text-[#3A3A3C]' : 'text-[#E8DCCB]'}`}>محاصيل مختصة تنقيط وحيد</p>
             </div>
           </div>
 
@@ -168,8 +168,8 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow, onExplore, theme = 'light
               <ShieldCheck className="w-5 h-5 shrink-0" />
             </div>
             <div className="text-right">
-              <h2 className={`text-sm font-bold ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>خلطات سلطانية فاخرة</h2>
-              <p className={`text-xs ${isLight ? 'text-[#6E6E73]' : 'text-[#E8DCCB]'}`}>بالهيل والزعفران السوبر نيل</p>
+              <h2 className={`text-sm sm:text-base font-extrabold ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>خلطات سلطانية فاخرة</h2>
+              <p className={`text-xs sm:text-sm font-medium ${isLight ? 'text-[#3A3A3C]' : 'text-[#E8DCCB]'}`}>بالهيل والزعفران السوبر نيل</p>
             </div>
           </div>
         </div>

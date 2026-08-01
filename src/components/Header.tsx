@@ -102,10 +102,10 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               key={idx}
               onClick={item.action}
-              className={`text-sm font-bold relative py-1 transition-colors group font-alexandria ${
+              className={`text-sm sm:text-base font-bold relative py-1 transition-colors group font-alexandria ${
                 isLight
-                  ? 'text-[#424245] hover:text-[#1D1D1F]'
-                  : 'text-[#E8DCCB] hover:text-[#F3E2BE]'
+                  ? 'text-[#2C2C2E] hover:text-[#1D1D1F]'
+                  : 'text-[#F7F2EA] hover:text-[#F3E2BE]'
               }`}
             >
               {item.label}

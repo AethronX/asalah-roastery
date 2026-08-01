@@ -32,20 +32,20 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ theme = 'light
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className={`text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border inline-block mb-3 shadow-sm font-alexandria ${
+          <span className={`text-xs sm:text-sm font-extrabold uppercase tracking-widest px-4 py-2 rounded-full border inline-block mb-3 shadow-sm font-alexandria ${
             isLight
-              ? 'bg-white text-[#734726] border-[#EFE7DD]'
-              : 'bg-[#241B17] text-[#F3E2BE] border-[#D7AE63]/40'
+              ? 'bg-white text-[#8A5A2B] border-[#EFE7DD]'
+              : 'bg-[#241B17] text-[#F3E2BE] border-[#D7AE63]/50'
           }`}>
             فروعنا وجلسات التذوق
           </span>
-          <h2 className={`font-alexandria text-2xl sm:text-4xl font-black mb-3 ${
+          <h2 className={`font-alexandria text-2xl sm:text-4xl lg:text-5xl font-black mb-3 ${
             isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'
           }`}>
             زوروا فروع محامص الأصالة في سلطنة عمان
           </h2>
-          <p className={`text-sm sm:text-base font-medium ${
-            isLight ? 'text-[#5C554E]' : 'text-[#E8DCCB]'
+          <p className={`text-sm sm:text-base md:text-lg font-semibold ${
+            isLight ? 'text-[#3A3A3C]' : 'text-[#E8DCCB]'
           }`}>
             استمتعوا بتجربة تذوق حيّة للبن المحمص طازجاً في صالات العرض المخصصة.
           </p>
@@ -86,8 +86,8 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ theme = 'light
                   )}
                 </div>
 
-                <div className={`space-y-2 text-xs font-medium ${
-                  isLight ? 'text-[#5C554E]' : 'text-[#E8DCCB]'
+                <div className={`space-y-2 text-xs sm:text-sm font-semibold ${
+                  isLight ? 'text-[#3A3A3C]' : 'text-[#E8DCCB]'
                 }`}>
                   <div className="flex items-center gap-2">
                     <MapPin className={`w-4 h-4 shrink-0 ${isLight ? 'text-[#9B6B3A]' : 'text-[#F3E2BE]'}`} />

@@ -80,10 +80,14 @@ export const Footer: React.FC<FooterProps> = ({ theme = 'light' }) => {
         </div>
 
         {/* Bottom Bar & Copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#E8DCCB]/70 font-medium">
+        <div className={`pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium ${
+          isLight ? 'text-[#3A3A3C]' : 'text-[#E8DCCB]/80'
+        }`}>
           <p>© {new Date().getFullYear()} محامص الأصالة - Al Asalah Roastery. جميع الحقوق محفوظة.</p>
           <div className="flex items-center gap-4">
-            <span className="font-serif text-[#F3E2BE]">صُنعت بشغف في سلطنة عمان 🇴🇲</span>
+            <span className={`font-serif ${isLight ? 'text-[#8A5A2B] font-semibold' : 'text-[#F3E2BE]'}`}>
+              صُنعت بشغف في سلطنة عمان 🇴🇲
+            </span>
           </div>
         </div>
 

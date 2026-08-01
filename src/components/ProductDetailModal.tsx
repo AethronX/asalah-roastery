@@ -75,13 +75,21 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#2B211B]/80 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn">
-      <div className="bg-[#F8F3EC] text-[#2B211B] rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto border border-[#C9A76A]/40 shadow-2xl relative text-right">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn">
+      <div className={`rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto border shadow-2xl relative text-right transition-colors ${
+        isLight
+          ? 'bg-white text-[#1D1D1F] border-[#EFE7DD]'
+          : 'bg-[#1D1613] text-[#F7F2EA] border-[#D7AE63]/40'
+      }`}>
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 left-4 z-20 p-2.5 rounded-full bg-[#2B211B] hover:bg-[#4A3326] text-[#F8F3EC] transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center"
+          className={`absolute top-4 left-4 z-20 p-2.5 rounded-full transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center ${
+            isLight
+              ? 'bg-[#F5F5F7] hover:bg-[#E5E5EA] text-[#1D1D1F]'
+              : 'bg-[#241B17] hover:bg-[#2C211C] text-[#F3E2BE] border border-[#D7AE63]/40'
+          }`}
           aria-label="إغلاق نافذة تفاصيل المنتج"
         >
           <X className="w-5 h-5" />
@@ -155,39 +163,49 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             <div>
               {/* Country & Category Badges */}
               <div className="flex items-center gap-2 mb-2 text-xs">
-                <span className="bg-[#B78A5C]/15 text-[#B78A5C] px-3 py-1 rounded-full font-medium flex items-center gap-1">
+                <span className={`px-3 py-1 rounded-full font-bold flex items-center gap-1 ${
+                  isLight ? 'bg-[#FAF6F0] text-[#9B6B3A] border border-[#EFE7DD]' : 'bg-[#241B17] text-[#F3E2BE] border border-[#D7AE63]/40'
+                }`}>
                   <MapPin className="w-3.5 h-3.5" />
                   {product.originCountry}
                 </span>
-                <span className="bg-[#2B211B]/5 text-[#4A3326] px-3 py-1 rounded-full font-medium flex items-center gap-1">
-                  <Flame className="w-3.5 h-3.5 text-[#B78A5C]" />
+                <span className={`px-3 py-1 rounded-full font-bold flex items-center gap-1 ${
+                  isLight ? 'bg-[#F5F5F7] text-[#1D1D1F] border border-[#000000]/10' : 'bg-[#241B17] text-[#F7F2EA] border border-[#D7AE63]/30'
+                }`}>
+                  <Flame className="w-3.5 h-3.5 text-[#9B6B3A]" />
                   {product.roastLevel}
                 </span>
               </div>
 
               {/* Title & Subtitle */}
-              <h1 className="font-cairo text-2xl sm:text-3xl font-bold text-[#2B211B] mb-2 leading-relaxed">
+              <h1 className={`font-alexandria text-2xl sm:text-3xl font-black mb-2 leading-snug ${
+                isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'
+              }`}>
                 {product.nameAr}
               </h1>
-              <p className="text-sm text-[#4A3326]/80 mb-4 font-normal leading-relaxed">
+              <p className={`text-sm sm:text-base font-semibold mb-4 leading-relaxed ${
+                isLight ? 'text-[#3A3A3C]' : 'text-[#E8DCCB]'
+              }`}>
                 {product.subtitleAr}
               </p>
 
               {/* Rating Bar */}
-              <div className="flex items-center gap-2 mb-6 pb-4 border-b border-[#EFE8DE]">
+              <div className={`flex items-center gap-2 mb-6 pb-4 border-b ${
+                isLight ? 'border-[#EFE7DD]' : 'border-[#D7AE63]/20'
+              }`}>
                 <div className="flex text-amber-500">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-current" />
                   ))}
                 </div>
-                <span className="font-bold text-sm text-[#2B211B]">{product.rating.toFixed(1)}/10</span>
-                <span className="text-xs text-[#4A3326]/60">({product.reviewsCount} تقييم معتمد)</span>
+                <span className={`font-bold text-sm ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>{product.rating.toFixed(1)}/10</span>
+                <span className={`text-xs font-medium ${isLight ? 'text-[#5C554E]' : 'text-[#E8DCCB]'}`}>({product.reviewsCount} تقييم معتمد)</span>
               </div>
 
               {/* Price Display */}
               <div className="mb-6">
-                <div className="text-xs text-[#4A3326]/70 mb-1">السعر الإجمالي (شامل الضريبة)</div>
-                <div className="font-bold text-3xl text-[#2B211B]">{displayPrice}</div>
+                <div className={`text-xs font-bold mb-1 ${isLight ? 'text-[#5C554E]' : 'text-[#E8DCCB]'}`}>السعر الإجمالي (شامل الضريبة)</div>
+                <div className={`font-black text-3xl sm:text-4xl ${isLight ? 'text-[#1D1D1F]' : 'text-[#F3E2BE]'}`}>{displayPrice}</div>
               </div>
 
               {/* Weight Selector */}

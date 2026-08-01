@@ -70,20 +70,20 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Section Header */}
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className={`text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border inline-block mb-3 shadow-sm ${
+        <span className={`text-xs sm:text-sm font-extrabold uppercase tracking-widest px-4 py-2 rounded-full border inline-block mb-3 shadow-sm ${
           isLight
-            ? 'bg-[#F5F5F7] text-[#1D1D1F] border-[#000000]/10'
-            : 'text-[#F3E2BE] bg-[#241B17] border-[#D7AE63]/40'
+            ? 'bg-[#F5F5F7] text-[#1D1D1F] border-[#000000]/12'
+            : 'text-[#F3E2BE] bg-[#241B17] border-[#D7AE63]/50'
         }`}>
           تشكيلة الأصالة
         </span>
-        <h2 className={`font-ibm text-3xl sm:text-4xl font-bold mb-4 leading-relaxed ${
+        <h2 className={`font-ibm text-2xl sm:text-4xl lg:text-5xl font-black mb-4 leading-relaxed ${
           isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'
         }`}>
           تصفح الأقسام الفاخرة
         </h2>
-        <p className={`text-sm sm:text-base font-normal ${
-          isLight ? 'text-[#424245]' : 'text-[#E8DCCB]'
+        <p className={`text-sm sm:text-base md:text-lg font-semibold ${
+          isLight ? 'text-[#2C2C2E]' : 'text-[#E8DCCB]'
         }`}>
           صُممت تشكيلاتنا لتلبي شغف عشاق القهوة العمانية الأصيلة والقهوة المختصة العالمية.
         </p>
@@ -140,14 +140,14 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
                   <IconComponent className="w-5 h-5" />
                 </div>
                 <span
-                  className={`text-[10px] px-2.5 py-1 rounded-full font-bold ${
+                  className={`text-xs px-2.5 py-1 rounded-full font-extrabold ${
                     isSelected
                       ? isLight
                         ? 'bg-[#3A3A3C] text-white'
-                        : 'bg-[#241B17] text-[#F3E2BE] border border-[#D7AE63]/30'
+                        : 'bg-[#120E0C] text-[#F3E2BE] border border-[#D7AE63]/40'
                       : isLight
-                        ? 'bg-[#F5F5F7] text-[#424245] border border-[#000000]/05'
-                        : 'bg-[#FAF6F0] text-[#6C4C35] border border-[#D7AE63]/20'
+                        ? 'bg-[#F5F5F7] text-[#1D1D1F] border border-[#000000]/10'
+                        : 'bg-[#1B1512] text-[#F3E2BE] border border-[#D7AE63]/30'
                   }`}
                 >
                   {cat.count}
@@ -157,7 +157,7 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
               {/* Bottom Content */}
               <div className="relative z-10">
                 <h3
-                  className={`font-alexandria text-base font-bold mb-1 transition-colors ${
+                  className={`font-alexandria text-base sm:text-lg font-bold mb-1 transition-colors ${
                     isSelected
                       ? isLight
                         ? 'text-white'
@@ -170,14 +170,14 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
                   {cat.titleAr}
                 </h3>
                 <p
-                  className={`text-xs line-clamp-2 leading-relaxed font-normal ${
+                  className={`text-xs sm:text-sm line-clamp-2 leading-relaxed font-medium ${
                     isSelected
                       ? isLight
                         ? 'text-[#E5E5EA]'
                         : 'text-[#E8DCCB]'
                       : isLight
-                        ? 'text-[#6E6E73]'
-                        : 'text-[#E8DCCB]/80'
+                        ? 'text-[#424245]'
+                        : 'text-[#E8DCCB]'
                   }`}
                 >
                   {cat.subtitleAr}

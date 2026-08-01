@@ -60,13 +60,13 @@ export const Features: React.FC<FeaturesProps> = ({ theme = 'light' }) => {
                 }`}>
                   <IconComponent className="w-6 h-6" />
                 </div>
-                <h3 className={`font-alexandria text-base font-bold mb-2 leading-relaxed ${
+                <h3 className={`font-alexandria text-base sm:text-lg font-extrabold mb-2 leading-relaxed ${
                   isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'
                 }`}>
                   {f.titleAr}
                 </h3>
-                <p className={`text-xs sm:text-sm leading-relaxed font-normal ${
-                  isLight ? 'text-[#5C554E]' : 'text-[#E8DCCB]'
+                <p className={`text-xs sm:text-sm md:text-base leading-relaxed font-medium ${
+                  isLight ? 'text-[#3A3A3C]' : 'text-[#E8DCCB]'
                 }`}>
                   {f.descAr}
                 </p>

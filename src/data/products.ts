@@ -56,8 +56,7 @@ export const PRODUCTS: Product[] = [
     image: '/assets/images/specialty_coffee_bag_1785262894947.jpg',
     gallery: [
       '/assets/images/specialty_coffee_bag_1785262894947.jpg',
-      '/assets/images/hero_coffee_beans_1785262866653.jpg',
-      '/assets/images/omani_dallah_set_1785262881798.jpg'
+      'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&q=80&w=800'
     ],
     roastLevel: 'متوسط (Medium)',
     roastValue: 3,
@@ -132,10 +131,10 @@ export const PRODUCTS: Product[] = [
     originalPriceOmr: 18.500,
     rating: 10.0,
     reviewsCount: 47,
-    image: '/assets/images/specialty_coffee_bag_1785262894947.jpg',
+    image: 'https://images.unsplash.com/photo-1610889556528-9a770e32642f?auto=format&fit=crop&q=80&w=800',
     gallery: [
-      '/assets/images/specialty_coffee_bag_1785262894947.jpg',
-      '/assets/images/hero_coffee_beans_1785262866653.jpg'
+      'https://images.unsplash.com/photo-1610889556528-9a770e32642f?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?auto=format&fit=crop&q=80&w=800'
     ],
     roastLevel: 'خفيف (Light)',
     roastValue: 1,
@@ -244,8 +243,9 @@ export const PRODUCTS: Product[] = [
     priceUsd: 72.80,
     rating: 10.0,
     reviewsCount: 39,
-    image: '/assets/images/omani_dallah_set_1785262881798.jpg',
+    image: 'https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&q=80&w=800',
     gallery: [
+      'https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&q=80&w=800',
       '/assets/images/omani_dallah_set_1785262881798.jpg'
     ],
     roastLevel: 'محمص خفيف بالهيل (Omani Traditional)',
@@ -392,11 +392,10 @@ export const PRODUCTS: Product[] = [
     priceUsd: 23.90,
     rating: 10.0,
     reviewsCount: 83,
-    image: '/assets/images/hero_luxury_roast_1785572872948.jpg',
+    image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800',
     gallery: [
-      '/assets/images/hero_luxury_roast_1785572872948.jpg',
-      '/assets/images/omani_dallah_set_1785262881798.jpg',
-      '/assets/images/luxury_gift_box_1785262908848.jpg'
+      'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800',
+      '/assets/images/hero_luxury_roast_1785572872948.jpg'
     ],
     roastLevel: 'محمص خفيف بالهيل (Omani Traditional)',
     roastValue: 2,
@@ -431,9 +430,9 @@ export const PRODUCTS: Product[] = [
     priceUsd: 28.60,
     rating: 10.0,
     reviewsCount: 61,
-    image: '/assets/images/hero_coffee_beans_1785262866653.jpg',
+    image: 'https://images.unsplash.com/photo-1610632380989-680fe40816c6?auto=format&fit=crop&q=80&w=800',
     gallery: [
-      '/assets/images/hero_coffee_beans_1785262866653.jpg'
+      'https://images.unsplash.com/photo-1610632380989-680fe40816c6?auto=format&fit=crop&q=80&w=800'
     ],
     roastLevel: 'متوسط-داكن (Medium-Dark)',
     roastValue: 4,
@@ -578,9 +577,9 @@ export const PRODUCTS: Product[] = [
     priceUsd: 20.20,
     rating: 10.0,
     reviewsCount: 104,
-    image: '/assets/images/nuts_and_dates_1785262922164.jpg',
+    image: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&q=80&w=800',
     gallery: [
-      '/assets/images/nuts_and_dates_1785262922164.jpg'
+      'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&q=80&w=800'
     ],
     roastLevel: 'متوسط (Medium)',
     roastValue: 3,
@@ -615,9 +614,9 @@ export const PRODUCTS: Product[] = [
     priceUsd: 16.90,
     rating: 10.0,
     reviewsCount: 77,
-    image: '/assets/images/nuts_and_dates_1785262922164.jpg',
+    image: 'https://images.unsplash.com/photo-1536591375315-19895658238f?auto=format&fit=crop&q=80&w=800',
     gallery: [
-      '/assets/images/nuts_and_dates_1785262922164.jpg'
+      'https://images.unsplash.com/photo-1536591375315-19895658238f?auto=format&fit=crop&q=80&w=800'
     ],
     roastLevel: 'متوسط (Medium)',
     roastValue: 3,
@@ -688,9 +687,9 @@ export const PRODUCTS: Product[] = [
     priceUsd: 58.50,
     rating: 10.0,
     reviewsCount: 59,
-    image: '/assets/images/coffee_tools_set_1785572885322.jpg',
+    image: 'https://images.unsplash.com/photo-1589396575653-c09c794ff6a6?auto=format&fit=crop&q=80&w=800',
     gallery: [
-      '/assets/images/coffee_tools_set_1785572885322.jpg',
+      'https://images.unsplash.com/photo-1589396575653-c09c794ff6a6?auto=format&fit=crop&q=80&w=800',
       'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=800'
     ],
     roastLevel: 'متوسط (Medium)',
@@ -725,11 +724,11 @@ export const PRODUCTS: Product[] = [
     originalPriceOmr: 52.000,
     rating: 10.0,
     reviewsCount: 89,
-    image: '/assets/images/luxury_gift_box_1785262908848.jpg',
+    image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800',
     gallery: [
+      'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800',
       '/assets/images/luxury_gift_box_1785262908848.jpg',
-      '/assets/images/omani_dallah_set_1785262881798.jpg',
-      '/assets/images/nuts_and_dates_1785262922164.jpg'
+      '/assets/images/omani_dallah_set_1785262881798.jpg'
     ],
     roastLevel: 'محمص خفيف بالهيل (Omani Traditional)',
     roastValue: 2,

@@ -20,36 +20,36 @@ export const GiftSection: React.FC<GiftSectionProps> = ({ onSelectGift, giftProd
           
           {/* Content Column */}
           <div className="lg:col-span-7 text-right space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#2C211C] text-[#F3E2BE] border border-[#D7AE63]/40 text-xs font-bold shadow-sm">
-              <Gift className="w-3.5 h-3.5 text-[#F3E2BE]" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2C211C] text-[#F3E2BE] border border-[#D7AE63]/50 text-xs sm:text-sm font-bold shadow-sm">
+              <Gift className="w-4 h-4 text-[#F3E2BE]" />
               <span>مجموعات الهدايا والتوزيعات الملكية VIP</span>
             </div>
 
-            <h2 className="font-alexandria text-3xl sm:text-5xl font-black text-[#F7F2EA] leading-tight">
+            <h2 className="font-alexandria text-2xl sm:text-4xl lg:text-5xl font-black text-[#F7F2EA] leading-snug sm:leading-tight">
               هدية تليق بقدْر من تحب <br className="hidden sm:inline" />
               <span className="gold-gradient-bright">بلمسات الضيافة السامية</span>
             </h2>
 
-            <p className="text-sm sm:text-base text-[#E8DCCB] font-medium leading-relaxed max-w-2xl">
+            <p className="text-base sm:text-lg text-[#F7F2EA] font-semibold leading-relaxed max-w-2xl">
               ابتكرنا صناديق هدايا فاخرة مغلفة بنسيج المخمل والحرير، تتزين بالحفر الذهبي للنقوش العمانية التاريخية، وتضم أواني ضيافة نحاسية معتقة مع أنقى خلطات البن العماني والتمور الفاخرة.
             </p>
 
             {/* Included Box Features */}
-            <div className="space-y-3 pt-2 text-xs sm:text-sm text-[#E8DCCB] font-medium">
+            <div className="space-y-3 pt-2 text-sm sm:text-base text-[#F7F2EA] font-semibold">
               <div className="flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full bg-[#D7AE63] text-[#120E0C] flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                <div className="w-6 h-6 rounded-full bg-[#D7AE63] text-[#120E0C] flex items-center justify-center font-black text-xs shrink-0 shadow-sm">
                   ✓
                 </div>
                 <span>صناديق خشبية ومخملية مصممة خصيصاً للمناسبات الرسمية وكبار الشخصيات</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full bg-[#D7AE63] text-[#120E0C] flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                <div className="w-6 h-6 rounded-full bg-[#D7AE63] text-[#120E0C] flex items-center justify-center font-black text-xs shrink-0 shadow-sm">
                   ✓
                 </div>
                 <span>طباعة بطاقات إهداء ملكية مخصصة بحروف بارزة بماء الذهب</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full bg-[#D7AE63] text-[#120E0C] flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                <div className="w-6 h-6 rounded-full bg-[#D7AE63] text-[#120E0C] flex items-center justify-center font-black text-xs shrink-0 shadow-sm">
                   ✓
                 </div>
                 <span>خدمة التسليم الشخصي المباشر للمهدَى إليه برُقي واحترام</span>

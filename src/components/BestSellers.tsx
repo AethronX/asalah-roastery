@@ -93,13 +93,13 @@ export const BestSellers: React.FC<BestSellersProps> = ({
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h2 className={`font-alexandria text-base sm:text-xl font-bold leading-tight ${
+              <h2 className={`font-alexandria text-lg sm:text-2xl font-black leading-tight ${
                 isLight ? 'text-[#1D1D1F]' : 'text-[#F3E2BE]'
               }`}>
                 تشكيلة محاصيل ومنتجات الأصالة ☕
               </h2>
-              <p className={`text-xs sm:text-sm mt-1 ${
-                isLight ? 'text-[#6C5D53]' : 'text-[#E8DCCB]'
+              <p className={`text-xs sm:text-base font-semibold mt-1 ${
+                isLight ? 'text-[#3A3A3C]' : 'text-[#E8DCCB]'
               }`}>
                 تصفح المحاصيل الفاخرة والطازجة المسجلة مباشرة من المحمصة
               </p>
@@ -186,18 +186,18 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                 }`}>
                   <div>
                     {/* Origin Badge */}
-                    <div className="flex items-center justify-between text-[11px] mb-2 font-medium">
-                      <span className={`px-2 py-0.5 rounded-full border text-[10px] font-bold ${
+                    <div className="flex items-center justify-between text-xs mb-2 font-bold">
+                      <span className={`px-2.5 py-0.5 rounded-full border text-[11px] sm:text-xs font-extrabold ${
                         isLight
-                          ? 'bg-[#FAF6F0] text-[#734726] border-[#EFE7DD]'
-                          : 'bg-[#1B1512] text-[#F3E2BE] border-[#D7AE63]/30'
+                          ? 'bg-[#FAF6F0] text-[#8A5A2B] border-[#EFE7DD]'
+                          : 'bg-[#1B1512] text-[#F3E2BE] border-[#D7AE63]/40'
                       }`}>
                         {product.originCountry}
                       </span>
                     </div>
 
                     {/* Product Name */}
-                    <h3 className={`font-alexandria text-xs sm:text-sm font-bold line-clamp-2 leading-relaxed mb-3 transition-colors ${
+                    <h3 className={`font-alexandria text-xs sm:text-base font-extrabold line-clamp-2 leading-snug sm:leading-relaxed mb-3 transition-colors ${
                       isLight
                         ? 'text-[#1D1D1F] group-hover:text-[#9B6B3A]'
                         : 'text-[#F7F2EA] group-hover:text-[#F3E2BE]'
@@ -212,7 +212,7 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                   }`}>
                     {/* Price Column */}
                     <div className="flex flex-col text-right">
-                      <span className={`font-extrabold text-sm sm:text-base font-alexandria leading-none ${
+                      <span className={`font-black text-sm sm:text-lg font-alexandria leading-none ${
                         isLight ? 'text-[#1D1D1F]' : 'text-[#F3E2BE]'
                       }`}>
                         {displayPrice}
