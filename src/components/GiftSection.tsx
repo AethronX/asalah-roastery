@@ -1,6 +1,7 @@
 import React from 'react';
 import { Gift, ArrowLeft } from 'lucide-react';
 import { Product } from '../types';
+import { Picture } from './Picture';
 
 interface GiftSectionProps {
   onSelectGift: (product: Product) => void;
@@ -74,7 +75,7 @@ export const GiftSection: React.FC<GiftSectionProps> = ({ onSelectGift, giftProd
           {/* Image Showcase Column */}
           <div className="lg:col-span-5 relative">
             <div className="rounded-3xl overflow-hidden border-2 border-[#D7AE63]/50 shadow-2xl group">
-              <img
+              <Picture
                 src="/assets/images/luxury_gift_box_1785262908848.jpg"
                 alt="صندوق هدايا القهوة العمانية الفاخر"
                 loading="lazy"

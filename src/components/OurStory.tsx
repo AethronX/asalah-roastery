@@ -1,12 +1,13 @@
 import React from 'react';
 import { Flame, Sparkles, Coffee } from 'lucide-react';
+import { Picture } from './Picture';
 
 export const OurStory: React.FC = () => {
   return (
     <section id="our-story" className="py-24 bg-gradient-to-b from-[#1B1512] via-[#241B17] to-[#1B1512] text-[#F7F2EA] relative overflow-hidden border-y border-[#D7AE63]/25">
       {/* Background Subtle Asset */}
       <div className="absolute right-0 top-0 bottom-0 w-1/2 opacity-15 pointer-events-none hidden lg:block" aria-hidden="true">
-        <img
+        <Picture
           src="/assets/images/boutique_roastery_1785572898074.jpg"
           alt="محامص الأصالة"
           loading="lazy"
@@ -25,7 +26,7 @@ export const OurStory: React.FC = () => {
           <div className="lg:col-span-6 grid grid-cols-2 gap-4">
             <div className="space-y-4">
               <div className="rounded-3xl overflow-hidden border border-[#D7AE63]/40 shadow-2xl group">
-                <img
+                <Picture
                   src="/assets/images/omani_dallah_set_1785262881798.jpg"
                   alt="الضيافة العمانية الأصيلة"
                   loading="lazy"
@@ -48,7 +49,7 @@ export const OurStory: React.FC = () => {
                 <div className="text-xs text-[#E8DCCB] font-medium leading-relaxed">فرز يدوي دقيق لحبات البن الذهبي</div>
               </div>
               <div className="rounded-3xl overflow-hidden border border-[#D7AE63]/40 shadow-2xl group">
-                <img
+                <Picture
                   src="/assets/images/hero_luxury_roast_1785572872948.jpg"
                   alt="تعبئة وتغليف محامص الأصالة"
                   loading="lazy"
