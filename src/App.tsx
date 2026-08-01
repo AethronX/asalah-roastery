@@ -42,6 +42,10 @@ export default function App() {
     });
   }, []);
 
+  const handleToggleCurrency = useCallback(() => {
+    setCurrency((prev) => (prev === 'OMR' ? 'USD' : 'OMR'));
+  }, []);
+
   // E-commerce state
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   
@@ -177,6 +181,8 @@ export default function App() {
         setActiveSection={setActiveSection}
         theme={theme}
         onToggleTheme={handleToggleTheme}
+        currency={currency}
+        onToggleCurrency={handleToggleCurrency}
       />
 
       {/* Main Content Sections */}
@@ -336,6 +342,7 @@ export default function App() {
           products={PRODUCTS}
           onSelectProduct={(p) => setSelectedProductView(p)}
           currency={currency}
+          theme={theme}
         />
       )}
 

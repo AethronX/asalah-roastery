@@ -10,6 +10,8 @@ interface HeaderProps {
   setActiveSection: (sec: string) => void;
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
+  currency?: 'OMR' | 'USD';
+  onToggleCurrency?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -21,6 +23,8 @@ export const Header: React.FC<HeaderProps> = ({
   setActiveSection,
   theme,
   onToggleTheme,
+  currency = 'OMR',
+  onToggleCurrency,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -120,6 +124,23 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Action Icons & Theme Switcher & Premium CTA Button */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Currency Switcher Toggle */}
+          {onToggleCurrency && (
+            <button
+              onClick={onToggleCurrency}
+              className={`px-3 py-1.5 rounded-full border text-xs font-black transition-all duration-200 flex items-center gap-1 shadow-sm active:scale-95 min-h-[38px] ${
+                isLight
+                  ? 'bg-[#F5F5F7] border-[#000000]/10 text-[#1D1D1F] hover:bg-[#E5E5EA]'
+                  : 'bg-[#241B17] border-[#D7AE63]/40 text-[#F3E2BE] hover:border-[#D7AE63]'
+              }`}
+              title="تغيير العملة"
+              aria-label="تغيير العملة المعروضة"
+            >
+              <span className="text-[#9B6B3A] dark:text-[#F3E2BE]">{currency === 'OMR' ? 'ر.ع' : '$'}</span>
+              <span className="hidden sm:inline">{currency}</span>
+            </button>
+          )}
+
           {/* Theme Switcher Toggle - Apple Inspired Segmented Pill */}
           <button
             onClick={onToggleTheme}

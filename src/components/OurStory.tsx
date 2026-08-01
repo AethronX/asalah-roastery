@@ -73,11 +73,11 @@ export const OurStory: React.FC = () => {
               حرفية تحميص عريقة تجسد <span className="gold-gradient-text inline-block">الضيافة العمانية</span>
             </h2>
 
-            <p className="text-base sm:text-lg text-[#E8DCCB] font-medium leading-[1.8] font-sans">
+            <p className="text-base sm:text-lg text-[#F7F2EA] font-semibold leading-[1.8] font-sans">
               تأسست محامص الأصالة من قلب ولاية نزوى وسوقها التراثي العريق، لتكون امتداداً لأعراف الكرم والضيافة التي تتوارثها الأجيال في سلطنة عمان.
             </p>
 
-            <p className="text-sm text-[#E8DCCB] font-normal leading-[1.8]">
+            <p className="text-sm sm:text-base text-[#E8DCCB] font-medium leading-[1.8]">
               نحن نؤمن بأن فنجان القهوة ليس مجرد مشروب، بل هو حكاية تجمع الشغف والتقاليد. نتنقل بين أرفع مزارع البن في مدرجات جبال اليمن، وإثيوبيا، وكولومبيا لننتقي أرقى الحبوب، ثم نعيد صياغتها في أفران التحميص المصممة خصيصاً بلمسات شيوخ الكار.
             </p>
 

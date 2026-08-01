@@ -210,16 +210,22 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
               {/* Weight Selector */}
               <div className="mb-5">
-                <label className="block text-xs font-bold text-[#2B211B] mb-2">اختر الوزن:</label>
+                <label className={`block text-xs font-bold mb-2 ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>
+                  اختر الوزن:
+                </label>
                 <div className="flex flex-wrap gap-2">
                   {product.weights.map((w, idx) => (
                     <button
                       key={idx}
                       onClick={() => setSelectedWeight(w)}
-                      className={`px-4 py-2 rounded-xl text-xs font-medium border transition-all ${
+                      className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all ${
                         selectedWeight.grams === w.grams
-                          ? 'bg-[#2B211B] text-[#F8F3EC] border-[#C9A76A] shadow-md'
-                          : 'bg-[#EFE8DE]/50 text-[#4A3326] border-[#EFE8DE] hover:border-[#B78A5C]'
+                          ? isLight
+                            ? 'bg-[#1D1D1F] text-white border-[#1D1D1F] shadow-md'
+                            : 'bg-[#F3E2BE] text-[#120E0C] border-[#F3E2BE] shadow-md'
+                          : isLight
+                            ? 'bg-[#F5F5F7] text-[#3A3A3C] border-[#000000]/10 hover:border-[#9B6B3A]'
+                            : 'bg-[#241B17] text-[#E8DCCB] border-[#D7AE63]/30 hover:border-[#F3E2BE]'
                       }`}
                     >
                       {w.label}
@@ -230,20 +236,26 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
               {/* Grind Selector */}
               <div className="mb-6">
-                <label className="block text-xs font-bold text-[#2B211B] mb-2">درجة الطحن الفاخرة:</label>
+                <label className={`block text-xs font-bold mb-2 ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>
+                  درجة الطحن الفاخرة:
+                </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {grindOptions.map((g, idx) => (
                     <button
                       key={idx}
                       onClick={() => setSelectedGrind(g)}
-                      className={`px-3 py-2.5 rounded-xl text-xs text-right border transition-all flex items-center justify-between ${
+                      className={`px-3 py-2.5 rounded-xl text-xs text-right border transition-all flex items-center justify-between font-bold ${
                         selectedGrind === g
-                          ? 'bg-[#B78A5C]/20 text-[#2B211B] border-[#B78A5C] font-semibold'
-                          : 'bg-white/50 text-[#4A3326]/80 border-[#EFE8DE] hover:bg-[#EFE8DE]'
+                          ? isLight
+                            ? 'bg-[#9B6B3A]/15 text-[#1D1D1F] border-[#9B6B3A]'
+                            : 'bg-[#241B17] text-[#F3E2BE] border-[#D7AE63]'
+                          : isLight
+                            ? 'bg-[#F5F5F7] text-[#3A3A3C] border-[#000000]/10 hover:bg-[#E5E5EA]'
+                            : 'bg-[#18120F] text-[#E8DCCB] border-[#D7AE63]/20 hover:bg-[#241B17]'
                       }`}
                     >
                       <span>{g}</span>
-                      {selectedGrind === g && <Check className="w-4 h-4 text-[#B78A5C]" />}
+                      {selectedGrind === g && <Check className={`w-4 h-4 ${isLight ? 'text-[#9B6B3A]' : 'text-[#F3E2BE]'}`} />}
                     </button>
                   ))}
                 </div>
@@ -252,17 +264,23 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               {/* Quantity Selector & Action Buttons */}
               <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center border border-[#EFE8DE] bg-[#EFE8DE]/50 rounded-2xl overflow-hidden shrink-0">
+                  <div className={`flex items-center border rounded-2xl overflow-hidden shrink-0 ${
+                    isLight ? 'border-[#000000]/10 bg-[#F5F5F7]' : 'border-[#D7AE63]/30 bg-[#241B17]'
+                  }`}>
                     <button
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="px-3.5 py-3 text-lg font-bold text-[#2B211B] hover:bg-[#B78A5C]/20 transition-colors"
+                      className={`px-3.5 py-3 text-lg font-bold transition-colors ${
+                        isLight ? 'text-[#1D1D1F] hover:bg-[#000000]/05' : 'text-[#F7F2EA] hover:bg-white/10'
+                      }`}
                     >
                       -
                     </button>
-                    <span className="px-3.5 py-3 font-bold text-sm">{quantity}</span>
+                    <span className={`px-3.5 py-3 font-bold text-sm ${isLight ? 'text-[#1D1D1F]' : 'text-[#F7F2EA]'}`}>{quantity}</span>
                     <button
                       onClick={() => setQuantity(quantity + 1)}
-                      className="px-3.5 py-3 text-lg font-bold text-[#2B211B] hover:bg-[#B78A5C]/20 transition-colors"
+                      className={`px-3.5 py-3 text-lg font-bold transition-colors ${
+                        isLight ? 'text-[#1D1D1F] hover:bg-[#000000]/05' : 'text-[#F7F2EA] hover:bg-white/10'
+                      }`}
                     >
                       +
                     </button>
@@ -270,10 +288,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
                   <button
                     onClick={handleAdd}
-                    className={`flex-grow py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center gap-2 border border-[#B78A5C]/40 ${
+                    className={`flex-grow py-3.5 px-4 rounded-2xl font-black text-xs sm:text-sm transition-all duration-300 flex items-center justify-center gap-2 border ${
                       addedSuccess
                         ? 'bg-emerald-600 text-white border-emerald-600'
-                        : 'bg-[#EFE8DE] text-[#2B211B] hover:bg-[#B78A5C] hover:text-white'
+                        : isLight
+                          ? 'bg-[#1D1D1F] text-white hover:bg-[#3A3A3C] border-[#1D1D1F]'
+                          : 'bg-[#241B17] text-[#F3E2BE] hover:bg-[#2C211C] border-[#D7AE63]/50'
                     }`}
                   >
                     {addedSuccess ? (
@@ -283,7 +303,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                       </>
                     ) : (
                       <>
-                        <ShoppingBag className="w-4 h-4 text-[#B78A5C]" />
+                        <ShoppingBag className={`w-4 h-4 ${isLight ? 'text-amber-400' : 'text-[#F3E2BE]'}`} />
                         <span>إضافة للسلة ({displayPrice})</span>
                       </>
                     )}
@@ -293,33 +313,43 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 {/* Instant Express Purchase Button */}
                 <button
                   onClick={handleInstantBuy}
-                  className="w-full py-3.5 px-6 bg-gradient-to-r from-[#2B211B] via-[#4A3326] to-[#2B211B] text-[#C9A76A] rounded-2xl font-bold text-sm hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 border border-[#C9A76A]/40 active:scale-98"
+                  className={`w-full py-3.5 px-6 rounded-2xl font-extrabold text-sm hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 border active:scale-98 ${
+                    isLight
+                      ? 'bg-gradient-to-r from-[#1D1D1F] via-[#3A3A3C] to-[#1D1D1F] text-[#F3E2BE] border-[#1D1D1F]'
+                      : 'btn-champagne-primary text-[#120E0C] border-[#F3E2BE]/60'
+                  }`}
                 >
-                  <Zap className="w-4 h-4 fill-current text-[#C9A76A]" />
+                  <Zap className="w-4 h-4 fill-current text-amber-400" />
                   <span>شراء سريع ومباشر الآن ({displayPrice})</span>
                 </button>
               </div>
 
               {/* Guarantees List */}
-              <div className="grid grid-cols-2 gap-3 text-xs text-[#4A3326] bg-[#EFE8DE]/40 p-3.5 rounded-xl border border-[#EFE8DE]">
+              <div className={`grid grid-cols-2 gap-3 text-xs p-3.5 rounded-xl border ${
+                isLight
+                  ? 'text-[#3A3A3C] bg-[#F5F5F7] border-[#000000]/08 font-semibold'
+                  : 'text-[#E8DCCB] bg-[#241B17] border-[#D7AE63]/30 font-semibold'
+              }`}>
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-[#B78A5C]" />
+                  <ShieldCheck className={`w-4 h-4 ${isLight ? 'text-[#9B6B3A]' : 'text-[#F3E2BE]'}`} />
                   <span>ضمان جودة الأصالة 100%</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Coffee className="w-4 h-4 text-[#B78A5C]" />
+                  <Coffee className={`w-4 h-4 ${isLight ? 'text-[#9B6B3A]' : 'text-[#F3E2BE]'}`} />
                   <span>تحميص طازج برعاية الخبراء</span>
                 </div>
               </div>
             </div>
 
             {/* Information Tabs */}
-            <div className="mt-8 border-t border-[#EFE8DE] pt-6">
-              <div className="flex gap-4 border-b border-[#EFE8DE] mb-4 text-sm font-medium">
+            <div className={`mt-8 border-t pt-6 ${isLight ? 'border-[#000000]/10' : 'border-[#D7AE63]/25'}`}>
+              <div className={`flex gap-4 border-b mb-4 text-sm font-medium ${isLight ? 'border-[#000000]/10' : 'border-[#D7AE63]/25'}`}>
                 <button
                   onClick={() => setActiveTab('details')}
                   className={`pb-2 transition-colors relative ${
-                    activeTab === 'details' ? 'text-[#B78A5C] font-bold border-b-2 border-[#B78A5C]' : 'text-[#2B211B]'
+                    activeTab === 'details'
+                      ? isLight ? 'text-[#9B6B3A] font-extrabold border-b-2 border-[#9B6B3A]' : 'text-[#F3E2BE] font-extrabold border-b-2 border-[#F3E2BE]'
+                      : isLight ? 'text-[#3A3A3C] font-semibold' : 'text-[#E8DCCB]'
                   }`}
                 >
                   التفاصيل والمنشأ
@@ -327,7 +357,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <button
                   onClick={() => setActiveTab('story')}
                   className={`pb-2 transition-colors relative ${
-                    activeTab === 'story' ? 'text-[#B78A5C] font-bold border-b-2 border-[#B78A5C]' : 'text-[#2B211B]'
+                    activeTab === 'story'
+                      ? isLight ? 'text-[#9B6B3A] font-extrabold border-b-2 border-[#9B6B3A]' : 'text-[#F3E2BE] font-extrabold border-b-2 border-[#F3E2BE]'
+                      : isLight ? 'text-[#3A3A3C] font-semibold' : 'text-[#E8DCCB]'
                   }`}
                 >
                   قصة المحصول
@@ -335,7 +367,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <button
                   onClick={() => setActiveTab('reviews')}
                   className={`pb-2 transition-colors relative ${
-                    activeTab === 'reviews' ? 'text-[#B78A5C] font-bold border-b-2 border-[#B78A5C]' : 'text-[#2B211B]'
+                    activeTab === 'reviews'
+                      ? isLight ? 'text-[#9B6B3A] font-extrabold border-b-2 border-[#9B6B3A]' : 'text-[#F3E2BE] font-extrabold border-b-2 border-[#F3E2BE]'
+                      : isLight ? 'text-[#3A3A3C] font-semibold' : 'text-[#E8DCCB]'
                   }`}
                 >
                   آراء المتذوقين ({reviewsList.length})
@@ -344,27 +378,27 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
               {activeTab === 'details' && (
                 <div className="grid grid-cols-2 gap-3 text-xs">
-                  <div className="p-3 bg-white rounded-xl border border-[#EFE8DE]">
-                    <span className="text-[#2B211B] font-bold block mb-1">الارتفاع عن سطح البحر:</span>
-                    <span className="font-bold text-[#2B211B]">{product.altitude}</span>
+                  <div className={`p-3 rounded-xl border ${isLight ? 'bg-[#F5F5F7] border-[#000000]/10 text-[#1D1D1F]' : 'bg-[#241B17] border-[#D7AE63]/30 text-[#F7F2EA]'}`}>
+                    <span className={`font-bold block mb-1 ${isLight ? 'text-[#5C554E]' : 'text-[#E8DCCB]'}`}>الارتفاع عن سطح البحر:</span>
+                    <span className="font-extrabold">{product.altitude}</span>
                   </div>
-                  <div className="p-3 bg-white rounded-xl border border-[#EFE8DE]">
-                    <span className="text-[#2B211B] font-bold block mb-1">طريقة المعالجة:</span>
-                    <span className="font-bold text-[#2B211B]">{product.process}</span>
+                  <div className={`p-3 rounded-xl border ${isLight ? 'bg-[#F5F5F7] border-[#000000]/10 text-[#1D1D1F]' : 'bg-[#241B17] border-[#D7AE63]/30 text-[#F7F2EA]'}`}>
+                    <span className={`font-bold block mb-1 ${isLight ? 'text-[#5C554E]' : 'text-[#E8DCCB]'}`}>طريقة المعالجة:</span>
+                    <span className="font-extrabold">{product.process}</span>
                   </div>
-                  <div className="p-3 bg-white rounded-xl border border-[#EFE8DE]">
-                    <span className="text-[#2B211B] font-bold block mb-1">طرق التحضير المقترحة:</span>
-                    <span className="font-bold text-[#2B211B]">{product.brewingMethods.join(' • ')}</span>
+                  <div className={`p-3 rounded-xl border ${isLight ? 'bg-[#F5F5F7] border-[#000000]/10 text-[#1D1D1F]' : 'bg-[#241B17] border-[#D7AE63]/30 text-[#F7F2EA]'}`}>
+                    <span className={`font-bold block mb-1 ${isLight ? 'text-[#5C554E]' : 'text-[#E8DCCB]'}`}>طرق التحضير المقترحة:</span>
+                    <span className="font-extrabold">{product.brewingMethods.join(' • ')}</span>
                   </div>
-                  <div className="p-3 bg-white rounded-xl border border-[#EFE8DE]">
-                    <span className="text-[#2B211B] font-bold block mb-1">المنطقة والاقليم:</span>
-                    <span className="font-bold text-[#2B211B]">{product.originRegion}</span>
+                  <div className={`p-3 rounded-xl border ${isLight ? 'bg-[#F5F5F7] border-[#000000]/10 text-[#1D1D1F]' : 'bg-[#241B17] border-[#D7AE63]/30 text-[#F7F2EA]'}`}>
+                    <span className={`font-bold block mb-1 ${isLight ? 'text-[#5C554E]' : 'text-[#E8DCCB]'}`}>المنطقة والاقليم:</span>
+                    <span className="font-extrabold">{product.originRegion}</span>
                   </div>
                 </div>
               )}
 
               {activeTab === 'story' && (
-                <p className="text-xs text-[#2B211B] font-medium leading-relaxed">
+                <p className={`text-xs sm:text-sm font-semibold leading-relaxed ${isLight ? 'text-[#2C2C2E]' : 'text-[#E8DCCB]'}`}>
                   {product.descriptionAr}
                 </p>
               )}
@@ -378,12 +412,20 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                       value={newReviewComment}
                       onChange={(e) => setNewReviewComment(e.target.value)}
                       placeholder="أضف انطباعك وتقييمك عن هذه القهوة..."
-                      className="w-full p-3 text-xs bg-white text-[#2B211B] border border-[#EFE8DE] rounded-xl focus:outline-none focus:border-[#B78A5C]"
+                      className={`w-full p-3 text-xs rounded-xl focus:outline-none border ${
+                        isLight
+                          ? 'bg-[#F5F5F7] text-[#1D1D1F] border-[#000000]/10 focus:border-[#9B6B3A]'
+                          : 'bg-[#241B17] text-[#F7F2EA] border-[#D7AE63]/30 focus:border-[#F3E2BE]'
+                      }`}
                       rows={2}
                     />
                     <button
                       type="submit"
-                      className="mt-2 px-4 py-2 bg-[#B78A5C] text-white rounded-lg text-xs font-bold hover:bg-[#2B211B] transition-colors min-h-[38px]"
+                      className={`mt-2 px-4 py-2 rounded-lg text-xs font-bold transition-colors min-h-[38px] ${
+                        isLight
+                          ? 'bg-[#1D1D1F] text-white hover:bg-[#3A3A3C]'
+                          : 'bg-[#F3E2BE] text-[#120E0C] hover:bg-white'
+                      }`}
                     >
                       إرسال التقييم
                     </button>
@@ -391,12 +433,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
                   <div className="space-y-2.5 max-h-40 overflow-y-auto pr-1">
                     {reviewsList.map((rev, idx) => (
-                      <div key={idx} className="p-3 bg-white rounded-xl border border-[#EFE8DE] text-xs">
+                      <div key={idx} className={`p-3 rounded-xl border text-xs ${
+                        isLight
+                          ? 'bg-[#F5F5F7] border-[#000000]/08 text-[#1D1D1F]'
+                          : 'bg-[#241B17] border-[#D7AE63]/30 text-[#F7F2EA]'
+                      }`}>
                         <div className="flex items-center justify-between mb-1">
-                          <span className="font-bold text-[#2B211B]">{rev.name} ({rev.city})</span>
-                          <span className="text-[#2B211B] text-[10px] font-bold">{rev.date}</span>
+                          <span className="font-extrabold">{rev.name} ({rev.city})</span>
+                          <span className={`text-[10px] font-bold ${isLight ? 'text-[#5C554E]' : 'text-[#E8DCCB]'}`}>{rev.date}</span>
                         </div>
-                        <p className="text-[#2B211B]">{rev.comment}</p>
+                        <p className={`font-medium ${isLight ? 'text-[#2C2C2E]' : 'text-[#E8DCCB]'}`}>{rev.comment}</p>
                       </div>
                     ))}
                   </div>
