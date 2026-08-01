@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Product, CategoryId } from '../types';
 import { ShoppingCart, Check, Sparkles, Filter } from 'lucide-react';
+import { Picture } from './Picture';
 
 interface BestSellersProps {
   products: Product[];
@@ -171,11 +172,13 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                 <div className={`relative overflow-hidden w-full aspect-square ${
                   isLight ? 'bg-[#FAF6F0]' : 'bg-[#1D1613]'
                 }`}>
-                  <img
+                  <Picture
                     src={product.image}
                     alt={product.nameAr}
                     loading="lazy"
                     decoding="async"
+                    width="600"
+                    height="600"
                     className="product-image group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
                 </div>

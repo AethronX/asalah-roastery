@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Product, GrindType } from '../types';
 import { X, Star, ShoppingBag, Flame, MapPin, Mountain, Layers, Coffee, Check, ShieldCheck, Share2, ThumbsUp, Zap } from 'lucide-react';
+import { Picture } from './Picture';
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -100,7 +101,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           {/* Left Column: Image Gallery & Zoom */}
           <div className="lg:col-span-6 flex flex-col gap-4">
             <div className="relative aspect-square rounded-2xl bg-[#EFE8DE] overflow-hidden border border-[#EFE8DE]">
-              <img
+              <Picture
                 src={selectedImage}
                 alt={product.nameAr}
                 loading="lazy"
@@ -123,7 +124,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     selectedImage === img ? 'border-[#C9A76A] ring-2 ring-[#C9A76A]/30 scale-105' : 'border-transparent opacity-80 hover:opacity-100'
                   }`}
                 >
-                  <img src={img} alt={`صورة معروضة ${idx + 1}`} loading="lazy" decoding="async" width="80" height="80" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
+                  <Picture src={img} alt={`صورة معروضة ${idx + 1}`} loading="lazy" decoding="async" width="80" height="80" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>

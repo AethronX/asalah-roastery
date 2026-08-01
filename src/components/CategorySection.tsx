@@ -1,6 +1,7 @@
 import React from 'react';
 import { CategoryId } from '../types';
 import { Coffee, Flame, Sparkles, Gift, Wrench, PackageCheck } from 'lucide-react';
+import { Picture } from './Picture';
 
 interface CategorySectionProps {
   activeCategory: CategoryId;
@@ -112,7 +113,7 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
             >
               {/* Card Background Subtle Image */}
               <div className="absolute inset-0 opacity-15 group-hover:opacity-25 transition-opacity duration-500 pointer-events-none overflow-hidden">
-                <img
+                <Picture
                   src={cat.image}
                   alt={cat.titleAr}
                   loading="lazy"
